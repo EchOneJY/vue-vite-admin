@@ -1,7 +1,50 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { UserConfig, ConfigEnv } from 'vite'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()]
-})
+import { loadEnv } from 'vite'
+import { resolve } from 'path'
+
+import { createProxy } from './build/vite/proxy'
+import { wrapperEnv } from './build/utils'
+import { createVitePlugins } from './build/vite/plugin'
+
+function pathResolve(dir: string) {
+  return resolve(process.cwd(), '.', dir)
+}
+
+export default ({ command, mode }: ConfigEnv): UserConfig => {
+  const root = process.cwd()
+
+  const isBuild = command === 'build'
+
+  const env = loadEnv(mode, root)
+
+  const viteEnv = wrapperEnv(env)
+
+  const { VITE_PORT, VITE_PROXY, VITE_PUBLIC_PATH } = viteEnv
+
+  return {
+    base: VITE_PUBLIC_PATH,
+    root,
+    resolve: {
+      alias: [
+        // /@/xxxx => src/xxxx
+        {
+          find: /\/@\//,
+          replacement: pathResolve('src') + '/',
+        },
+        // /#/xxxx => types/xxxx
+        {
+          find: /\/#\//,
+          replacement: pathResolve('types') + '/',
+        },
+        // ['@vue/compiler-sfc', '@vue/compiler-sfc/dist/compiler-sfc.esm-browser.js'],
+      ],
+    },
+    server: {
+      port: VITE_PORT,
+      // Load proxy configuration from .env
+      proxy: createProxy(VITE_PROXY),
+    },
+    plugins: createVitePlugins(viteEnv, isBuild),
+  }
+}

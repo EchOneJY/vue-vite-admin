@@ -17,4 +17,4 @@ module.exports = {
   htmlWhitespaceSensitivity: 'strict',
   endOfLine: 'lf',
   rangeStart: 0,
-};
+}

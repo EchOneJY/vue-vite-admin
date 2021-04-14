@@ -1,15 +1,43 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "esnext", //target用于指定编译后js文件里的语法应该遵循哪个JavaScript的版本的版本目标: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'
+    "module": "esnext", //用来指定编译后的js要使用的模块标准: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'
+    "moduleResolution": "node", //用于选择模块解析策略，有'node'和'classic'两种类型
     "strict": true,
-    "jsx": "preserve",
-    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true, //用来指定允许从没有默认导出的模块中默认导入 
+    "strictFunctionTypes": false, //指定是否使用函数参数双向协变检查 
+    "jsx": "preserve",  //指定jsx代码用于的开发环境: 'preserve', 'react-native', or 'react'
+    "baseUrl": ".", //工作根目录
+    "allowJs": true,  //用来指定是否允许编译js文件
+    "sourceMap": true,  //用来指定编译时是否生成.map文件
+    "esModuleInterop": true,  //通过为导入内容创建命名空间，实现CommonJS和ES模块之间的互操作性
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "types": ["vite/client"]
+    "noUnusedLocals": true, //用于检查是否有定义了但是没有使用的变量,默认为false 
+    "noUnusedParameters": true, //用于检查是否有在函数体中没有使用的参数,默认为false
+    "experimentalDecorators": true, //用于指定是否启用实验性的装饰器特性
+    "lib": ["dom", "esnext"], //用于指定要包含在编译中的库文件
+    "types": ["vite/client"], //用来指定需要包含的模块，只有在这里列出的模块的声明文件才会被加载进来
+    "typeRoots": ["./node_modules/@types/", "./types"], //用来指定声明文件或文件夹的路径列表，如果指定了此项，则只有在这里列出的声明文件才会被加载
+    "incremental": true,
+    "noImplicitAny": false, //果我们没有为一些值设置明确的类型，编译器会默认认为这个值为any，如果noImplicitAny的值为true的话。则没有明确的类型会报错。默认值为false
+    "skipLibCheck": true,
+    "paths": { // 用于设置模块名称到基于baseUrl的路径映射
+      "/@/*": ["src/*"],
+      "/#/*": ["types/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "build/**/*.ts",
+    "build/**/*.d.ts",
+    "mock/**/*.ts",
+    "vite.config.ts"
+  ],
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }
