@@ -24,6 +24,9 @@
 //     "comments": true,
 //     "strings": true
 //   },
+"editor.codeActionsOnSave": {
+  "source.fixAll.eslint": true
+},
 //   //===========================================
 //   //============= Other =======================
 //   //===========================================
@@ -102,10 +105,10 @@
 //   // ================ Eslint ===================
 //   // ===========================================
 //   "eslint.alwaysShowStatus": true,
-  "eslint.options": {
-    "plugins": ["html", "vue", "javascript", "jsx", "typescript"],
-    "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
-  },
+  // "eslint.options": {
+  //   "plugins": ["html", "vue", "javascript", "jsx", "typescript"],
+  //   "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
+  // },
 //   "eslint.validate": [
 //     "javascript",
 //     "typescript",
