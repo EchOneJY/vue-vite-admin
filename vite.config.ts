@@ -45,6 +45,16 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       // Load proxy configuration from .env
       proxy: createProxy(VITE_PROXY),
     },
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {
+            hack: `true; @import (reference) "${pathResolve('src/styles/config.less')}";`,
+          },
+          javascriptEnabled: true,
+        },
+      },
+    },
     plugins: createVitePlugins(viteEnv, isBuild),
   }
 }

@@ -12,19 +12,16 @@
     "allowJs": true,  //用来指定是否允许编译js文件
     "sourceMap": true,  //用来指定编译时是否生成.map文件
     "esModuleInterop": true,  //通过为导入内容创建命名空间，实现CommonJS和ES模块之间的互操作性
-    "resolveJsonModule": true,
     "noUnusedLocals": true, //用于检查是否有定义了但是没有使用的变量,默认为false 
     "noUnusedParameters": true, //用于检查是否有在函数体中没有使用的参数,默认为false
     "experimentalDecorators": true, //用于指定是否启用实验性的装饰器特性
     "lib": ["dom", "esnext"], //用于指定要包含在编译中的库文件
     "types": ["vite/client"], //用来指定需要包含的模块，只有在这里列出的模块的声明文件才会被加载进来
-    "typeRoots": ["./node_modules/@types/", "./types"], //用来指定声明文件或文件夹的路径列表，如果指定了此项，则只有在这里列出的声明文件才会被加载
     "incremental": true,
     "noImplicitAny": false, //果我们没有为一些值设置明确的类型，编译器会默认认为这个值为any，如果noImplicitAny的值为true的话。则没有明确的类型会报错。默认值为false
     "skipLibCheck": true,
     "paths": { // 用于设置模块名称到基于baseUrl的路径映射
       "/@/*": ["src/*"],
-      "/#/*": ["types/*"]
     }
   },
   "include": [
@@ -32,12 +29,6 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "types/**/*.d.ts",
-    "types/**/*.ts",
-    "build/**/*.ts",
-    "build/**/*.d.ts",
-    "mock/**/*.ts",
-    "vite.config.ts"
   ],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }

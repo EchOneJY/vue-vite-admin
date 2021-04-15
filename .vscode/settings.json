@@ -6,7 +6,7 @@
 //   //============= Editor ======================
 //   //===========================================
 //   "explorer.openEditors.visible": 0,
-//   "editor.tabSize": 2,
+  "editor.tabSize": 2,
 //   "editor.renderControlCharacters": true,
 //   "editor.minimap.renderCharacters": false,
 //   "editor.minimap.maxColumn": 300,
@@ -24,9 +24,6 @@
 //     "comments": true,
 //     "strings": true
 //   },
-"editor.codeActionsOnSave": {
-  "source.fixAll.eslint": true
-},
 //   //===========================================
 //   //============= Other =======================
 //   //===========================================
@@ -105,10 +102,10 @@
 //   // ================ Eslint ===================
 //   // ===========================================
 //   "eslint.alwaysShowStatus": true,
-  // "eslint.options": {
-  //   "plugins": ["html", "vue", "javascript", "jsx", "typescript"],
-  //   "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
-  // },
+// "eslint.options": {
+//   "plugins": ["html", "vue", "javascript", "jsx", "typescript"],
+//   "extensions": [".js", ".jsx", ".ts", ".tsx", ".vue"]
+// },
 //   "eslint.validate": [
 //     "javascript",
 //     "typescript",
@@ -174,9 +171,9 @@
 //   "[markdown]": {
 //     "editor.defaultFormatter": "esbenp.prettier-vscode"
 //   },
-//   "editor.codeActionsOnSave": {
-//     "source.fixAll.eslint": true
-//   },
+"editor.codeActionsOnSave": {
+  "source.fixAll.eslint": true
+},
 //   "[vue]": {
 //     "editor.codeActionsOnSave": {
 //       "source.fixAll.eslint": false
