@@ -1,9 +1,9 @@
 <template>
-  <Layout class="default-layout">
+  <Layout :class="prefixCls">
     <LayoutSider />
     <Layout>
       <LayoutHeader />
-      <LayoutContent class="layout-content" />
+      <LayoutContent :class="`${prefixCls}-content`" />
     </Layout>
   </Layout>
 </template>
@@ -16,6 +16,8 @@
   import LayoutHeader from './header/index.vue'
   import LayoutContent from './content/index.vue'
 
+  import { useDesign } from '/@/hooks/web/useDesign'
+
   export default defineComponent({
     name: 'DefaultLayout',
     components: {
@@ -24,15 +26,22 @@
       LayoutHeader,
       LayoutContent,
     },
+    setup() {
+      const { prefixCls } = useDesign('default-layout')
+
+      return { prefixCls }
+    },
   })
 </script>
 
 <style lang="less" scoped>
-  .default-layout {
+  @prefix-cls: ~'@{namespace}-default-layout';
+
+  .@{prefix-cls} {
     width: 100%;
     min-height: 100%;
     background: #f4f7f9;
-    .layout-content {
+    &-content {
       position: relative;
       flex: 1 1 auto;
       min-height: 0;

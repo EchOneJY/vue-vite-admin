@@ -1,12 +1,12 @@
 <template>
-  <Header class="layout-header">
-    <div class="layout-header-left">
-      <span class="layout-header-tirgger" @click="toggleCollapsed">
+  <Header :class="prefixCls">
+    <div :class="`${prefixCls}-left`">
+      <span :class="`${prefixCls}-tirgger`" @click="toggleCollapsed">
         <MenuUnfoldOutlined v-if="getCollapsed" /> <MenuFoldOutlined v-else />
       </span>
     </div>
 
-    <div class="layout-header-action"> 欢迎您，admin </div>
+    <div :class="`${prefixCls}-action`"> 欢迎您，admin </div>
   </Header>
 </template>
 
@@ -16,6 +16,7 @@
   import { Layout } from 'ant-design-vue'
   import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 
+  import { useDesign } from '/@/hooks/web/useDesign'
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
   export default defineComponent({
     name: 'LayoutHeader',
@@ -25,8 +26,10 @@
       MenuFoldOutlined,
     },
     setup() {
+      const { prefixCls } = useDesign('layout-header')
       const { getCollapsed, toggleCollapsed } = useMenuSetting()
       return {
+        prefixCls,
         getCollapsed,
         toggleCollapsed,
       }
@@ -35,7 +38,9 @@
 </script>
 
 <style lang="less" scoped>
-  .layout-header {
+  @prefix-cls: ~'@{namespace}-layout-header';
+
+  .@{prefix-cls} {
     display: flex;
     align-items: center;
     justify-content: space-between;

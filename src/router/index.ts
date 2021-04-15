@@ -47,6 +47,23 @@ const constantRoutes: AppRouteModule[] = [
     meta: { title: '首页' },
   },
   {
+    path: '/about',
+    name: 'About',
+    component: Layout,
+    redirect: '/about/index',
+    children: [
+      {
+        name: 'AboutPage',
+        path: 'index',
+        component: () => import('/@/views/about/index.vue'),
+        meta: {
+          title: 'About',
+        },
+      },
+    ],
+    meta: { title: '关于' },
+  },
+  {
     path: '/',
     name: 'GoDefault',
     redirect: '/dashboard',
