@@ -1,7 +1,7 @@
 import { VuexModule, getModule, Module, Mutation } from 'vuex-module-decorators'
 import store from '/@/store'
 
-import type { ProjectConfig } from '/@/types/config'
+import type { ProjectConfig } from '/#/config'
 import PrjectSettings from '/@/settings/project'
 
 import { deepMerge } from '/@/utils'

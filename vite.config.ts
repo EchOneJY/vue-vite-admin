@@ -3,6 +3,7 @@ import { UserConfig, ConfigEnv } from 'vite'
 import { loadEnv } from 'vite'
 import { resolve } from 'path'
 
+import { generateModifyVars } from './build/generate/modifyVars'
 import { createProxy } from './build/vite/proxy'
 import { wrapperEnv } from './build/utils'
 import { createVitePlugins } from './build/vite/plugin'
@@ -26,6 +27,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: VITE_PUBLIC_PATH,
     root,
     resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.vue', '.json'],
       alias: [
         // /@/xxxx => src/xxxx
         {
@@ -48,9 +50,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     css: {
       preprocessorOptions: {
         less: {
-          modifyVars: {
-            hack: `true; @import (reference) "${pathResolve('src/styles/config.less')}";`,
-          },
+          modifyVars: generateModifyVars(),
+          // {hack: `true; @import (reference) "${pathResolve('src/styles/config.less')}";`,},
           javascriptEnabled: true,
         },
       },

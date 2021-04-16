@@ -8,6 +8,7 @@ module.exports = defineConfig({
     es6: true,
   },
   parser: 'vue-eslint-parser',
+  // plugins: ['html'],
   parserOptions: {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
@@ -72,5 +73,6 @@ module.exports = defineConfig({
         math: 'always',
       },
     ],
+    'vue/comment-directive': 'off',
   },
 })

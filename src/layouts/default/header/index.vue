@@ -6,32 +6,44 @@
       </span>
     </div>
 
-    <div :class="`${prefixCls}-action`"> 欢迎您，admin </div>
+    <div :class="`${prefixCls}-action`">
+      <span>欢迎您，admin</span>
+      <Button class="logout-btn" type="primary" @click="handelLoginOut">注销</Button>
+    </div>
   </Header>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
 
-  import { Layout } from 'ant-design-vue'
+  import { Layout, Button } from 'ant-design-vue'
   import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
+  import { userStore } from '/@/store/modules/user'
+
   export default defineComponent({
     name: 'LayoutHeader',
     components: {
       Header: Layout.Header,
       MenuUnfoldOutlined,
       MenuFoldOutlined,
+      Button,
     },
     setup() {
       const { prefixCls } = useDesign('layout-header')
       const { getCollapsed, toggleCollapsed } = useMenuSetting()
+
+      const handelLoginOut = () => {
+        userStore.confirmLoginOut()
+      }
+
       return {
         prefixCls,
         getCollapsed,
         toggleCollapsed,
+        handelLoginOut,
       }
     },
   })
@@ -62,6 +74,22 @@
       &:hover {
         background: #f6f6f6;
       }
+    }
+    &-action {
+      display: flex;
+      align-items: center;
+      padding-right: 20px;
+    }
+    .logout-btn {
+      margin-left: 15px;
+      width: 56px;
+      height: 28px;
+      text-align: center;
+      padding: 0;
+      font-size: 13px;
+      background-color: #fff;
+      color: @primary-color;
+      text-shadow: none;
     }
   }
 </style>

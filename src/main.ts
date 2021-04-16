@@ -1,4 +1,5 @@
 import '/@/styles/index.less'
+import 'virtual:windi.css';
 
 import { createApp } from 'vue'
 import App from './App.vue'

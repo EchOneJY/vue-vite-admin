@@ -1,7 +1,7 @@
 import { unref, computed } from 'vue'
 
 import { appStore } from '/@/store/modules/app'
-import { MenuSetting } from '/@/types/config'
+import { MenuSetting } from '/#/config'
 
 const getMenuSetting = computed(() => appStore.getProjectConfig.menuSetting)
 
