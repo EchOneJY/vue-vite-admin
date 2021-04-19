@@ -1,5 +1,5 @@
 <template>
-  <ConfigProvider :locale="locale">
+  <ConfigProvider :locale="getAntdLocale">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -9,9 +9,9 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { ConfigProvider } from 'ant-design-vue'
-  import zhCN from 'ant-design-vue/es/locale/zh_CN'
 
   import AppProvider from '/@/components/AppProvider/index.vue'
+  import { useLocale } from '/@/locales/useLocale'
 
   export default defineComponent({
     name: 'App',
@@ -20,8 +20,11 @@
       ConfigProvider,
     },
     setup() {
+      // support Multi-language
+      const { getAntdLocale } = useLocale()
+
       return {
-        locale: zhCN,
+        getAntdLocale,
       }
     },
   })
