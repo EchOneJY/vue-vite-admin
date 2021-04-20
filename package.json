@@ -48,5 +48,10 @@
     "vite-plugin-windicss": "^0.14.2",
     "vue-eslint-parser": "^7.6.0",
     "vue-tsc": "^0.0.15"
+  },
+  "husky": {
+    "hooks": {
+     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
