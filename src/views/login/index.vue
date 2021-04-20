@@ -15,7 +15,7 @@
               class="w-1/2 -mt-16 -enter-x"
             />
             <div class="mt-10 font-medium text-white -enter-x">
-              <span class="mt-4 text-3xl inline-block">蒙牛数字化厂区管理系统</span>
+              <span class="mt-4 text-3xl inline-block">蒙牛干线物流管理系统</span>
             </div>
             <div class="mt-5 text-md text-white font-normal dark:text-gray-500 -enter-x">
               输入您的个人详细信息开始使用！
@@ -37,7 +37,7 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
 
-  import AppLogo from '/@/components/AppLogo/index.vue'
+  import { AppLogo } from '/@/components/Application'
   import LoginForm from './LoginForm.vue'
 
   import { useGlobSetting } from '/@/hooks/setting'

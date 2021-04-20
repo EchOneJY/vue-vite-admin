@@ -10,7 +10,7 @@
   import { defineComponent } from 'vue'
   import { ConfigProvider } from 'ant-design-vue'
 
-  import AppProvider from '/@/components/AppProvider/index.vue'
+  import { AppProvider } from '/@/components/Application'
   import { useLocale } from '/@/locales/useLocale'
 
   export default defineComponent({

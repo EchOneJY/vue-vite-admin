@@ -9,7 +9,7 @@
   import { defineComponent } from 'vue'
 
   import { Layout } from 'ant-design-vue'
-  import AppLogo from '/@/components/AppLogo/index.vue'
+  import { AppLogo } from '/@/components/Application'
   import LayoutMenu from '../menu/index.vue'
 
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
