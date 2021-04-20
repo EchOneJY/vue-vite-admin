@@ -12,11 +12,11 @@
             :disabled="item.disabled"
           >
             <Popconfirm v-if="popconfirm && item.popConfirm" v-bind="item">
-              <Icon :icon="item.icon" v-if="item.icon" />
+              <!-- <Icon :icon="item.icon" v-if="item.icon" /> -->
               <span class="ml-1">{{ item.text }}</span>
             </Popconfirm>
             <template v-else>
-              <Icon :icon="item.icon" v-if="item.icon" />
+              <!-- <Icon :icon="item.icon" v-if="item.icon" /> -->
               <span class="ml-1">{{ item.text }}</span>
             </template>
           </a-menu-item>
@@ -33,7 +33,7 @@
 
   import { defineComponent } from 'vue'
   import { Dropdown, Menu, Popconfirm } from 'ant-design-vue'
-  import { Icon } from '/@/components/Icon'
+  // import { Icon } from '/@/components/Icon'
 
   export default defineComponent({
     name: 'BasicDropdown',
@@ -42,7 +42,7 @@
       [Menu.name]: Menu,
       [Menu.Item.name]: Menu.Item,
       [Menu.Divider.name]: Menu.Divider,
-      Icon,
+      // Icon,
       Popconfirm,
     },
     props: {

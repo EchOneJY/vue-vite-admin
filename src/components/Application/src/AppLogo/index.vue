@@ -29,10 +29,10 @@
     display: flex;
     align-items: center;
     height: 60px;
-    background: url('../../assets/images/logo.png') no-repeat 20px center;
+    background: url('/@/assets/images/logo.png') no-repeat 20px center;
     background-size: 128px 28px;
     &.collapsed {
-      background: url('../../assets/images/logo_collapse.png') no-repeat center center;
+      background: url('/@/assets/images/logo_collapse.png') no-repeat center center;
     }
   }
 </style>

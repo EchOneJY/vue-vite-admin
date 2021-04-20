@@ -1,5 +1,7 @@
 <template>
   <div :class="prefixCls" class="relative w-full h-full px-4">
+    <AppLocalePicker class="absolute top-4 right-4 enter-x text-white xl:text-gray-600" />
+
     <span class="-enter-x xl:hidden">
       <AppLogo :alwaysShowTitle="true" />
     </span>
@@ -16,9 +18,6 @@
             />
             <div class="mt-10 font-medium text-white -enter-x">
               <span class="mt-4 text-3xl inline-block">蒙牛干线物流管理系统</span>
-            </div>
-            <div class="mt-5 text-md text-white font-normal dark:text-gray-500 -enter-x">
-              输入您的个人详细信息开始使用！
             </div>
           </div>
         </div>
@@ -37,7 +36,7 @@
 <script lang="ts">
   import { defineComponent, computed } from 'vue'
 
-  import { AppLogo } from '/@/components/Application'
+  import { AppLogo, AppLocalePicker } from '/@/components/Application'
   import LoginForm from './LoginForm.vue'
 
   import { useGlobSetting } from '/@/hooks/setting'
@@ -48,6 +47,7 @@
     components: {
       AppLogo,
       LoginForm,
+      AppLocalePicker,
     },
     setup() {
       const globSetting = useGlobSetting()
