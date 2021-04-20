@@ -16,7 +16,7 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 ### If Using Volar
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+Run `Volar: Switch TS Plugin on/off  ` from VSCode command palette.
 
 ### If Using Vetur
 
