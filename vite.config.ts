@@ -27,7 +27,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     base: VITE_PUBLIC_PATH,
     root,
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.vue', '.json'],
       alias: [
         // /@/xxxx => src/xxxx
         {
