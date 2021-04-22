@@ -507,6 +507,23 @@
     "@intlify/runtime" "9.1.6"
     "@intlify/shared" "9.1.6"
 
+"@ionic/core@5.6.4":
+  version "5.6.4"
+  resolved "https://registry.npmjs.org/@ionic/core/-/core-5.6.4.tgz#49da080a4122241dd0e8ad5c08f9b8139e2a522b"
+  integrity sha512-fxCV/+0ibiaiBn1dsrrOmlLGJlTkqiG6IVXdLpPKimGdFLjy56olDvB5trlz9J5C/nHc7vR5MIiYC0qdTyX7og==
+  dependencies:
+    "@stencil/core" "^2.4.0"
+    ionicons "^5.5.1"
+    tslib "^2.1.0"
+
+"@ionic/vue@^5.6.4":
+  version "5.6.4"
+  resolved "https://registry.npmjs.org/@ionic/vue/-/vue-5.6.4.tgz#27998808a150c8730a4e059dcc0be1fce68354af"
+  integrity sha512-fv/pn3Nx+BTy/PX29xnotuLurlkRxya+m1BWCVaniRPvWjPvhp0WKhC/l5KexaDzG/aLmlauylds1WtWs6Bhhw==
+  dependencies:
+    "@ionic/core" "5.6.4"
+    ionicons "^5.1.2"
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
@@ -563,6 +580,11 @@
   dependencies:
     core-js "^3.8.0"
     nanopop "^2.1.0"
+
+"@stencil/core@^2.4.0", "@stencil/core@^2.5.0":
+  version "2.5.2"
+  resolved "https://registry.npmjs.org/@stencil/core/-/core-2.5.2.tgz#ad00d495ee37bbed4044524d59c7f22de15ab4a7"
+  integrity sha512-bgjPXkSzzg1WnTgVUm6m5ZzpKt602WmA/QljODAW1xVN40OHJdbGblzF/F6MFzqv2c5Cy30CB41arc8qADIdcQ==
 
 "@trysound/sax@0.1.1":
   version "0.1.1"
@@ -2518,6 +2540,13 @@ ini@^1.3.4:
   resolved "https://registry.npmjs.org/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
+ionicons@^5.1.2, ionicons@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.npmjs.org/ionicons/-/ionicons-5.5.1.tgz#c337b2a0871c18910dea5c72384b0f0a393abf15"
+  integrity sha512-1auVisfaXmkmxINer8Q3kJGHP1vSxk86hf7By95eJ+Av9+oBcNuAEBfSe3jaMaGRVxVw8U/2j23MFq7R3c0HPg==
+  dependencies:
+    "@stencil/core" "^2.5.0"
+
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
   resolved "https://registry.npmjs.org/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz#a9e12cb3ae8d876727eeef3843f8a0897b5c98d6"
@@ -4294,7 +4323,7 @@ tslib@^1.10.0, tslib@^1.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3:
+tslib@^2.0.3, tslib@^2.1.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
