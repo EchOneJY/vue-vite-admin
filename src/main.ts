@@ -10,6 +10,9 @@ import { setupStore } from '/@/store'
 import { localeStore } from '/@/store/modules/locale'
 import { setupI18n } from '/@/locales/setupI18n'
 
+// Register icon Sprite
+import 'vite-plugin-svg-icons/register'
+
 if (import.meta.env.DEV) {
   import('ant-design-vue/dist/antd.less')
 }

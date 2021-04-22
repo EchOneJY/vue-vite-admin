@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls" class="relative w-full h-full px-4">
-    <AppLocalePicker class="absolute top-4 right-4 enter-x text-white xl:text-gray-600" />
+    <AppLocalePicker class="absolute text-white top-4 right-4 enter-x xl:text-gray-600" />
 
     <span class="-enter-x xl:hidden">
       <AppLogo :alwaysShowTitle="true" />
@@ -8,7 +8,7 @@
 
     <div class="container relative h-full py-2 mx-auto sm:px-10">
       <div class="flex h-full">
-        <div class="hidden xl:flex xl:flex-col xl:w-6/12 min-h-full mr-4 pl-4">
+        <div class="hidden min-h-full pl-4 mr-4 xl:flex xl:flex-col xl:w-6/12">
           <AppLogo class="-enter-x" />
           <div class="my-auto">
             <img
@@ -17,14 +17,14 @@
               class="w-1/2 -mt-16 -enter-x"
             />
             <div class="mt-10 font-medium text-white -enter-x">
-              <span class="mt-4 text-3xl inline-block">蒙牛干线物流管理系统</span>
+              <span class="inline-block mt-4 text-3xl">蒙牛干线物流管理系统</span>
             </div>
           </div>
         </div>
-        <div class="h-full xl:h-auto flex py-5 xl:py-0 xl:my-0 w-full xl:w-6/12">
+        <div class="flex w-full h-full py-5 xl:h-auto xl:py-0 xl:my-0 xl:w-6/12">
           <div
             :class="`${prefixCls}-form`"
-            class="my-auto mx-auto xl:ml-20 xl:bg-transparent px-5 py-8 sm:px-8 xl:p-4 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto enter-x relative"
+            class="relative w-full px-5 py-8 mx-auto my-auto rounded-md shadow-md xl:ml-20 xl:bg-transparent sm:px-8 xl:p-4 xl:shadow-none sm:w-3/4 lg:w-2/4 xl:w-auto enter-x"
           >
             <LoginForm />
           </div>
