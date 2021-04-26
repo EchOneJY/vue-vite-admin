@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
-import { AppRouteModule } from './type'
+import { AppRouteModule } from './types'
 
 const Layout = () => import('/@/layouts/default/index.vue')
 

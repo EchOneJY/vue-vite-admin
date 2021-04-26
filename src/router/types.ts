@@ -26,19 +26,16 @@ export interface RouteMeta {
   // 指定该路由切换的动画名
   transitionName?: string
 
-  // 隐藏该路由在面包屑上面的显示
-  hideBreadcrumb?: boolean
-
   // 如果该路由会携带参数，且需要在tab页上面显示。则需要设置为true
   carryParam?: boolean
 
   // 当前激活的菜单。用于配置详情页时左侧激活的菜单路径
   currentActiveMenu?: string
 
-  // 当前路由不再标签页显示
+  // 当前路由不在标签页显示
   hideTab?: boolean
 
-  // 当前路由不再菜单显示
+  // 当前路由不在菜单显示
   hideMenu?: boolean
 }
 
