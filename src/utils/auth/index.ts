@@ -5,5 +5,5 @@ import { userStore } from '/@/store/modules/user'
  * @return jwt token
  */
 export function getToken(): string {
-  return userStore.getTokenState
+  return userStore.getToken
 }

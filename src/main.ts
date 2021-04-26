@@ -6,6 +6,7 @@ import App from './App.vue'
 
 import router, { setupRouter } from '/@/router'
 import { setupStore } from '/@/store'
+import { setupRouterGuard } from '/@/router/guard'
 
 import { localeStore } from '/@/store/modules/locale'
 import { setupI18n } from '/@/locales/setupI18n'
@@ -22,6 +23,9 @@ if (import.meta.env.DEV) {
 
   // Configure routing
   setupRouter(app)
+
+  // router-guard
+  setupRouterGuard()
 
   // Configure vuex store
   setupStore(app)

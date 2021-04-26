@@ -11,7 +11,7 @@ const NAME = 'locale'
 hotModuleUnregisterModule(NAME)
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
-class App extends VuexModule {
+class Locale extends VuexModule {
   private localeState: LocaleSetting = localeSetting
 
   get getShowPicker() {
@@ -35,4 +35,4 @@ class App extends VuexModule {
   }
 }
 
-export const localeStore = getModule<App>(App)
+export const localeStore = getModule<Locale>(Locale)

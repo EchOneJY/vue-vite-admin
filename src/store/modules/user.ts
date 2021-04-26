@@ -2,20 +2,20 @@ import type {
   LoginParams,
   GetUserInfoByUserIdModel,
   GetUserInfoByUserIdParams,
-} from '/@/api/system/model/userModel'
+} from '/@/api/model/userModel'
 
 import store from '/@/store/index'
 import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators'
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper'
 
 import { PageEnum } from '/@/enums/pageEnum'
-import { RoleEnum } from '/@/enums/roleEnum'
 
 import { useMessage } from '/@/hooks/web/useMessage'
+import { useI18n } from '/@/hooks/web/useI18n'
 
 import router from '/@/router'
 
-import { loginApi, getUserInfoById } from '/@/api/system/user'
+import { loginApi, getUserInfoById } from '/@/api/user'
 
 import { ErrorMessageMode } from '/@/utils/axios/types'
 
@@ -27,48 +27,34 @@ hotModuleUnregisterModule(NAME)
 @Module({ namespaced: true, name: NAME, dynamic: true, store })
 class User extends VuexModule {
   // user info
-  private userInfoState: UserInfo | null = null
+  private userInfo: Nullable<UserInfo> = null
 
   // token
-  private tokenState = ''
+  private token = ''
 
-  // roleList
-  private roleListState: RoleEnum[] = []
-
-  get getUserInfoState(): UserInfo | null {
-    return this.userInfoState
+  get getUserInfo(): Nullable<UserInfo> {
+    return this.userInfo
   }
 
-  get getTokenState(): string {
-    return this.tokenState
-  }
-
-  get getRoleListState(): RoleEnum[] {
-    return this.roleListState
+  get getToken(): string {
+    return this.token
   }
 
   @Mutation
-  commitResetState(): void {
-    this.userInfoState = null
-    this.tokenState = ''
-    this.roleListState = []
+  commitReset(): void {
+    this.userInfo = null
+    this.token = ''
   }
 
   @Mutation
-  commitUserInfoState(info: UserInfo): void {
-    this.userInfoState = info
+  commitUserInfo(info: UserInfo): void {
+    this.userInfo = info
     // setCache(USER_INFO_KEY, info);
   }
 
   @Mutation
-  commitRoleListState(roleList: RoleEnum[]): void {
-    this.roleListState = roleList
-    // setCache(ROLES_KEY, roleList);
-  }
-
-  @Mutation
-  commitTokenState(info: string): void {
-    this.tokenState = info
+  commitToken(info: string): void {
+    this.token = info
     // setCache(TOKEN_KEY, info);
   }
 
@@ -89,7 +75,7 @@ class User extends VuexModule {
       const { token, userId } = data
 
       // save token
-      this.commitTokenState(token)
+      this.commitToken(token)
 
       // get user info
       const userInfo = await this.getUserInfoAction({ userId })
@@ -106,10 +92,7 @@ class User extends VuexModule {
   @Action
   async getUserInfoAction({ userId }: GetUserInfoByUserIdParams) {
     const userInfo = await getUserInfoById({ userId })
-    const { role } = userInfo
-    const roleList = [role.value] as RoleEnum[]
-    this.commitUserInfoState(userInfo)
-    this.commitRoleListState(roleList)
+    this.commitUserInfo(userInfo)
     return userInfo
   }
 
@@ -126,15 +109,12 @@ class User extends VuexModule {
    */
   @Action
   async confirmLoginOut() {
-    console.log(useMessage().createConfirm)
     const { createConfirm } = useMessage()
-    // const { t } = useI18n();
+    const { t } = useI18n()
     createConfirm({
       iconType: 'warning',
-      title: '温馨提醒',
-      // title: t('sys.app.loginOutTip'),
-      content: '是否确认退出系统',
-      // content: t('sys.app.loginOutMessage'),
+      title: t('sys.app.loginOutTip'),
+      content: t('sys.app.loginOutMessage'),
       onOk: async () => {
         await this.loginOut(true)
       },

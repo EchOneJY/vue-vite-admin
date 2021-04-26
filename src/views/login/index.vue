@@ -6,7 +6,7 @@
       <AppLogo :alwaysShowTitle="true" />
     </span>
 
-    <IonIcon :icon="ellipse" />
+    <!-- <IonIcon :icon="ellipse" /> -->
 
     <div class="container relative h-full py-2 mx-auto sm:px-10">
       <div class="flex h-full">
@@ -44,15 +44,15 @@
   import { useGlobSetting } from '/@/hooks/setting'
   import { useDesign } from '/@/hooks/web/useDesign'
 
-  import { IonIcon } from '@ionic/vue'
-  import { ellipse } from 'ionicons/icons'
+  // import { IonIcon } from '@ionic/vue'
+  // import { ellipse } from 'ionicons/icons'
   export default defineComponent({
     name: 'Login',
     components: {
       AppLogo,
       LoginForm,
       AppLocalePicker,
-      IonIcon,
+      // IonIcon,
     },
     setup() {
       const globSetting = useGlobSetting()
@@ -61,7 +61,7 @@
       return {
         prefixCls,
         title: computed(() => globSetting?.title ?? ''),
-        ellipse,
+        // ellipse,
       }
     },
   })
