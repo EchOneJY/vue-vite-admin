@@ -5,31 +5,31 @@ import store from '/@/store'
 
 import { localeSetting } from '/@/settings/locale'
 
-import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper'
+import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 
 const NAME = 'locale'
 hotModuleUnregisterModule(NAME)
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class Locale extends VuexModule {
-  private localeState: LocaleSetting = localeSetting
+  private locale: LocaleSetting = localeSetting
 
   get getShowPicker() {
-    return !!this.localeState?.showPicker
+    return !!this.locale?.showPicker
   }
 
   get getLocale(): LocaleType {
-    return this.localeState?.locale ?? 'zh_CN'
+    return this.locale?.locale ?? 'zh_CN'
   }
 
   @Mutation
-  setLocaleState(locale: Partial<LocaleSetting>): void {
-    this.localeState = { ...this.localeState, ...locale }
+  setLocale(locale: Partial<LocaleSetting>): void {
+    this.locale = { ...this.locale, ...locale }
   }
 
   @Action
   initLocale() {
-    this.setLocaleState({
+    this.setLocale({
       ...localeSetting,
     })
   }

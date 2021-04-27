@@ -2,15 +2,17 @@ import type { Menu } from '/@/router/types'
 
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import store from '/@/store/index'
-import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper'
+import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 
 import { useI18n } from '/@/hooks/web/useI18n'
 import { useMessage } from '/@/hooks/web/useMessage'
 
 import { getMenuListById } from '/@/api/menu'
-import { getMenuListByIdParamsResultModel } from '/@/api/model/menuModel'
+import type { AppRouteModule } from '/@/router/types'
 
 import { userStore } from './user'
+import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/route'
+import { transformRouteToMenu } from '/@/router/helper/menu'
 
 const NAME = 'permisson'
 hotModuleUnregisterModule(NAME)
@@ -40,7 +42,7 @@ class Permisson extends VuexModule {
   }
 
   @Action
-  async buildRoutesAction(id?): Promise<getMenuListByIdParamsResultModel> {
+  async buildRoutesAction(id?): Promise<AppRouteModule[]> {
     const { t } = useI18n()
 
     // const routes: AppRouteRecordRaw[] = []
@@ -54,16 +56,19 @@ class Permisson extends VuexModule {
 
     const paramId = id || userStore.getUserInfo?.userId
 
-    const routeList = (await getMenuListById({ id: paramId })) as getMenuListByIdParamsResultModel
+    let routeList = (await getMenuListById({ id: paramId })) as AppRouteModule[]
+
+    routeList = transformObjToRoute(routeList)
+
+    const backMenuList = transformRouteToMenu(routeList)
+    this.setBackMenuList(backMenuList)
 
     console.log(routeList)
+    console.log(backMenuList)
 
-    // routeList = transformObjToRoute(routeList)
+    routeList = flatMultiLevelRoutes(routeList)
 
-    // const backMenuList = transformRouteToMenu(routeList)
-    // this.setBackMenuList(backMenuList)
-
-    // routeList = flatMultiLevelRoutes(routeList)
+    console.log(routeList)
 
     return routeList
   }

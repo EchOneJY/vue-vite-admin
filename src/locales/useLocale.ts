@@ -23,7 +23,7 @@ function setI18nLanguage(locale: LocaleType) {
   } else {
     ;(i18n.global.locale as any).value = locale
   }
-  localeStore.setLocaleState({ locale })
+  localeStore.setLocale({ locale })
   document.querySelector('html')?.setAttribute('lang', locale)
 }
 

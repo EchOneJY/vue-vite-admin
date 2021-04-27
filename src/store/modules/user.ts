@@ -6,7 +6,7 @@ import type {
 
 import store from '/@/store/index'
 import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators'
-import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper'
+import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 
 import { PageEnum } from '/@/enums/pageEnum'
 
@@ -113,8 +113,8 @@ class User extends VuexModule {
     const { t } = useI18n()
     createConfirm({
       iconType: 'warning',
-      title: t('sys.app.loginOutTip'),
-      content: t('sys.app.loginOutMessage'),
+      title: t('sys.app.logoutTip'),
+      content: t('sys.app.logoutMessage'),
       onOk: async () => {
         await this.loginOut(true)
       },

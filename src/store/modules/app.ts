@@ -5,7 +5,7 @@ import type { ProjectConfig } from '/#/config'
 import PrjectSettings from '/@/settings/project'
 
 import { deepMerge } from '/@/utils'
-import { hotModuleUnregisterModule } from '/@/utils/helper/vuexHelper'
+import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 
 const NAME = 'app'
 hotModuleUnregisterModule(NAME)

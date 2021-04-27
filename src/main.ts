@@ -21,12 +21,6 @@ if (import.meta.env.DEV) {
 ;(async () => {
   const app = createApp(App)
 
-  // Configure routing
-  setupRouter(app)
-
-  // router-guard
-  setupRouterGuard()
-
   // Configure vuex store
   setupStore(app)
 
@@ -34,6 +28,12 @@ if (import.meta.env.DEV) {
 
   // Multilingual configuration
   await setupI18n(app)
+
+  // Configure routing
+  setupRouter(app)
+
+  // router-guard
+  setupRouterGuard()
 
   // Mount when the route is ready
   await router.isReady()

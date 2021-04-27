@@ -1,10 +1,6 @@
-import { RouteMeta } from '/@/router/types'
-export interface RouteItem {
+import { AppRouteModule } from '/@/router/types'
+export interface RouteItem extends AppRouteModule {
   id: string
-  url: string
-  meta: RouteMeta
-  redirect?: string
-  children?: RouteItem[]
 }
 
 /**

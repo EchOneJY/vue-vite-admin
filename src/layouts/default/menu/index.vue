@@ -5,14 +5,17 @@
     v-model:selectedKeys="selectedKeys"
     @click="handleMenuClick"
   >
-    <MenuItem key="/dashboard/index">
+    <!-- <MenuItem key="/dashboard/index">
       <UserOutlined />
       <span>dashboard</span>
     </MenuItem>
     <MenuItem key="/about/index">
       <VideoCameraOutlined />
       <span>about</span>
-    </MenuItem>
+    </MenuItem> -->
+    <template v-for="item in menus" :key="item.path">
+      <SubMenuItem :item="item" />
+    </template>
   </Menu>
 </template>
 
@@ -22,9 +25,12 @@
   import { Router } from 'vue-router'
 
   import { Menu } from 'ant-design-vue'
-  import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons-vue'
+  // import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons-vue'
 
   import { useRouter, useRoute } from 'vue-router'
+
+  import { permissionStore } from '/@/store/modules/permission'
+  import SubMenuItem from './components/SubMenuItem.vue'
 
   interface State {
     openKeys: string[]
@@ -35,9 +41,10 @@
     name: 'LayoutMenu',
     components: {
       Menu,
-      MenuItem: Menu.Item,
-      UserOutlined,
-      VideoCameraOutlined,
+      SubMenuItem,
+      // MenuItem: Menu.MenuItem,
+      // UserOutlined,
+      // VideoCameraOutlined,
     },
     setup() {
       const router: Router = useRouter()
@@ -47,6 +54,10 @@
         openKeys: [],
         selectedKeys: [],
       })
+
+      const menus = permissionStore.getBackMenuList
+
+      // console.log(menus.value)
 
       watch(
         () => route.path,
@@ -66,6 +77,7 @@
       return {
         ...toRefs(state),
         handleMenuClick,
+        menus,
       }
     },
   })

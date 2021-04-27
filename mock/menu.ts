@@ -3,62 +3,65 @@ import { resultSuccess } from './_util'
 
 // single
 const asyncRoute = {
-  path: '/dashboard',
-  name: 'Dashboard',
+  path: 'dashboard/index',
   children: [],
+  component: '/dashboard/index',
   meta: {
-    title: 'routes.dashboard',
+    title: 'routes.dashboard.dashboard',
     icon: 'home',
     affix: true,
   },
 }
 
 const levelRoute = {
-  path: '/level',
-  name: 'Level',
+  path: 'level',
+  component: '',
   meta: {
     icon: 'level',
-    title: 'routes.level',
+    title: 'routes.level.level',
   },
   children: [
     {
       path: 'menu1',
-      name: 'Menu1Demo',
+      component: '',
       meta: {
-        title: 'Menu1',
+        title: 'routes.level.menu1',
       },
       children: [
         {
           path: 'menu1-1',
-          name: 'Menu11Demo',
+          component: '',
           meta: {
-            title: 'Menu1-1',
+            title: 'routes.level.menu1-1',
           },
           children: [
             {
               path: 'menu1-1-1',
-              name: 'Menu111Demo',
+              component: '/level/Menu111',
               meta: {
-                title: 'Menu111',
+                title: 'routes.level.menu1-1-1',
               },
+              children: [],
             },
           ],
         },
         {
           path: 'menu1-2',
-          name: 'Menu12Demo',
+          component: '/level/Menu12',
           meta: {
-            title: 'Menu1-2',
+            title: 'routes.level.menu1-2',
           },
+          children: [],
         },
       ],
     },
     {
       path: 'menu2',
-      name: 'Menu2Demo',
+      component: '/level/Menu2',
       meta: {
-        title: 'Menu2',
+        title: 'routes.level.menu2',
       },
+      children: [],
     },
   ],
 }

@@ -14,6 +14,9 @@ export interface RouteMeta {
   // 是否忽略KeepAlive缓存
   ignoreKeepAlive?: boolean
 
+  // 是否为单个菜单
+  single?: boolean
+
   // 是否固定标签
   affix?: boolean
 
@@ -41,11 +44,11 @@ export interface RouteMeta {
 
 // @ts-ignore
 export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
-  name: string
+  name?: string
   meta: RouteMeta
   component?: Component | string
   components?: Component
-  children?: AppRouteRecordRaw[]
+  children: AppRouteRecordRaw[]
   props?: Recordable
   fullPath?: string
 }
@@ -69,7 +72,7 @@ export interface Menu {
 
   orderNo?: number
 
-  meta?: Partial<RouteMeta>
+  meta: Partial<RouteMeta>
 
   tag?: MenuTag
 

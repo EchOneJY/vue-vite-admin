@@ -4553,14 +4553,7 @@ vue-tsc@^0.0.15:
   dependencies:
     unzipper "0.10.11"
 
-vue-types@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/vue-types/-/vue-types-2.0.3.tgz#d4d3b124e8ae09e2d58785054451a6eb7e672d6d"
-  integrity sha512-pLTOquc/x5uvVLZBjEKwC8e3eni17wv9M/2XdYbDQ/93pk3vW6eXvoynMw0ACBvHad7GgQ92F+D+C7d7e5msBw==
-  dependencies:
-    is-plain-object "3.0.1"
-
-vue-types@^3.0.0:
+vue-types@^3.0.0, vue-types@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npmjs.org/vue-types/-/vue-types-3.0.2.tgz#ec16e05d412c038262fc1efa4ceb9647e7fb601d"
   integrity sha512-IwUC0Aq2zwaXqy74h4WCvFCUtoV0iSWr0snWnE9TnU18S66GAQyqQbRf2qfJtUuiFsBf6qp0MEwdonlwznlcrw==
