@@ -1,5 +1,5 @@
 <template>
-  <MenuItem>
+  <MenuItem :key="item.path">
     <!-- <MenuItem :class="getLevelClass"> -->
     <MenuItemContent v-bind="$props" :item="item" />
   </MenuItem>
@@ -12,7 +12,6 @@
 
   import MenuItemContent from './MenuItemContent.vue'
   export default defineComponent({
-    name: 'BasicMenuItem',
     components: { MenuItem: Menu.Item, MenuItemContent },
     props: itemProps,
     setup() // props

@@ -1,3 +1,5 @@
+import { CacheTypeEnum } from '/@/enums/cacheEnum'
+
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko'
 
 export interface MenuSetting {
@@ -28,14 +30,27 @@ export interface LocaleSetting {
   availableLocales: LocaleType[]
 }
 
+export interface TabsSetting {
+  cache: boolean
+  show: boolean
+  showQuick: boolean
+  showRedo: boolean
+  showFold: boolean
+}
+
 export interface ProjectConfig {
   // 是否显示配置按钮
   showSettingButton: boolean
+
+  permissionCacheType: CacheTypeEnum
 
   headerSetting: HeaderSetting
 
   // 菜单类型
   menuSetting: MenuSetting
+
+  // tab settings
+  tabsSetting: TabsSetting
 }
 
 export interface GlobConfig {

@@ -1,16 +1,17 @@
 <template>
-  <MenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" />
+  <MenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" :key="item.path" />
   <SubMenu
     v-if="menuHasChildren(item) && getShowMenu"
     :class="[theme]"
     popupClassName="app-top-menu-popup"
+    :key="item.path"
   >
     <template #title>
       <MenuItemContent v-bind="$props" :item="item" />
     </template>
 
     <template v-for="childrenItem in item.children || []" :key="childrenItem.path">
-      <BasicSubMenuItem v-bind="$props" :item="childrenItem" />
+      <SubMenuItem v-bind="$props" :item="childrenItem" />
     </template>
   </SubMenu>
 </template>
@@ -25,7 +26,7 @@
   import MenuItemContent from './MenuItemContent.vue'
 
   export default defineComponent({
-    name: 'BasicSubMenuItem',
+    name: 'SubMenuItem',
     isSubMenu: true,
     components: {
       MenuItem,

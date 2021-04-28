@@ -4,15 +4,8 @@
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
     @click="handleMenuClick"
+    mode="inline"
   >
-    <!-- <MenuItem key="/dashboard/index">
-      <UserOutlined />
-      <span>dashboard</span>
-    </MenuItem>
-    <MenuItem key="/about/index">
-      <VideoCameraOutlined />
-      <span>about</span>
-    </MenuItem> -->
     <template v-for="item in menus" :key="item.path">
       <SubMenuItem :item="item" />
     </template>
@@ -31,6 +24,7 @@
 
   import { permissionStore } from '/@/store/modules/permission'
   import SubMenuItem from './components/SubMenuItem.vue'
+  import { getAllParentPath } from '/@/router/helper/menuHelper'
 
   interface State {
     openKeys: string[]
@@ -57,11 +51,10 @@
 
       const menus = permissionStore.getBackMenuList
 
-      // console.log(menus.value)
-
       watch(
         () => route.path,
         () => {
+          state.openKeys = getAllParentPath(menus, route.path)
           state.selectedKeys.push(route.path)
         },
         {

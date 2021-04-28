@@ -1,7 +1,8 @@
+import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router'
+import { isObject } from '/@/utils/is'
+
 export const timestamp = () => +Date.now()
 export const now = () => Date.now()
-
-import { isObject } from '/@/utils/is'
 
 export function deepMerge<T = any>(src: any = {}, target: any = {}): T {
   let key: string
@@ -34,4 +35,19 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
     url = baseUrl.replace(/\/?$/, '?') + parameters
   }
   return url
+}
+
+export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
+  if (!route) return route
+  const { matched, ...opt } = route
+  return {
+    ...opt,
+    matched: (matched
+      ? matched.map((item) => ({
+          meta: item.meta,
+          name: item.name,
+          path: item.path,
+        }))
+      : undefined) as RouteRecordNormalized[],
+  }
 }

@@ -11,6 +11,7 @@
     "@vueuse/core": "^4.8.1",
     "ant-design-vue": "2.1.2",
     "axios": "^0.21.1",
+    "crypto-js": "^4.0.0",
     "ionicons": "^5.5.1",
     "lodash-es": "^4.17.21",
     "mockjs": "^1.1.0",

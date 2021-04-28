@@ -1,7 +1,11 @@
 import type { ProjectConfig } from '/#/config'
+import { CacheTypeEnum } from '/@/enums/cacheEnum'
 
 const setting: ProjectConfig = {
   showSettingButton: false,
+
+  // Permission-related cache is stored in sessionStorage or localStorage
+  permissionCacheType: CacheTypeEnum.SESSION,
 
   // Header configuration
   headerSetting: {
@@ -30,6 +34,19 @@ const setting: ProjectConfig = {
     menuWidth: 210,
     // Fold trigger position
     trigger: 'top',
+  },
+
+  // Multi-label
+  tabsSetting: {
+    cache: false,
+    // Turn on
+    show: true,
+    // Turn on quick actions
+    showQuick: true,
+    // Whether to show the refresh button
+    showRedo: true,
+    // Whether to show the collapse button
+    showFold: true,
   },
 }
 

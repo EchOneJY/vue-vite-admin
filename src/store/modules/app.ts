@@ -1,4 +1,4 @@
-import { VuexModule, getModule, Module, Mutation } from 'vuex-module-decorators'
+import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import store from '/@/store'
 
 import type { ProjectConfig } from '/#/config'
@@ -6,6 +6,8 @@ import PrjectSettings from '/@/settings/project'
 
 import { deepMerge } from '/@/utils'
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
+import { Persistent } from '/@/utils/cache/persistent'
+import { resetRouter } from '/@/router'
 
 const NAME = 'app'
 hotModuleUnregisterModule(NAME)
@@ -21,6 +23,12 @@ class App extends VuexModule {
   @Mutation
   commitProjectConfigState(proCfg: DeepPartial<ProjectConfig>): void {
     this.projectConfigState = deepMerge(this.projectConfigState || {}, proCfg)
+  }
+
+  @Action
+  async commitResetState() {
+    resetRouter()
+    Persistent.clearAll()
   }
 }
 

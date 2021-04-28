@@ -1,6 +1,11 @@
 <template>
-  <span :class="`${prefixCls}- flex items-center `">
-    <SvgIcon :icon="getIcon" :size="18" :class="`${prefixCls}-wrapper__icon`" />
+  <span :class="`${prefixCls} flex items-center`">
+    <SvgIcon
+      v-if="getIcon"
+      :name="getIcon"
+      :size="15"
+      :class="`${prefixCls}-wrapper__icon mr-2.5`"
+    />
     {{ getI18nName }}
   </span>
 </template>
@@ -20,7 +25,7 @@
     },
     props: contentProps,
     setup(props) {
-      const { prefixCls } = useDesign('basic-menu-item-content')
+      const { prefixCls } = useDesign('menu-item-content')
       const getI18nName = computed(() => t(props.item?.name))
       const getIcon = computed(() => props.item?.icon)
 

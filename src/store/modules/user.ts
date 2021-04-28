@@ -9,6 +9,9 @@ import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-dec
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 
 import { PageEnum } from '/@/enums/pageEnum'
+import { TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum'
+
+import { getAuthCache, setAuthCache } from '/@/utils/auth'
 
 import { useMessage } from '/@/hooks/web/useMessage'
 import { useI18n } from '/@/hooks/web/useI18n'
@@ -32,16 +35,16 @@ class User extends VuexModule {
   // token
   private token = ''
 
-  get getUserInfo(): Nullable<UserInfo> {
-    return this.userInfo
+  get getUserInfo(): UserInfo {
+    return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY) || {}
   }
 
   get getToken(): string {
-    return this.token
+    return this.token || getAuthCache<string>(TOKEN_KEY)
   }
 
   @Mutation
-  commitReset(): void {
+  commitResetState(): void {
     this.userInfo = null
     this.token = ''
   }
@@ -49,13 +52,13 @@ class User extends VuexModule {
   @Mutation
   commitUserInfo(info: UserInfo): void {
     this.userInfo = info
-    // setCache(USER_INFO_KEY, info);
+    setAuthCache(USER_INFO_KEY, info)
   }
 
   @Mutation
-  commitToken(info: string): void {
-    this.token = info
-    // setCache(TOKEN_KEY, info);
+  commitToken(token: string): void {
+    this.token = token
+    setAuthCache(TOKEN_KEY, token)
   }
 
   /**

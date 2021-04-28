@@ -1,5 +1,5 @@
 <template>
-  <Sider v-model:collapsed="getCollapsed" :trigger="null" collapsible>
+  <Sider width="220" v-model:collapsed="getCollapsed" :trigger="null" collapsible>
     <AppLogo />
     <LayoutMenu />
   </Sider>

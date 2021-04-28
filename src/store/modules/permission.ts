@@ -11,8 +11,9 @@ import { getMenuListById } from '/@/api/menu'
 import type { AppRouteModule } from '/@/router/types'
 
 import { userStore } from './user'
-import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/route'
-import { transformRouteToMenu } from '/@/router/helper/menu'
+import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/routeHelper'
+import { transformRouteToMenu } from '/@/router/helper/menuHelper'
+import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes'
 
 const NAME = 'permisson'
 hotModuleUnregisterModule(NAME)
@@ -41,11 +42,17 @@ class Permisson extends VuexModule {
     this.backMenuList = menus
   }
 
+  @Mutation
+  commitResetState(): void {
+    this.hasDynamicAddedRoute = false
+    this.backMenuList = []
+  }
+
   @Action
   async buildRoutesAction(id?): Promise<AppRouteModule[]> {
     const { t } = useI18n()
 
-    // const routes: AppRouteRecordRaw[] = []
+    let routes: AppRouteModule[] = []
 
     const { createMessage } = useMessage()
 
@@ -63,14 +70,13 @@ class Permisson extends VuexModule {
     const backMenuList = transformRouteToMenu(routeList)
     this.setBackMenuList(backMenuList)
 
-    console.log(routeList)
-    console.log(backMenuList)
-
     routeList = flatMultiLevelRoutes(routeList)
 
-    console.log(routeList)
+    routes = [PAGE_NOT_FOUND_ROUTE, ...routeList]
 
-    return routeList
+    console.log(routes)
+
+    return routes
   }
 }
 export const permissionStore = getModule<Permisson>(Permisson)

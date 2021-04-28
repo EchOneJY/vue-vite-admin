@@ -20,11 +20,11 @@ function asyncImportRoute(routes: AppRouteModule[]) {
     const { component, children } = item
     if (component) {
       item.component = dynamicImport(dynamicViewsModules, component as string)
-      // item.component = () => import(`../../views`)
+      // item.component = () => import(`../../views${component}`)
     } else {
       item.component = getParentLayout()
     }
-    children.length && asyncImportRoute(children)
+    children?.length && asyncImportRoute(children)
   })
 }
 
@@ -39,6 +39,7 @@ function dynamicImport(
     k = k.substring(0, lastIndex)
     return k === component
   })
+
   if (matchKeys?.length === 1) {
     const matchKey = matchKeys[0]
     return dynamicViewsModules[matchKey]
@@ -54,8 +55,7 @@ function dynamicImport(
 export function transformObjToRoute<T = AppRouteModule>(routeList: AppRouteModule[]): T[] {
   // LayoutMap.set('LAYOUT', LAYOUT)
   routeList.forEach((route) => {
-    route.component = LAYOUT
-    if (!route.children.length) {
+    if (!route.children?.length) {
       route.children = [cloneDeep(route)]
       route.path = '/'
       const meta = route.meta || {}
@@ -65,6 +65,7 @@ export function transformObjToRoute<T = AppRouteModule>(routeList: AppRouteModul
     } else {
       route.path = `/${route.path}`
     }
+    route.component = LAYOUT
 
     route.children.length && asyncImportRoute(route.children)
   })
@@ -96,7 +97,6 @@ function promoteRouteLevel(routeModule: AppRouteModule) {
   })
 
   const routes = router.getRoutes()
-  console.log(routes)
   addToChildren(routes, routeModule.children || [], routeModule)
   router = null
 
@@ -133,7 +133,7 @@ function isMultipleRoute(routeModule: AppRouteModule) {
   const children = routeModule.children
 
   let flag = false
-  if (children.findIndex((item) => !!item.children.length) > -1) {
+  if (children.findIndex((item) => !!item.children?.length) > -1) {
     flag = true
   }
 

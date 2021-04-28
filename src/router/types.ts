@@ -40,6 +40,8 @@ export interface RouteMeta {
 
   // 当前路由不在菜单显示
   hideMenu?: boolean
+
+  hideBreadcrumb?: boolean
 }
 
 // @ts-ignore
@@ -48,7 +50,7 @@ export interface AppRouteRecordRaw extends Omit<RouteRecordRaw, 'meta'> {
   meta: RouteMeta
   component?: Component | string
   components?: Component
-  children: AppRouteRecordRaw[]
+  children?: AppRouteRecordRaw[]
   props?: Recordable
   fullPath?: string
 }

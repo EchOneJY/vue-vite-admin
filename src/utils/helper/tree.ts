@@ -41,7 +41,7 @@ export function findPath<T = any>(
 /**
  * @description: Extract tree specified structure
  */
-export function treeMap<T = any>(treeData: T[], opt: { children?: string; conversion: Fn }): T[] {
+export function treeMap<T = any>(treeData, opt: { children?: string; conversion: Fn }): T[] {
   return treeData.map((item) => treeMapEach(item, opt))
 }
 

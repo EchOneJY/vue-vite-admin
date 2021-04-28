@@ -48,7 +48,7 @@ export function transformRouteToMenu(routeModList: AppRouteModule[]) {
       routeList.push(item)
     }
   })
-  const list = treeMap(routeList, {
+  const list = treeMap<Menu>(routeList, {
     conversion: (node: AppRouteRecordRaw) => {
       const { meta: { title, hideMenu = false } = {} } = node
 
