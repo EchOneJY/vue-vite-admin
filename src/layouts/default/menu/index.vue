@@ -55,7 +55,7 @@
         () => route.path,
         () => {
           state.openKeys = getAllParentPath(menus, route.path)
-          state.selectedKeys.push(route.path)
+          state.selectedKeys = [route.path]
         },
         {
           immediate: true,

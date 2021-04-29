@@ -73,8 +73,6 @@
         return tabsStore.getTabList.filter((item) => !item.meta?.hideTab)
       })
 
-      console.log(getTabsState.value)
-
       const unClose = computed(() => unref(getTabsState).length === 1)
 
       const getWrapClass = computed(() => {
@@ -89,8 +87,9 @@
       watch(
         () => route.path,
         () => {
+          console.log('route change')
           const { path, fullPath, meta = {} } = route
-          if (path === REDIRECT_ROUTE.path || !userStore.getToken) {
+          if (route.path === REDIRECT_ROUTE.path || !userStore.getToken) {
             return
           }
           const { currentActiveMenu, hideTab } = meta
@@ -99,7 +98,6 @@
           if (activeKeyRef.value !== p) {
             activeKeyRef.value = p as string
           }
-          // debugger
           if (isHide) {
             const findParentRoute = router
               .getRoutes()
@@ -107,35 +105,14 @@
 
             findParentRoute &&
               tabsStore.addTab((findParentRoute as unknown) as RouteLocationNormalized)
-          } else {
-            tabsStore.addTab(unref(route))
           }
+
+          tabsStore.addTab(unref(route))
+        },
+        {
+          immediate: true,
         }
       )
-
-      // listenerRouteChange((route) => {
-      //   const { name } = route
-      //   if (name === REDIRECT_NAME || !route || !userStore.getToken) {
-      //     return
-      //   }
-
-      //   const { path, fullPath, meta = {} } = route
-      //   const { currentActiveMenu, hideTab } = meta
-      //   const isHide = !hideTab ? null : currentActiveMenu
-      //   const p = isHide || fullPath || path
-      //   if (activeKeyRef.value !== p) {
-      //     activeKeyRef.value = p as string
-      //   }
-
-      //   if (isHide) {
-      //     const findParentRoute = router.getRoutes().find((item) => item.path === currentActiveMenu)
-
-      //     findParentRoute &&
-      //       tabsStore.addTab((findParentRoute as unknown) as RouteLocationNormalized)
-      //   } else {
-      //     tabsStore.addTab(unref(route))
-      //   }
-      // })
 
       function handleChange(activeKey: any) {
         activeKeyRef.value = activeKey
@@ -149,7 +126,7 @@
           return
         }
 
-        tabsStore.closeTabByKey(targetKey, router)
+        tabsStore.closeTabByKey(targetKey)
       }
       return {
         prefixCls,

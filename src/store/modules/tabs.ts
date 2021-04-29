@@ -1,5 +1,4 @@
-import type { RouteLocationNormalized, RouteLocationRaw, Router } from 'vue-router'
-
+import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
 import { toRaw, unref } from 'vue'
 
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
@@ -14,6 +13,8 @@ import { PageEnum } from '/@/enums/pageEnum'
 import { TABS_KEY } from '/@/enums/cacheEnum'
 import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/routes'
 import { getRawRoute } from '/@/utils'
+import router from '/@/router'
+import { cloneDeep } from 'lodash-es'
 
 const NAME = 'tabs'
 hotModuleUnregisterModule(NAME)
@@ -39,14 +40,32 @@ class Tabs extends VuexModule {
   }
 
   @Mutation
-  clearCacheTabs(): void {
-    this.cacheTabList = new Set()
+  commitSetTabList(tabs: RouteLocationNormalized[]): void {
+    console.log(tabs)
+    this.tabList = tabs
   }
 
   @Mutation
-  resetState(): void {
-    this.tabList = []
-    this.clearCacheTabs()
+  commitSetCacheTabs(tabs: Set<string>): void {
+    this.cacheTabList = tabs
+  }
+
+  @Mutation
+  commitClearCacheTabs(): void {
+    this.cacheTabList = new Set()
+  }
+  // Sort the tabs
+  @Mutation
+  async sortTabs(oldIndex: number, newIndex: number) {
+    const currentTab = this.tabList[oldIndex]
+    this.tabList.splice(oldIndex, 1)
+    this.tabList.splice(newIndex, 0, currentTab)
+  }
+
+  @Action
+  handleResetState(): void {
+    this.commitSetTabList([])
+    this.commitClearCacheTabs()
   }
 
   /**
@@ -63,52 +82,34 @@ class Tabs extends VuexModule {
       if (!needCache) {
         return
       }
-      const name = item.name as string
-      cacheMap.add(name)
+      const path = item.path as string
+      cacheMap.add(path)
     }
-    this.cacheTabList = cacheMap
-    console.log(this.cacheTabList)
+    this.commitSetCacheTabs(cacheMap)
   }
 
   @Action
-  async addTab(route: RouteLocationNormalized) {
-    const { path, name, fullPath, params, query } = getRawRoute(route)
-    // 404  The page does not need to add a tab
+  addTab(route: RouteLocationNormalized) {
+    const addRoute = getRawRoute(route)
+    const tabList = cloneDeep(toRaw(this.tabList))
+    const { path } = addRoute
     if (
       path === PageEnum.ERROR_PAGE ||
-      !name ||
-      [REDIRECT_ROUTE.name, PAGE_NOT_FOUND_ROUTE.name].includes(name as string)
+      [REDIRECT_ROUTE.path, PAGE_NOT_FOUND_ROUTE.path].includes(path as string)
     ) {
       return
     }
-
-    let updateIndex = -1
-    // Existing pages, do not add tabs repeatedly
-    const tabHasExits = this.tabList.some((tab, index) => {
-      updateIndex = index
-      return (tab.fullPath || tab.path) === (fullPath || path)
-    })
-
-    // If the tab already exists, perform the update operation
-    if (tabHasExits) {
-      const curTab = toRaw(this.tabList)[updateIndex]
-      if (!curTab) {
-        return
-      }
-      curTab.params = params || curTab.params
-      curTab.query = query || curTab.query
-      curTab.fullPath = fullPath || curTab.fullPath
-      this.tabList.splice(updateIndex, 1, curTab)
-      return
-    }
+    if (tabList.some((tab) => tab.path === path)) return
     // Add tab
-    this.tabList.push(route)
+    tabList.push(addRoute)
+    this.commitSetTabList(tabList)
     this.updateCacheTab()
     cacheTab && Persistent.setLocal(TABS_KEY, this.tabList)
   }
 
   @Action
-  async closeTab(tab: RouteLocationNormalized, router: Router) {
+  closeTab(tab: RouteLocationNormalized) {
+    const tabList = cloneDeep(toRaw(this.tabList))
     const getToTarget = (tabItem: RouteLocationNormalized) => {
       const { params, path, query } = tabItem
       return {
@@ -123,10 +124,12 @@ class Tabs extends VuexModule {
       if (affix) {
         return
       }
-      const index = this.tabList.findIndex((item) => item.fullPath === fullPath)
-      index !== -1 && this.tabList.splice(index, 1)
+      const index = tabList.findIndex((item) => item.fullPath === fullPath)
+      if (index !== -1) {
+        tabList.splice(index, 1)
+        this.commitSetTabList(tabList)
+      }
     }
-
     const { currentRoute, replace } = router
 
     const { path } = unref(currentRoute)
@@ -139,21 +142,21 @@ class Tabs extends VuexModule {
     // Closed is activated atb
     let toTarget: RouteLocationRaw = {}
 
-    const index = this.tabList.findIndex((item) => item.path === path)
+    const index = tabList.findIndex((item) => item.path === path)
 
     // If the current is the leftmost tab
     if (index === 0) {
       // There is only one tab, then jump to the homepage, otherwise jump to the right tab
-      if (this.tabList.length === 1) {
+      if (tabList.length === 1) {
         toTarget = PageEnum.BASE_HOME
       } else {
         //  Jump to the right tab
-        const page = this.tabList[index + 1]
+        const page = tabList[index + 1]
         toTarget = getToTarget(page)
       }
     } else {
       // Close the current tab
-      const page = this.tabList[index - 1]
+      const page = tabList[index - 1]
       toTarget = getToTarget(page)
     }
     close(currentRoute.value)
@@ -162,17 +165,9 @@ class Tabs extends VuexModule {
 
   // Close according to key
   @Action
-  async closeTabByKey(key: string, router: Router) {
+  closeTabByKey(key: string) {
     const index = this.tabList.findIndex((item) => (item.fullPath || item.path) === key)
-    index !== -1 && this.closeTab(this.tabList[index], router)
-  }
-
-  // Sort the tabs
-  @Action
-  async sortTabs(oldIndex: number, newIndex: number) {
-    const currentTab = this.tabList[oldIndex]
-    this.tabList.splice(oldIndex, 1)
-    this.tabList.splice(newIndex, 0, currentTab)
+    index !== -1 && this.closeTab(this.tabList[index])
   }
 }
 

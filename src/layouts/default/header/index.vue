@@ -60,6 +60,8 @@
     line-height: 48px;
     background-color: #fff;
     padding: 0;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
     &-left {
       display: flex;
       height: 100%;
