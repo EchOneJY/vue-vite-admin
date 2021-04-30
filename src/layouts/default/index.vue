@@ -1,8 +1,8 @@
 <template>
   <Layout :class="prefixCls">
-    <LayoutSider />
+    <LayoutSider v-if="getShowMenu" />
     <Layout>
-      <LayoutHeader />
+      <LayoutHeader v-if="getHeaderShow" />
       <LayoutTabs />
       <LayoutContent :class="`${prefixCls}-content`" />
     </Layout>
@@ -19,6 +19,8 @@
   import LayoutContent from './content/index.vue'
 
   import { useDesign } from '/@/hooks/web/useDesign'
+  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
+  import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting'
 
   export default defineComponent({
     name: 'DefaultLayout',
@@ -31,8 +33,10 @@
     },
     setup() {
       const { prefixCls } = useDesign('default-layout')
+      const { getShowMenu } = useMenuSetting()
+      const { getHeaderShow } = useHeaderSetting()
 
-      return { prefixCls }
+      return { prefixCls, getShowMenu, getHeaderShow }
     },
   })
 </script>

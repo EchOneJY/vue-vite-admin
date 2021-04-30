@@ -18,11 +18,11 @@
         </TabPane>
       </template>
 
-      <!-- <template #tabBarExtraContent v-if="getShowRedo || getShowQuick">
+      <template #tabBarExtraContent v-if="getShowRedo || getShowQuick">
         <TabRedo v-if="getShowRedo" />
-        <TabContent isExtra :tabItem="$route" v-if="getShowQuick" />
+        <TabOperation :tabItem="$route" v-if="getShowQuick" />
         <FoldButton v-if="getShowFold" />
-      </template> -->
+      </template>
     </Tabs>
   </div>
 </template>
@@ -33,8 +33,9 @@
 
   import { Tabs } from 'ant-design-vue'
   import TabContent from './components/TabContent.vue'
-  // import FoldButton from './components/FoldButton.vue';
-  // import TabRedo from './components/TabRedo.vue';
+  import TabOperation from './components/TabOperation.vue'
+  import FoldButton from './components/FoldButton.vue'
+  import TabRedo from './components/TabRedo.vue'
 
   import { useGo } from '/@/hooks/web/usePage'
 
@@ -42,19 +43,17 @@
   import { userStore } from '/@/store/modules/user'
 
   import { useDesign } from '/@/hooks/web/useDesign'
-  // import { useMultipleTabSetting } from '/@/hooks/setting/useMultipleTabSetting'
-
-  // import { REDIRECT_NAME } from '/@/router/constant'
-  // import { listenerRouteChange } from '/@/logics/mitt/routeChange'
+  import { useTabsSetting } from '/@/hooks/setting/useTabsSetting'
 
   import { useRouter, useRoute } from 'vue-router'
-  import { REDIRECT_ROUTE } from '/@/router/routes'
+  import { REDIRECT_NAME } from '/@/router/constant'
 
   export default defineComponent({
     name: 'MultipleTabs',
     components: {
-      // TabRedo,
-      // FoldButton,
+      TabRedo,
+      TabOperation,
+      FoldButton,
       Tabs,
       TabPane: Tabs.TabPane,
       TabContent,
@@ -65,9 +64,9 @@
       const router = useRouter()
       const route = useRoute()
 
-      const { prefixCls } = useDesign('multiple-tabs')
+      const { prefixCls } = useDesign('tabs')
       const go = useGo()
-      // const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting()
+      const { getShowRedo, getShowFold, getShowQuick } = useTabsSetting()
 
       const getTabsState = computed(() => {
         return tabsStore.getTabList.filter((item) => !item.meta?.hideTab)
@@ -87,9 +86,8 @@
       watch(
         () => route.path,
         () => {
-          console.log('route change')
           const { path, fullPath, meta = {} } = route
-          if (route.path === REDIRECT_ROUTE.path || !userStore.getToken) {
+          if (route.name === REDIRECT_NAME || !userStore.getToken) {
             return
           }
           const { currentActiveMenu, hideTab } = meta
@@ -136,9 +134,9 @@
         handleChange,
         activeKeyRef,
         getTabsState,
-        // getShowQuick,
-        // getShowRedo,
-        // getShowFold,
+        getShowQuick,
+        getShowRedo,
+        getShowFold,
       }
     },
   })

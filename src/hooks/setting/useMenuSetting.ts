@@ -3,13 +3,15 @@ import { unref, computed } from 'vue'
 import { appStore } from '/@/store/modules/app'
 import { MenuSetting } from '/#/config'
 
-const getMenuSetting = computed(() => appStore.getProjectConfig.menuSetting)
-
-const getCollapsed = computed(() => unref(getMenuSetting).collapsed)
-
 export function useMenuSetting() {
+  const getMenuSetting = computed(() => appStore.getProjectConfig.menuSetting)
+
+  const getCollapsed = computed(() => unref(getMenuSetting).collapsed)
+
+  const getShowMenu = computed(() => appStore.getMenuSetting.show)
+
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
-    appStore.commitProjectConfigState({ menuSetting })
+    appStore.commitProjectConfig({ menuSetting })
   }
 
   function toggleCollapsed() {
@@ -21,7 +23,7 @@ export function useMenuSetting() {
   return {
     setMenuSetting,
     toggleCollapsed,
-
+    getShowMenu,
     getCollapsed,
   }
 }

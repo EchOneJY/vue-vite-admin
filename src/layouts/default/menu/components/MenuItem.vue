@@ -1,6 +1,5 @@
 <template>
   <MenuItem :key="item.path">
-    <!-- <MenuItem :class="getLevelClass"> -->
     <MenuItemContent v-bind="$props" :item="item" />
   </MenuItem>
 </template>
@@ -18,15 +17,8 @@
     {
       const { prefixCls } = useDesign('basic-menu-item')
 
-      // const getLevelClass = computed(() => {
-      //   const { level, theme } = props;
-
-      //   const levelCls = [`${prefixCls}__level${level}`, theme];
-      //   return levelCls;
-      // });
       return {
         prefixCls,
-        // getLevelClass,
       }
     },
   })

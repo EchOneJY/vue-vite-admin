@@ -6,6 +6,7 @@ export interface MenuSetting {
   bgColor: string
   fixed: boolean
   show: boolean
+  hidden: boolean
   collapsed: boolean
   menuWidth: number
   trigger: 'top'

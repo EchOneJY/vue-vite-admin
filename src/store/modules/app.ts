@@ -8,21 +8,35 @@ import { deepMerge } from '/@/utils'
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 import { Persistent } from '/@/utils/cache/persistent'
 import { resetRouter } from '/@/router'
+import { PROJ_CFG_KEY } from '/@/enums/cacheEnum'
 
 const NAME = 'app'
 hotModuleUnregisterModule(NAME)
 
 @Module({ dynamic: true, namespaced: true, store, name: NAME })
 class App extends VuexModule {
-  private projectConfigState: ProjectConfig = PrjectSettings
+  private projectConfig: ProjectConfig = PrjectSettings
 
   get getProjectConfig(): ProjectConfig {
-    return this.projectConfigState || ({} as ProjectConfig)
+    return this.projectConfig || ({} as ProjectConfig)
+  }
+
+  get getTabsSetting() {
+    return this.getProjectConfig.tabsSetting
+  }
+
+  get getMenuSetting() {
+    return this.getProjectConfig.menuSetting
+  }
+
+  get getHeaderSetting() {
+    return this.getProjectConfig.headerSetting
   }
 
   @Mutation
-  commitProjectConfigState(proCfg: DeepPartial<ProjectConfig>): void {
-    this.projectConfigState = deepMerge(this.projectConfigState || {}, proCfg)
+  commitProjectConfig(proCfg: DeepPartial<ProjectConfig>): void {
+    this.projectConfig = deepMerge(this.projectConfig || {}, proCfg)
+    Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig)
   }
 
   @Action

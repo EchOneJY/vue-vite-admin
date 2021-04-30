@@ -5,6 +5,7 @@
     v-model:selectedKeys="selectedKeys"
     @click="handleMenuClick"
     mode="inline"
+    :inline-collapsed="getCollapsed"
   >
     <template v-for="item in menus" :key="item.path">
       <SubMenuItem :item="item" />
@@ -18,13 +19,15 @@
   import { Router } from 'vue-router'
 
   import { Menu } from 'ant-design-vue'
-  // import { UserOutlined, VideoCameraOutlined } from '@ant-design/icons-vue'
 
   import { useRouter, useRoute } from 'vue-router'
 
   import { permissionStore } from '/@/store/modules/permission'
   import SubMenuItem from './components/SubMenuItem.vue'
   import { getAllParentPath } from '/@/router/helper/menuHelper'
+  import { REDIRECT_NAME } from '/@/router/constant'
+  import { userStore } from '/@/store/modules/user'
+  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
 
   interface State {
     openKeys: string[]
@@ -36,13 +39,11 @@
     components: {
       Menu,
       SubMenuItem,
-      // MenuItem: Menu.MenuItem,
-      // UserOutlined,
-      // VideoCameraOutlined,
     },
     setup() {
       const router: Router = useRouter()
       const route = useRoute()
+      const { getCollapsed } = useMenuSetting()
 
       const state = reactive<State>({
         openKeys: [],
@@ -54,6 +55,9 @@
       watch(
         () => route.path,
         () => {
+          if (route.name === REDIRECT_NAME || !userStore.getToken) {
+            return
+          }
           state.openKeys = getAllParentPath(menus, route.path)
           state.selectedKeys = [route.path]
         },
@@ -68,6 +72,7 @@
       }
 
       return {
+        getCollapsed,
         ...toRefs(state),
         handleMenuClick,
         menus,

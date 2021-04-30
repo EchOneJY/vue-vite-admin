@@ -5,7 +5,7 @@ import { computed, unref, reactive } from 'vue'
 import { MenuEventEnum } from './types'
 import { tabsStore } from '/@/store/modules/tabs'
 import { RouteLocationNormalized, useRouter } from 'vue-router'
-// import { useTabs } from '/@/hooks/web/useTabs'
+import { useTabs } from '/@/hooks/web/useTabs'
 import { useI18n } from '/@/hooks/web/useI18n'
 
 export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: boolean) {
@@ -16,7 +16,7 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: bool
 
   const { t } = useI18n()
   const { currentRoute } = useRouter()
-  // const { refreshPage, closeAll, close, closeLeft, closeOther, closeRight } = useTabs()
+  const { refreshPage, closeAll, close, closeLeft, closeOther, closeRight } = useTabs()
 
   const getTargetTab = computed(
     (): RouteLocationNormalized => {
@@ -102,35 +102,35 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: bool
     }
   }
 
-  // // Handle right click event
-  // function handleMenuEvent(menu: DropMenu): void {
-  //   const { event } = menu
-  //   switch (event) {
-  //     case MenuEventEnum.REFRESH_PAGE:
-  //       // refresh page
-  //       refreshPage()
-  //       break
-  //     // Close current
-  //     case MenuEventEnum.CLOSE_CURRENT:
-  //       close(tabContentProps.tabItem)
-  //       break
-  //     // Close left
-  //     case MenuEventEnum.CLOSE_LEFT:
-  //       closeLeft()
-  //       break
-  //     // Close right
-  //     case MenuEventEnum.CLOSE_RIGHT:
-  //       closeRight()
-  //       break
-  //     // Close other
-  //     case MenuEventEnum.CLOSE_OTHER:
-  //       closeOther()
-  //       break
-  //     // Close all
-  //     case MenuEventEnum.CLOSE_ALL:
-  //       closeAll()
-  //       break
-  //   }
-  // }
-  return { getDropMenuList, handleContextMenu }
+  // Handle right click event
+  function handleMenuEvent(menu: DropMenu): void {
+    const { event } = menu
+    switch (event) {
+      case MenuEventEnum.REFRESH_PAGE:
+        // refresh page
+        refreshPage()
+        break
+      // Close current
+      case MenuEventEnum.CLOSE_CURRENT:
+        close(tabContentProps.tabItem)
+        break
+      // Close left
+      case MenuEventEnum.CLOSE_LEFT:
+        closeLeft()
+        break
+      // Close right
+      case MenuEventEnum.CLOSE_RIGHT:
+        closeRight()
+        break
+      // Close other
+      case MenuEventEnum.CLOSE_OTHER:
+        closeOther()
+        break
+      // Close all
+      case MenuEventEnum.CLOSE_ALL:
+        closeAll()
+        break
+    }
+  }
+  return { getDropMenuList, handleContextMenu, handleMenuEvent }
 }

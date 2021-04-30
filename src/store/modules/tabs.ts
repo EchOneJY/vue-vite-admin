@@ -5,7 +5,7 @@ import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-dec
 import store from '/@/store'
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 
-// import { useGo, useRedo } from '/@/hooks/web/usePage'
+import { useGo, useRedo } from '/@/hooks/web/usePage'
 import { Persistent } from '/@/utils/cache/persistent'
 
 import ProjectConfig from '/@/settings/project'
@@ -19,10 +19,10 @@ import { cloneDeep } from 'lodash-es'
 const NAME = 'tabs'
 hotModuleUnregisterModule(NAME)
 
-// function handleGotoPage(router: Router) {
-//   const go = useGo(router)
-//   go(unref(router.currentRoute).path, true)
-// }
+function handleGotoPage() {
+  const go = useGo(router)
+  go(unref(router.currentRoute).path, true)
+}
 
 const cacheTab = ProjectConfig.tabsSetting.cache
 
@@ -56,16 +56,43 @@ class Tabs extends VuexModule {
   }
   // Sort the tabs
   @Mutation
-  async sortTabs(oldIndex: number, newIndex: number) {
+  commitSortTabs(oldIndex: number, newIndex: number) {
     const currentTab = this.tabList[oldIndex]
     this.tabList.splice(oldIndex, 1)
     this.tabList.splice(newIndex, 0, currentTab)
+  }
+
+  /**
+   * Close tabs in bulk
+   */
+  @Mutation
+  bulkCloseTabs(pathList: string[]) {
+    this.tabList = this.tabList.filter((item) => !pathList.includes(item.fullPath))
   }
 
   @Action
   handleResetState(): void {
     this.commitSetTabList([])
     this.commitClearCacheTabs()
+  }
+
+  @Action
+  goToPage() {
+    const go = useGo(router)
+    const len = this.tabList.length
+    const { path } = unref(router.currentRoute)
+
+    let toPath: PageEnum | string = PageEnum.BASE_HOME
+
+    if (len > 0) {
+      const page = this.tabList[len - 1]
+      const p = page.fullPath || page.path
+      if (p) {
+        toPath = p
+      }
+    }
+    // Jump to the current page and report an error
+    path !== toPath && go(toPath as PageEnum, true)
   }
 
   /**
@@ -168,6 +195,103 @@ class Tabs extends VuexModule {
   closeTabByKey(key: string) {
     const index = this.tabList.findIndex((item) => (item.fullPath || item.path) === key)
     index !== -1 && this.closeTab(this.tabList[index])
+  }
+
+  /**
+   * Refresh tabs
+   */
+  @Action
+  async refreshPage() {
+    const cacheTabList = cloneDeep(this.cacheTabList)
+    const { currentRoute } = router
+    const route = unref(currentRoute)
+    const name = route.name
+
+    const findTab = this.getCachedTabList.find((item) => item === name)
+    if (findTab) {
+      cacheTabList.delete(findTab)
+      this.commitSetCacheTabs(cacheTabList)
+    }
+    const redo = useRedo(router)
+    await redo()
+  }
+
+  /**
+   * closeAllTab tabs
+   */
+  @Action
+  closeAllTab() {
+    const tabList = this.tabList.filter((item) => item?.meta?.affix ?? false)
+    this.commitSetTabList(tabList)
+    this.commitClearCacheTabs()
+    this.goToPage()
+  }
+
+  // Close the tab on the right and jump
+  @Action
+  closeLeftTabs(route: RouteLocationNormalized) {
+    const index = this.tabList.findIndex((item) => item.path === route.path)
+
+    if (index > 0) {
+      const leftTabs = this.tabList.slice(0, index)
+      const pathList: string[] = []
+      for (const item of leftTabs) {
+        const affix = item?.meta?.affix ?? false
+        if (!affix) {
+          pathList.push(item.fullPath)
+        }
+      }
+      this.bulkCloseTabs(pathList)
+    }
+    this.updateCacheTab()
+    handleGotoPage()
+  }
+
+  // Close the tab on the left and jump
+  @Action
+  closeRightTabs(route: RouteLocationNormalized) {
+    const index = this.tabList.findIndex((item) => item.fullPath === route.fullPath)
+
+    if (index >= 0 && index < this.tabList.length - 1) {
+      const rightTabs = this.tabList.slice(index + 1, this.tabList.length)
+
+      const pathList: string[] = []
+      for (const item of rightTabs) {
+        const affix = item?.meta?.affix ?? false
+        if (!affix) {
+          pathList.push(item.fullPath)
+        }
+      }
+      this.bulkCloseTabs(pathList)
+    }
+    this.updateCacheTab()
+    handleGotoPage()
+  }
+
+  /**
+   * Close other tabs
+   */
+  @Action
+  closeOtherTabs(route: RouteLocationNormalized) {
+    const closePathList = this.tabList.map((item) => item.fullPath)
+
+    const pathList: string[] = []
+
+    for (const path of closePathList) {
+      if (path !== route.fullPath) {
+        const closeItem = this.tabList.find((item) => item.path === path)
+        if (!closeItem) {
+          continue
+        }
+        const affix = closeItem?.meta?.affix ?? false
+        if (!affix) {
+          pathList.push(closeItem.fullPath)
+        }
+      }
+    }
+    this.bulkCloseTabs(pathList)
+    this.updateCacheTab()
+    handleGotoPage()
   }
 }
 
