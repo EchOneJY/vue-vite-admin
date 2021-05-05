@@ -2,7 +2,7 @@ import type {
   LoginParams,
   GetUserInfoByUserIdModel,
   GetUserInfoByUserIdParams,
-} from '/@/api/model/userModel'
+} from '/@/api/core/model/userModel'
 
 import store from '/@/store/index'
 import { VuexModule, Module, getModule, Mutation, Action } from 'vuex-module-decorators'
@@ -18,7 +18,7 @@ import { useI18n } from '/@/hooks/web/useI18n'
 
 import router from '/@/router'
 
-import { loginApi, getUserInfoById } from '/@/api/user'
+import { loginApi, getUserInfoById } from '/@/api/core/user'
 
 import { ErrorMessageMode } from '/@/utils/axios/types'
 
@@ -44,7 +44,7 @@ class User extends VuexModule {
   }
 
   @Mutation
-  commitResetState(): void {
+  resetAllState(): void {
     this.userInfo = null
     this.token = ''
   }

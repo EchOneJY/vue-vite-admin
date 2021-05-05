@@ -1,26 +1,31 @@
 <template>
-  <div :class="[prefixCls]">
-    <RouterView>
-      <template #default="{ Component, route }">
-        <transition name="fade-slide" mode="out-in" appear>
-          <component :is="Component" :key="route.fullPath" />
-        </transition>
-      </template>
-    </RouterView>
+  <div :class="[prefixCls, getLayoutContentMode]" v-loading="getOpenPageLoading && getPageLoading">
+    <LayoutPage />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+
   import { useDesign } from '/@/hooks/web/useDesign'
+  import { useRootSetting } from '/@/hooks/setting/useRootSetting'
+  import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting'
+
+  import LayoutPage from '/@/layouts/page/index.vue'
 
   export default defineComponent({
     name: 'LayoutContent',
+    components: { LayoutPage },
     setup() {
       const { prefixCls } = useDesign('layout-content')
+      const { getOpenPageLoading } = useTransitionSetting()
+      const { getLayoutContentMode, getPageLoading } = useRootSetting()
 
       return {
         prefixCls,
+        getLayoutContentMode,
+        getOpenPageLoading,
+        getPageLoading,
       }
     },
   })

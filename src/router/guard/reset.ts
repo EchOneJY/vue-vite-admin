@@ -8,9 +8,9 @@ export function createResetGuard(router: Router) {
   router.afterEach((to) => {
     // Just enter the login page and clear the authentication information
     if (to.path === PageEnum.BASE_LOGIN) {
-      appStore.commitResetState()
-      permissionStore.commitResetState()
-      userStore.commitResetState()
+      appStore.resetAllState()
+      permissionStore.resetAllState()
+      userStore.resetAllState()
     }
   })
 }

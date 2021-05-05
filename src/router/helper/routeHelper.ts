@@ -82,7 +82,6 @@ export function flatMultiLevelRoutes(routeModules: AppRouteModule[]) {
     if (!isMultipleRoute(routeModule)) {
       continue
     }
-    console.log(routeModule)
     promoteRouteLevel(routeModule)
   }
   return modules

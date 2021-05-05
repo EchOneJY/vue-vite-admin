@@ -1,11 +1,20 @@
 import type { ProjectConfig } from '/#/config'
 import { CacheTypeEnum } from '/@/enums/cacheEnum'
+import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum'
 
 const setting: ProjectConfig = {
   showSettingButton: false,
 
   // Permission-related cache is stored in sessionStorage or localStorage
   permissionCacheType: CacheTypeEnum.SESSION,
+
+  fullContent: false,
+
+  // Whether to display the logo
+  showLogo: true,
+
+  // content mode
+  contentMode: ContentEnum.FULL,
 
   // Header configuration
   headerSetting: {
@@ -28,6 +37,7 @@ const setting: ProjectConfig = {
     fixed: true,
     // Whether to show no dom
     show: true,
+    hidden: false,
     // Menu collapse
     collapsed: false,
     // Menu width
@@ -48,6 +58,24 @@ const setting: ProjectConfig = {
     // Whether to show the collapse button
     showFold: true,
   },
+
+  transitionSetting: {
+    //  Whether to open the page switching animation
+    // The disabled state will also disable pageLoadinng
+    enable: true,
+
+    // Route basic switching animation
+    basicTransition: RouterTransitionEnum.FADE_SIDE,
+
+    // Whether to open page switching loading
+    // Only open when enable=true
+    openPageLoading: true,
+
+    // Whether to open the top progress bar
+    openNProgress: false,
+  },
+
+  openKeepAlive: true,
 }
 
 export default setting

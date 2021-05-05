@@ -52,6 +52,20 @@ export interface ProjectConfig {
 
   // tab settings
   tabsSetting: TabsSetting
+
+  // content width
+  contentMode: ContentEnum
+
+  fullContent: boolean
+
+  // Whether to display the logo
+  showLogo: boolean
+
+  // Animation configuration
+  transitionSetting: TransitionSetting
+
+  // 是否可以使用keep-alive
+  openKeepAlive: boolean
 }
 
 export interface GlobConfig {
@@ -72,4 +86,15 @@ export interface GlobEnvConfig {
   VITE_GLOB_API_URL_PREFIX?: string
   VITE_GLOB_APP_SHORT_NAME: string
   VITE_GLOB_UPLOAD_URL?: string
+}
+
+export interface TransitionSetting {
+  //  Whether to open the page switching animation
+  enable: boolean
+  // Route basic switching animation
+  basicTransition: RouterTransitionEnum
+  // Whether to open page switching loading
+  openPageLoading: boolean
+  // Whether to open the top progress bar
+  openNProgress: boolean
 }

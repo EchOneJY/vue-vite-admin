@@ -10,7 +10,7 @@ export interface RequestOptions {
   formatDate?: boolean
   //  是否处理请求结果
   isTransformRequestResult?: boolean
-  // 是否加入url
+  // 是否加入url前缀
   joinPrefix?: boolean
   // 接口地址， 不填则使用默认apiUrl
   apiUrl?: string
@@ -18,6 +18,8 @@ export interface RequestOptions {
   errorMessageMode?: ErrorMessageMode
   // 是否加入时间戳
   joinTime?: boolean
+  // 忽略重复请求
+  ignoreCancelToken?: boolean
 }
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {

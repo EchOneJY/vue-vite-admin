@@ -1,3 +1,4 @@
+import { unref } from 'vue'
 import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router'
 import { isObject } from '/@/utils/is'
 
@@ -50,4 +51,22 @@ export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormal
         }))
       : undefined) as RouteRecordNormalized[],
   }
+}
+
+/**
+ * @description:  Set ui mount node
+ */
+export function getPopupContainer(node?: HTMLElement): HTMLElement {
+  return (node?.parentNode as HTMLElement) ?? document.body
+}
+
+// dynamic use hook props
+export function getDynamicProps<T, U>(props: T): Partial<U> {
+  const ret: Recordable = {}
+
+  Object.keys(props).map((key) => {
+    ret[key] = unref((props as Recordable)[key])
+  })
+
+  return ret as Partial<U>
 }

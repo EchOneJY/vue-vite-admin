@@ -11,9 +11,8 @@ enum Api {
  * @return {*}
  */
 export function getMenuListById(params: getMenuListByIdParams) {
-  return defHttp.request<getMenuListByIdParamsResultModel>({
+  return defHttp.get<getMenuListByIdParamsResultModel>({
     url: Api.GetMenuListById,
-    method: 'GET',
     params,
   })
 }

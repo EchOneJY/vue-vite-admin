@@ -7,7 +7,7 @@ import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 import { useI18n } from '/@/hooks/web/useI18n'
 import { useMessage } from '/@/hooks/web/useMessage'
 
-import { getMenuListById } from '/@/api/menu'
+import { getMenuListById } from '/@/api/core/menu'
 import type { AppRouteModule } from '/@/router/types'
 
 import { userStore } from './user'
@@ -43,7 +43,7 @@ class Permisson extends VuexModule {
   }
 
   @Mutation
-  commitResetState(): void {
+  resetAllState(): void {
     this.hasDynamicAddedRoute = false
     this.backMenuList = []
   }
@@ -73,8 +73,6 @@ class Permisson extends VuexModule {
     routeList = flatMultiLevelRoutes(routeList)
 
     routes = [PAGE_NOT_FOUND_ROUTE, ...routeList]
-
-    console.log(routes)
 
     return routes
   }

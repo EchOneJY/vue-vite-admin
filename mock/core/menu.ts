@@ -1,9 +1,9 @@
 import { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess } from './_util'
+import { resultSuccess } from '../_util'
 import { ExceptionEnum } from '/@/enums/exceptionEnum'
 
 // single
-const asyncRoute = {
+const dashboardRoute = {
   path: 'dashboard/index',
   children: [],
   component: '/dashboard/index',
@@ -77,7 +77,7 @@ const exceptionRoute = {
   children: [
     {
       path: '403',
-      component: '/exception/index',
+      component: '/core/exception/index',
       props: {
         status: ExceptionEnum.PAGE_NOT_ACCESS,
       },
@@ -88,7 +88,7 @@ const exceptionRoute = {
     },
     {
       path: '404',
-      component: '/exception/index',
+      component: '/core/exception/index',
       props: {
         status: ExceptionEnum.PAGE_NOT_FOUND,
       },
@@ -99,7 +99,7 @@ const exceptionRoute = {
     },
     {
       path: '500',
-      component: '/exception/index',
+      component: '/core/exception/index',
       props: {
         status: ExceptionEnum.ERROR,
       },
@@ -110,7 +110,7 @@ const exceptionRoute = {
     },
     {
       path: 'net-work-error',
-      component: '/exception/index',
+      component: '/core/exception/index',
       props: {
         status: ExceptionEnum.NET_WORK_ERROR,
       },
@@ -121,12 +121,110 @@ const exceptionRoute = {
     },
     {
       path: 'not-data',
-      component: '/exception/index',
+      component: '/core/exception/index',
       props: {
         status: ExceptionEnum.PAGE_NOT_DATA,
       },
       meta: {
         title: 'routes.exception.not-data',
+      },
+      children: [],
+    },
+  ],
+}
+
+const componentsRoute = {
+  path: 'routes.component',
+  component: '',
+  meta: {
+    icon: 'component',
+    title: 'routes.component.title',
+  },
+  children: [
+    {
+      path: 'icon',
+      component: '/component/icon/index',
+      meta: {
+        title: 'routes.component.icon.title',
+      },
+      children: [],
+    },
+    {
+      path: 'form',
+      component: '',
+      meta: {
+        title: 'routes.component.form.title',
+      },
+      children: [
+        {
+          path: 'basic',
+          component: '/component/form/BasicForm',
+          meta: {
+            title: 'routes.component.form.basic',
+          },
+          children: [],
+        },
+      ],
+    },
+    {
+      path: 'table',
+      component: '',
+      meta: {
+        title: 'routes.component.table.title',
+      },
+      children: [
+        {
+          path: 'basic',
+          component: '/component/table/BasicTable',
+          meta: {
+            title: 'routes.component.table.basic',
+          },
+          children: [],
+        },
+        {
+          path: 'fetch',
+          component: '/component/table/FetchTable',
+          meta: {
+            title: 'routes.component.table.fetch',
+          },
+          children: [],
+        },
+        {
+          path: 'form',
+          component: '/component/table/FormTable',
+          meta: {
+            title: 'routes.component.table.form',
+          },
+          children: [],
+        },
+      ],
+    },
+  ],
+}
+
+const iframeRoute = {
+  path: 'iframe',
+  component: '',
+  meta: {
+    icon: 'iframe',
+    title: 'routes.iframe.title',
+  },
+  children: [
+    {
+      path: 'vue3',
+      component: '/core/iframe/blank',
+      meta: {
+        frameSrc: 'https://vue3js.cn/docs/zh/',
+        title: 'routes.iframe.vue3',
+      },
+      children: [],
+    },
+    {
+      path: 'ant-dv',
+      component: '/core/iframe/blank',
+      meta: {
+        frameSrc: 'https://2x.antdv.com/docs/vue/introduce-cn/',
+        title: 'routes.iframe.ant-dv',
       },
       children: [],
     },
@@ -139,7 +237,13 @@ export default [
     timeout: 1000,
     method: 'get',
     response: () => {
-      return resultSuccess([asyncRoute, levelRoute, exceptionRoute])
+      return resultSuccess([
+        dashboardRoute,
+        componentsRoute,
+        levelRoute,
+        exceptionRoute,
+        iframeRoute,
+      ])
     },
   },
 ] as MockMethod[]

@@ -20,6 +20,9 @@ declare global {
     [P in keyof T]?: DeepPartial<T[P]>
   }
 
+  declare type TimeoutHandle = ReturnType<typeof setTimeout>
+  declare type IntervalHandle = ReturnType<typeof setInterval>
+
   declare type Indexable<T extends any = any> = {
     [key: string]: T
   }

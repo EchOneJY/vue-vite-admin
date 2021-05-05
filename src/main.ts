@@ -7,9 +7,9 @@ import App from './App.vue'
 import router, { setupRouter } from '/@/router'
 import { setupStore } from '/@/store'
 import { setupRouterGuard } from '/@/router/guard'
-
-import { localeStore } from '/@/store/modules/locale'
 import { setupI18n } from '/@/locales/setupI18n'
+import { setupGlobDirectives } from '/@/directives'
+import { useInit } from '/@/hooks/web/useInit'
 
 // Register icon Sprite
 import 'vite-plugin-svg-icons/register'
@@ -21,21 +21,25 @@ if (import.meta.env.DEV) {
 ;(async () => {
   const app = createApp(App)
 
-  // Configure vuex store
+  // 配置vuex
   setupStore(app)
 
-  localeStore.initLocale()
+  //初始化系统配置
+  useInit()
 
-  // Multilingual configuration
+  // 配置多语言
   await setupI18n(app)
 
-  // Configure routing
+  // 配置路由
   setupRouter(app)
 
-  // router-guard
+  // 配置路由守卫
   setupRouterGuard()
 
-  // Mount when the route is ready
+  // 注册全局directive
+  setupGlobDirectives(app)
+
+  // 当路由准备好后加载
   await router.isReady()
 
   app.mount('#app', true)

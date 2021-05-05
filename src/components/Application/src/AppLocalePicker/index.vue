@@ -7,8 +7,8 @@
     @menuEvent="handleMenuEvent"
     overlayClassName="app-locale-picker-overlay"
   >
-    <span class="cursor-pointer flex items-center">
-      <!-- <Icon icon="ion:language" /> -->
+    <span class="flex items-center cursor-pointer">
+      <Icon icon="ion:language" />
       <span v-if="showText" class="ml-1">{{ getLangText }}</span>
     </span>
   </Dropdown>
@@ -19,25 +19,20 @@
 
   import { defineComponent, ref, watchEffect, unref, computed } from 'vue'
   import { Dropdown } from '/@/components/Dropdown'
-  // import Icon from '/@/components/Icon'
+  import Icon from '/@/components/Icon'
 
   import { useLocale } from '/@/locales/useLocale'
   import { localeList } from '/@/settings/locale'
-  // import { propTypes } from '/@/utils/propTypes'
+  import { propTypes } from '/@/utils/propTypes'
 
   export default defineComponent({
     name: 'AppLocalPicker',
-    components: { Dropdown },
+    components: { Dropdown, Icon },
     props: {
       // Whether to display text
-      showText: {
-        type: Boolean,
-        default: true,
-      },
+      showText: propTypes.bool.def(true),
       // Whether to refresh the interface when changing
-      reload: {
-        type: Boolean,
-      },
+      reload: propTypes.bool,
     },
     setup(props) {
       const selectedKeys = ref<string[]>([])

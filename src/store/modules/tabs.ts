@@ -41,7 +41,6 @@ class Tabs extends VuexModule {
 
   @Mutation
   commitSetTabList(tabs: RouteLocationNormalized[]): void {
-    console.log(tabs)
     this.tabList = tabs
   }
 

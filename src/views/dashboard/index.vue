@@ -1,16 +1,25 @@
 <template>
-  <Table :columns="columns" :data-source="data" />
+  <div class="p-4">
+    <BasicTable
+      title="基础示例"
+      titleHelpMessage="温馨提醒"
+      :columns="columns"
+      :dataSource="data"
+      :bordered="border"
+      :pagination="pagination"
+    />
+  </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, ref } from 'vue'
 
-  import { Table } from 'ant-design-vue'
+  import { BasicTable } from '/@/components/Table'
 
   export default defineComponent({
     name: 'Dashboard',
     components: {
-      Table,
+      BasicTable,
     },
     setup() {
       const columns = [
@@ -46,9 +55,14 @@
         },
       ]
 
+      const border = ref(true)
+      const pagination = ref<any>(false)
+
       return {
         data,
         columns,
+        border,
+        pagination,
       }
     },
   })

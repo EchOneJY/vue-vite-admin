@@ -1,6 +1,8 @@
 <template>
-  <div :class="`${prefixCls}__info`" @contextmenu="handleContext">
-    <span class="ml-1">{{ getTitle }}</span>
+  <div :class="`${prefixCls}__item`">
+    <div :class="`${prefixCls}__info`" @contextmenu="handleContext">
+      <span class="ml-1">{{ getTitle }}</span>
+    </div>
   </div>
 </template>
 <script lang="ts">
