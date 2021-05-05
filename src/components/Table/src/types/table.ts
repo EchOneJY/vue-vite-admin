@@ -1,6 +1,6 @@
 import type { VNodeChild } from 'vue'
 import type { PaginationProps } from './pagination'
-// import type { FormProps } from '/@/components/Form'
+import type { FormProps } from '/@/components/Form'
 import type {
   ColumnProps,
   TableRowSelection as ITableRowSelection,
@@ -87,8 +87,8 @@ export interface TableActionType {
   reload: (opt?: FetchParams) => Promise<void>
   getSelectRows: <T = Recordable>() => T[]
   clearSelectedRowKeys: () => void
-  expandAll: () => void
-  collapseAll: () => void
+  // expandAll: () => void
+  // collapseAll: () => void
   getSelectRowKeys: () => string[]
   deleteSelectRowByKey: (key: string) => void
   setPagination: (info: Partial<PaginationProps>) => void
@@ -173,7 +173,7 @@ export interface BasicTableProps<T = any> {
   // 使用搜索表单
   useSearchForm?: boolean
   // 表单配置
-  // formConfig?: Partial<FormProps>
+  formConfig?: Partial<FormProps>
   // 列配置
   columns: BasicColumn[]
   // 是否显示序号列

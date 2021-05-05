@@ -9,6 +9,6 @@ export * from './src/types/tableAction'
 
 export { useTable } from './src/hooks/useTable'
 
-// export type { FormSchema, FormProps } from '/@/components/Form/src/types/form'
+export type { FormSchema, FormProps } from '/@/components/Form/src/types/form'
 
 // export type { EditRecordRow } from './src/components/editable'

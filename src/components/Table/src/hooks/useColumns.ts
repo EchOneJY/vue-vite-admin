@@ -71,7 +71,7 @@ function handleIndexColumn(
   columns.unshift({
     flag: INDEX_COLUMN_FLAG,
     width: 50,
-    title: t('component.table.index'),
+    title: t('routes.component.table.index'),
     align: 'center',
     customRender: ({ index }) => {
       const getPagination = unref(getPaginationRef)

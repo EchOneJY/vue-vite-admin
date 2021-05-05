@@ -8,7 +8,7 @@ import type {
   TableCustomRecord,
   TableRowSelection,
 } from './types/table'
-// import type { FormProps } from '/@/components/Form'
+import type { FormProps } from '/@/components/Form'
 import {
   DEFAULT_FILTER_FN,
   // DEFAULT_SORT_FN,
@@ -76,10 +76,10 @@ export const basicProps = {
   // 使用搜索表单
   useSearchForm: propTypes.bool,
   // // 表单配置
-  // formConfig: {
-  //   type: Object as PropType<Partial<FormProps>>,
-  //   default: null,
-  // },
+  formConfig: {
+    type: Object as PropType<Partial<FormProps>>,
+    default: null,
+  },
   columns: {
     type: [Array] as PropType<BasicColumn[]>,
     default: () => [],
@@ -126,8 +126,8 @@ export const basicProps = {
   rowClassName: {
     type: Function as PropType<(record: TableCustomRecord<any>, index: number) => string>,
   },
-  // scroll: {
-  //   type: Object as PropType<{ x: number | true; y: number }>,
-  //   default: null,
-  // },
+  scroll: {
+    type: Object as PropType<{ x: number | true; y: number }>,
+    default: null,
+  },
 }

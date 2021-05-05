@@ -134,7 +134,7 @@ const exceptionRoute = {
 }
 
 const componentsRoute = {
-  path: 'routes.component',
+  path: 'component',
   component: '',
   meta: {
     icon: 'component',

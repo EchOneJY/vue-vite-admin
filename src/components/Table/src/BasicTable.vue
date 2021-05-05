@@ -1,6 +1,6 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
-    <!-- <BasicForm
+    <BasicForm
       submitOnReset
       v-bind="getFormProps"
       v-if="getBindValues.useSearchForm"
@@ -12,7 +12,7 @@
       <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
         <slot :name="item" v-bind="data"></slot>
       </template>
-    </BasicForm> -->
+    </BasicForm>
 
     <Table
       ref="tableElRef"
@@ -20,13 +20,13 @@
       :rowClassName="getRowClassName"
       @change="handleTableChange"
     >
-      <!-- <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data"></slot>
-      </template> -->
+      </template>
 
-      <!-- <template #[`header-${column.dataIndex}`] v-for="column in columns" :key="column.dataIndex">
+      <template #[`header-${column.dataIndex}`] v-for="column in columns" :key="column.dataIndex">
         <HeaderCell :column="column" />
-      </template> -->
+      </template>
     </Table>
   </div>
 </template>
@@ -35,23 +35,23 @@
 
   import { defineComponent, ref, computed, unref, toRaw } from 'vue'
   import { Table } from 'ant-design-vue'
-  // import { BasicForm, useForm } from '/@/components/Form/index'
+  import { BasicForm, useForm } from '/@/components/Form/index'
   // import expandIcon from './components/ExpandIcon'
-  // import HeaderCell from './components/HeaderCell.vue'
+  import HeaderCell from './components/HeaderCell.vue'
 
   import { usePagination } from './hooks/usePagination'
   import { useColumns } from './hooks/useColumns'
   import { useDataSource } from './hooks/useDataSource'
-  // import { useLoading } from './hooks/useLoading'
+  import { useLoading } from './hooks/useLoading'
   import { useRowSelection } from './hooks/useRowSelection'
-  // import { useTableScroll } from './hooks/useTableScroll'
-  // import { useCustomRow } from './hooks/useCustomRow'
+  import { useTableScroll } from './hooks/useTableScroll'
+  import { useCustomRow } from './hooks/useCustomRow'
   import { useTableStyle } from './hooks/useTableStyle'
   import { useTableHeader } from './hooks/useTableHeader'
   // import { useTableExpand } from './hooks/useTableExpand'
-  // import { createTableContext } from './hooks/useTableContext'
-  // import { useTableFooter } from './hooks/useTableFooter'
-  // import { useTableForm } from './hooks/useTableForm'
+  import { createTableContext } from './hooks/useTableContext'
+  import { useTableFooter } from './hooks/useTableFooter'
+  import { useTableForm } from './hooks/useTableForm'
   import { useExpose } from '/@/hooks/core/useExpose'
   import { useDesign } from '/@/hooks/web/useDesign'
 
@@ -61,8 +61,8 @@
   export default defineComponent({
     components: {
       Table,
-      // BasicForm,
-      // HeaderCell,
+      BasicForm,
+      HeaderCell,
     },
     props: basicProps,
     emits: [
@@ -70,11 +70,11 @@
       'fetch-error',
       'selection-change',
       'register',
-      // 'row-click',
-      // 'row-dbClick',
-      // 'row-contextmenu',
-      // 'row-mouseenter',
-      // 'row-mouseleave',
+      'row-click',
+      'row-dbClick',
+      'row-contextmenu',
+      'row-mouseenter',
+      'row-mouseleave',
       // 'edit-end',
       // 'edit-cancel',
       // 'edit-row-end',
@@ -89,13 +89,13 @@
       const innerPropsRef = ref<Partial<BasicTableProps>>()
 
       const { prefixCls } = useDesign('basic-table')
-      // const [registerForm, formActions] = useForm()
+      const [registerForm, formActions] = useForm()
 
       const getProps = computed(() => {
         return { ...props, ...unref(innerPropsRef) } as BasicTableProps
       })
 
-      // const { getLoading, setLoading } = useLoading(getProps)
+      const { getLoading, setLoading } = useLoading(getProps)
       const {
         getPaginationInfo,
         getPagination,
@@ -119,20 +119,20 @@
         getDataSourceRef,
         getDataSource,
         setTableData,
-        // fetch,
+        fetch,
         getRowKey,
         reload,
-        // getAutoCreateKey,
+        getAutoCreateKey,
         updateTableData,
       } = useDataSource(
         getProps,
         {
           tableData,
           getPaginationInfo,
-          // setLoading,
+          setLoading,
           setPagination,
-          // getFieldsValue: formActions.getFieldsValue,
-          // clearSelectedRowKeys,
+          getFieldsValue: formActions.getFieldsValue,
+          clearSelectedRowKeys,
         },
         emit
       )
@@ -142,25 +142,25 @@
         getColumns,
         setCacheColumnsByField,
         setColumns,
-        // getColumnsRef,
+        getColumnsRef,
         getCacheColumns,
       } = useColumns(getProps, getPaginationInfo)
 
-      // const { getScrollRef, redoHeight } = useTableScroll(
-      //   getProps,
-      //   tableElRef,
-      //   getColumnsRef,
-      //   getRowSelectionRef,
-      //   getDataSourceRef
-      // )
+      const { getScrollRef, redoHeight } = useTableScroll(
+        getProps,
+        tableElRef,
+        getColumnsRef,
+        getRowSelectionRef,
+        getDataSourceRef
+      )
 
-      // const { customRow } = useCustomRow(getProps, {
-      //   setSelectedRowKeys,
-      //   getSelectRowKeys,
-      //   clearSelectedRowKeys,
-      //   getAutoCreateKey,
-      //   emit,
-      // })
+      const { customRow } = useCustomRow(getProps, {
+        setSelectedRowKeys,
+        getSelectRowKeys,
+        clearSelectedRowKeys,
+        getAutoCreateKey,
+        emit,
+      })
 
       const { getRowClassName } = useTableStyle(getProps, prefixCls)
 
@@ -168,19 +168,19 @@
 
       const { getHeaderProps } = useTableHeader(getProps, slots)
 
-      // const { getFooterProps } = useTableFooter(
-      //   getProps,
-      //   getScrollRef,
-      //   tableElRef,
-      //   getDataSourceRef
-      // )
+      const { getFooterProps } = useTableFooter(
+        getProps,
+        getScrollRef,
+        tableElRef,
+        getDataSourceRef
+      )
 
-      // const {
-      //   getFormProps,
-      //   replaceFormSlotKey,
-      //   getFormSlotKeys,
-      //   handleSearchInfoChange,
-      // } = useTableForm(getProps, slots, fetch, getLoading)
+      const {
+        getFormProps,
+        replaceFormSlotKey,
+        getFormSlotKeys,
+        handleSearchInfoChange,
+      } = useTableForm(getProps, slots, fetch, getLoading)
 
       const getBindValues = computed(() => {
         const dataSource = unref(getDataSourceRef)
@@ -188,19 +188,19 @@
           size: 'middle',
           // // ...(dataSource.length === 0 ? { getPopupContainer: () => document.body } : {}),
           ...attrs,
-          // customRow,
+          customRow,
           // expandIcon: expandIcon(),
           ...unref(getProps),
           ...unref(getHeaderProps),
-          // scroll: unref(getScrollRef),
-          // loading: unref(getLoading),
+          scroll: unref(getScrollRef),
+          loading: unref(getLoading),
           tableLayout: 'fixed',
           rowSelection: unref(getRowSelectionRef),
           rowKey: unref(getRowKey),
           columns: toRaw(unref(getViewColumns)),
           pagination: toRaw(unref(getPaginationInfo)),
           dataSource,
-          // footer: unref(getFooterProps),
+          footer: unref(getFooterProps),
           // ...unref(getExpandOption),
         }
         // if (slots.expandedRowRender) {
@@ -217,25 +217,25 @@
           prefixCls,
           attrs.class,
           {
-            // [`${prefixCls}-form-container`]: values.useSearchForm,
+            [`${prefixCls}-form-container`]: values.useSearchForm,
             [`${prefixCls}--inset`]: values.inset,
           },
         ]
       })
 
-      // const getEmptyDataIsShowTable = computed(() => {
-      //   const { emptyDataIsShowTable, useSearchForm } = unref(getProps)
-      //   if (emptyDataIsShowTable || !useSearchForm) {
-      //     return true
-      //   }
-      //   return !!unref(getDataSourceRef).length
-      // })
+      const getEmptyDataIsShowTable = computed(() => {
+        const { emptyDataIsShowTable, useSearchForm } = unref(getProps)
+        if (emptyDataIsShowTable || !useSearchForm) {
+          return true
+        }
+        return !!unref(getDataSourceRef).length
+      })
 
       function setProps(props: Partial<BasicTableProps>) {
         innerPropsRef.value = { ...unref(innerPropsRef), ...props }
       }
 
-      const tableAction: Partial<TableActionType> = {
+      const tableAction: TableActionType = {
         reload,
         getSelectRows,
         clearSelectedRowKeys,
@@ -243,10 +243,10 @@
         deleteSelectRowByKey,
         setPagination,
         setTableData,
-        // redoHeight,
+        redoHeight,
         setSelectedRowKeys,
         setColumns,
-        // setLoading,
+        setLoading,
         getDataSource,
         setProps,
         getRowSelection,
@@ -264,28 +264,27 @@
           return unref(getBindValues).size as SizeType
         },
       }
-      // createTableContext({ ...tableAction, wrapRef, getBindValues })
+      createTableContext({ ...tableAction, wrapRef, getBindValues })
 
-      useExpose<Partial<TableActionType>>(tableAction)
+      useExpose<TableActionType>(tableAction)
 
-      emit('register', tableAction)
-      // emit('register', tableAction, formActions)
+      emit('register', tableAction, formActions)
 
       return {
         tableElRef,
         getBindValues,
-        // getLoading,
-        // registerForm,
-        // handleSearchInfoChange,
-        // getEmptyDataIsShowTable,
+        getLoading,
+        registerForm,
+        handleSearchInfoChange,
+        getEmptyDataIsShowTable,
         handleTableChange,
         getRowClassName,
         wrapRef,
         tableAction,
-        // redoHeight,
-        // getFormProps,
-        // replaceFormSlotKey,
-        // getFormSlotKeys,
+        redoHeight,
+        getFormProps,
+        replaceFormSlotKey,
+        getFormSlotKeys,
         getWrapperClass,
         columns: getViewColumns,
       }

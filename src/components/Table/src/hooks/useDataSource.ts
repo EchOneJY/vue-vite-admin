@@ -24,9 +24,9 @@ import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const'
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>
   setPagination: (info: Partial<PaginationProps>) => void
-  // setLoading: (loading: boolean) => void
-  // getFieldsValue: () => Recordable
-  // clearSelectedRowKeys: () => void
+  setLoading: (loading: boolean) => void
+  getFieldsValue: () => Recordable
+  clearSelectedRowKeys: () => void
   tableData: Ref<Recordable[]>
 }
 
@@ -39,9 +39,9 @@ export function useDataSource(
   {
     getPaginationInfo,
     setPagination,
-    // setLoading,
-    // getFieldsValue,
-    // clearSelectedRowKeys,
+    setLoading,
+    getFieldsValue,
+    clearSelectedRowKeys,
     tableData,
   }: ActionType,
   emit: EmitType
@@ -72,14 +72,10 @@ export function useDataSource(
     filters: Partial<Recordable<string[]>>,
     sorter: SorterResult
   ) {
-    const {
-      // clearSelectOnPageChange,
-      sortFn,
-      filterFn,
-    } = unref(propsRef)
-    // if (clearSelectOnPageChange) {
-    //   clearSelectedRowKeys()
-    // }
+    const { clearSelectOnPageChange, sortFn, filterFn } = unref(propsRef)
+    if (clearSelectOnPageChange) {
+      clearSelectedRowKeys()
+    }
     setPagination(pagination)
 
     const params: Recordable = {}
@@ -160,12 +156,12 @@ export function useDataSource(
       fetchSetting,
       beforeFetch,
       afterFetch,
-      // useSearchForm,
+      useSearchForm,
       pagination,
     } = unref(propsRef)
     if (!api || !isFunction(api)) return
     try {
-      // setLoading(true)
+      setLoading(true)
       const { pageField, sizeField, listField, totalField } = fetchSetting || FETCH_SETTING
       let pageParams: Recordable = {}
 
@@ -182,7 +178,7 @@ export function useDataSource(
 
       let params: Recordable = {
         ...pageParams,
-        // ...(useSearchForm ? getFieldsValue() : {}),
+        ...(useSearchForm ? getFieldsValue() : {}),
         ...searchInfo,
         ...(opt?.searchInfo ?? {}),
         ...sortInfo,
@@ -235,7 +231,7 @@ export function useDataSource(
         total: 0,
       })
     } finally {
-      // setLoading(false)
+      setLoading(false)
     }
   }
 

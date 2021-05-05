@@ -6,7 +6,7 @@
   <div :class="`${prefixCls}__toolbar`">
     <slot name="toolbar"></slot>
     <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
-    <!-- <TableSetting :setting="tableSetting" v-if="showTableSetting" /> -->
+    <TableSetting :setting="tableSetting" v-if="showTableSetting" />
   </div>
 </template>
 <script lang="ts">
@@ -15,7 +15,7 @@
 
   import { defineComponent } from 'vue'
   import { Divider } from 'ant-design-vue'
-  // import TableSettingComponent from './settings/index.vue'
+  import TableSettingComponent from './settings/index.vue'
   import TableTitle from './TableTitle.vue'
 
   import { useDesign } from '/@/hooks/web/useDesign'
@@ -25,7 +25,7 @@
     components: {
       Divider,
       TableTitle,
-      // TableSetting: TableSettingComponent,
+      TableSetting: TableSettingComponent,
     },
     props: {
       title: {

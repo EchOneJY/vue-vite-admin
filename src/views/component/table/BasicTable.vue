@@ -1,12 +1,14 @@
 <template>
-  <BasicTable
-    title="基础示例"
-    titleHelpMessage="温馨提醒"
-    :columns="columns"
-    :dataSource="data"
-    :bordered="border"
-    :pagination="pagination"
-  />
+  <div class="p-4">
+    <BasicTable
+      title="基础示例"
+      titleHelpMessage="温馨提醒"
+      :columns="columns"
+      :dataSource="data"
+      :bordered="border"
+      :pagination="pagination"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,7 +17,7 @@
   import { BasicTable } from '/@/components/Table'
 
   export default defineComponent({
-    name: 'BasicTable',
+    name: 'Dashboard',
     components: {
       BasicTable,
     },
