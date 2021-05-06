@@ -3,6 +3,9 @@ export default {
   form: {
     title: 'Form',
     basic: 'Basic Form',
+    useForm: 'useForm',
+    refForm: 'refForm',
+    ruleForm: 'Rule Form',
     putAway: 'Put away',
     unfold: 'Unfold',
     maxTip: 'The number of characters should be less than {0}',

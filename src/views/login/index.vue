@@ -22,7 +22,7 @@
               class="w-1/2 -mt-16 -enter-x"
             />
             <div class="mt-10 font-medium text-white -enter-x">
-              <span class="inline-block mt-4 text-3xl">蒙牛干线物流管理系统</span>
+              <span class="inline-block mt-4 text-3xl">蒙牛数智物流管理系统</span>
             </div>
           </div>
         </div>

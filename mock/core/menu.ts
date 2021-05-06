@@ -141,14 +141,14 @@ const componentsRoute = {
     title: 'routes.component.title',
   },
   children: [
-    {
-      path: 'icon',
-      component: '/component/icon/index',
-      meta: {
-        title: 'routes.component.icon.title',
-      },
-      children: [],
-    },
+    // {
+    //   path: 'icon',
+    //   component: '/component/icon/index',
+    //   meta: {
+    //     title: 'routes.component.icon.title',
+    //   },
+    //   children: [],
+    // },
     {
       path: 'form',
       component: '',
@@ -161,6 +161,30 @@ const componentsRoute = {
           component: '/component/form/BasicForm',
           meta: {
             title: 'routes.component.form.basic',
+          },
+          children: [],
+        },
+        {
+          path: 'useForm',
+          component: '/component/form/UseForm',
+          meta: {
+            title: 'routes.component.form.useForm',
+          },
+          children: [],
+        },
+        {
+          path: 'refForm',
+          component: '/component/form/RefForm',
+          meta: {
+            title: 'routes.component.form.refForm',
+          },
+          children: [],
+        },
+        {
+          path: 'ruleForm',
+          component: '/component/form/RuleForm',
+          meta: {
+            title: 'routes.component.form.ruleForm',
           },
           children: [],
         },

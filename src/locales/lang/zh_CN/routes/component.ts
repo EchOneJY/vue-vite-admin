@@ -3,6 +3,9 @@ export default {
   form: {
     title: '表单',
     basic: '基础表单',
+    useForm: 'useForm',
+    refForm: 'refForm',
+    ruleForm: '表单验证',
     putAway: '收起',
     unfold: '展开',
 
