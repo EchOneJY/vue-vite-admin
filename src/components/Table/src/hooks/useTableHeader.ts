@@ -7,6 +7,15 @@ import TableHeader from '../components/TableHeader.vue'
 import { isString } from '/@/utils/is'
 import { getSlot } from '/@/utils/helper/tsx'
 
+// interface ActionType {
+//   getFormProps: ComputedRef<Partial<FormProps>>
+//   tableAction: TableActionType
+//   handleSearchInfoChange: (info: Recordable) => void
+//   redoHeight: () => void
+//   replaceFormSlotKey: (key: string) => string
+//   getFormSlotKeys: ComputedRef<(string | null)[]>
+// }
+
 export function useTableHeader(propsRef: ComputedRef<BasicTableProps>, slots: Slots) {
   const getHeaderProps = computed(
     (): Recordable => {

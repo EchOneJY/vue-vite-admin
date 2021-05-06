@@ -1,5 +1,10 @@
 <template>
-  <a-col v-bind="actionColOpt" :style="{ textAlign: 'right' }" v-if="showActionButtonGroup">
+  <a-col
+    v-bind="actionColOpt"
+    class="ml-4"
+    :style="{ textAlign: isFormTable ? 'left' : 'right' }"
+    v-if="showActionButtonGroup"
+  >
     <FormItem>
       <slot name="resetBefore"></slot>
       <Button
@@ -47,6 +52,7 @@
       [Col.name]: Col,
     },
     props: {
+      isFormTable: propTypes.bool.def(false),
       showActionButtonGroup: propTypes.bool.def(true),
       showResetButton: propTypes.bool.def(true),
       showSubmitButton: propTypes.bool.def(true),

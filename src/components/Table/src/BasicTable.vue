@@ -212,6 +212,10 @@
         return propsData
       })
 
+      // setTimeout(() => {
+      //   console.log(unref(getBindValues))
+      // }, 2000)
+
       const getWrapperClass = computed(() => {
         const values = unref(getBindValues)
         return [
@@ -344,13 +348,13 @@
       width: 100%;
       overflow-x: hidden;
 
-      &-title {
-        display: flex;
-        padding: 8px 6px;
-        border-bottom: none;
-        justify-content: space-between;
-        align-items: center;
-      }
+      // &-title {
+      //   display: flex;
+      //   padding: 8px 6px;
+      //   border-bottom: none;
+      //   justify-content: space-between;
+      //   align-items: center;
+      // }
 
       .ant-table-tbody > tr.ant-table-row-selected td {
         background-color: fade(@primary-color, 8%) !important;

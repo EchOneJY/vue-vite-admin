@@ -137,12 +137,12 @@ export function useTable(
     getShowPagination: () => {
       return toRaw(getTableInstance().getShowPagination())
     },
-    expandAll: () => {
-      getTableInstance().expandAll()
-    },
-    collapseAll: () => {
-      getTableInstance().collapseAll()
-    },
+    // expandAll: () => {
+    //   getTableInstance().expandAll()
+    // },
+    // collapseAll: () => {
+    //   getTableInstance().collapseAll()
+    // },
   }
 
   return [register, methods]

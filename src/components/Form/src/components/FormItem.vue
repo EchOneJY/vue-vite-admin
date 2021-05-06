@@ -22,6 +22,7 @@
     name: 'BasicFormItem',
     inheritAttrs: false,
     props: {
+      isFormTable: { type: Boolean, default: false },
       schema: {
         type: Object as PropType<FormSchema>,
         default: () => ({}),
@@ -100,12 +101,12 @@
 
       function getShow(): { isShow: boolean; isIfShow: boolean } {
         const { show, ifShow } = props.schema
-        const { showAdvancedButton } = props.formProps
-        const itemIsAdvanced = showAdvancedButton
-          ? isBoolean(props.schema.isAdvanced)
-            ? props.schema.isAdvanced
-            : true
-          : true
+        // const { showAdvancedButton } = props.formProps
+        // const itemIsAdvanced = showAdvancedButton
+        //   ? isBoolean(props.schema.isAdvanced)
+        //     ? props.schema.isAdvanced
+        //     : true
+        //   : true
 
         let isShow = true
         let isIfShow = true
@@ -122,7 +123,7 @@
         if (isFunction(ifShow)) {
           isIfShow = ifShow(unref(getValues))
         }
-        isShow = isShow && itemIsAdvanced
+        // isShow = isShow && itemIsAdvanced
         return { isShow, isIfShow }
       }
 
@@ -192,6 +193,7 @@
           field,
           changeEvent = 'change',
           valueField,
+          label,
         } = props.schema
 
         const isCheck = component && ['Switch', 'Checkbox'].includes(component)
@@ -224,7 +226,9 @@
         // RangePicker place is an array
         if (isCreatePlaceholder && component !== 'RangePicker' && component) {
           placeholder =
-            unref(getComponentsProps)?.placeholder || createPlaceholderMessage(component)
+            unref(getComponentsProps)?.placeholder ||
+            createPlaceholderMessage(component) + label ||
+            ''
         }
         propsData.placeholder = placeholder
         propsData.codeField = field
@@ -253,7 +257,11 @@
       }
 
       function renderLabelHelpMessage() {
+        const { isFormTable } = props
         const { label, helpMessage, helpComponentProps, subLabel } = props.schema
+        if (isFormTable) {
+          return <span class="mr-2"></span>
+        }
         const renderLabel = subLabel ? (
           <span>
             {label} <span class="text-secondary">{subLabel}</span>

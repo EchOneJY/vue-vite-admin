@@ -11,10 +11,18 @@ export function useItemLabelWidth(schemaItemRef: Ref<FormSchema>, propsRef: Ref<
     const { labelWidth, disabledLabelWidth } = schemaItem
 
     const {
+      isFormTable,
       labelWidth: globalLabelWidth,
       labelCol: globalLabelCol,
       wrapperCol: globWrapperCol,
     } = unref(propsRef)
+
+    if (isFormTable) {
+      return {
+        labelCol: { style: { width: '1rem' } },
+        wrapperCol: { style: { width: `calc(100% - 1rem)` } },
+      }
+    }
 
     // If labelWidth is set globally, all items setting
     if ((!globalLabelWidth && !labelWidth && !globalLabelCol) || disabledLabelWidth) {

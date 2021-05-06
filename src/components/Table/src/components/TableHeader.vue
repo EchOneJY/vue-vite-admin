@@ -1,13 +1,17 @@
 <template>
-  <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
+  <div :class="prefixCls">
+    <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
 
-  <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
+    <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
 
-  <div :class="`${prefixCls}__toolbar`">
-    <slot name="toolbar"></slot>
-    <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
-    <TableSetting :setting="tableSetting" v-if="showTableSetting" />
+    <div :class="`${prefixCls}__toolbar`">
+      <slot name="toolbar"></slot>
+      <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
+      <TableSetting :setting="tableSetting" v-if="showTableSetting" />
+    </div>
   </div>
+
+  <div :class="`${prefixCls}__form`"> </div>
 </template>
 <script lang="ts">
   import type { TableSetting } from '../types/table'
@@ -52,6 +56,11 @@
   @prefix-cls: ~'@{namespace}-basic-table-header';
 
   .@{prefix-cls} {
+    display: flex;
+    padding: 8px 6px;
+    border-bottom: none;
+    justify-content: space-between;
+    align-items: center;
     &__toolbar {
       flex: 1;
       display: flex;

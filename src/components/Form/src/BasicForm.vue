@@ -4,6 +4,7 @@
       <slot name="formHeader"></slot>
       <template v-for="schema in getSchema" :key="schema.field">
         <FormItem
+          :isFormTable="getProps.isFormTable"
           :tableAction="tableAction"
           :formActionType="formActionType"
           :schema="schema"

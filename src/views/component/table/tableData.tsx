@@ -230,8 +230,9 @@ export const getAdvanceSchema = (itemNumber = 6): FormSchema[] => {
       label: `字段${index}`,
       component: 'Input',
       colProps: {
-        lg: 6
+        lg: 4
       },
+      rulesMessageJoinLabel: true
     });
   }
   return arr;
@@ -247,8 +248,9 @@ export function getFormConfig(): Partial<FormProps> {
         component: 'Select',
         // slot: 'custom',
         colProps: {
-          lg: 6
+          lg: 4
         },
+        rulesMessageJoinLabel: true
       },
     ],
   };
