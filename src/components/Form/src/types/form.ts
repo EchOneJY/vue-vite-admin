@@ -49,6 +49,7 @@ export type RegisterFn = (formInstance: FormActionType) => void
 export type UseFormReturnType = [RegisterFn, FormActionType]
 
 export interface FormProps {
+  isFormTable?: boolean
   // layout?: 'vertical' | 'inline' | 'horizontal';
   // Form value
   model?: Recordable
@@ -85,12 +86,8 @@ export interface FormProps {
   autoSetPlaceHolder?: boolean
   // Check whether the information is added to the label
   rulesMessageJoinLabel?: boolean
-  // Whether to show collapse and expand buttons
-  showAdvancedButton?: boolean
   // Whether to focus on the first input box, only works when the first form item is input
   autoFocusFirstItem?: boolean
-  // Automatically collapse over the specified number of rows
-  autoAdvancedLine?: number
   // Whether to show the operation button
   showActionButtonGroup?: boolean
 
@@ -161,7 +158,6 @@ export interface FormSchema {
 
   // 默认值
   defaultValue?: any
-  isAdvanced?: boolean
 
   // Matching details components
   span?: number

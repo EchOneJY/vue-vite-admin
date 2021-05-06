@@ -1,8 +1,5 @@
 <template>
-  <EditTableHeaderCell v-if="getIsEdit">
-    {{ getTitle }}
-  </EditTableHeaderCell>
-  <span v-else>{{ getTitle }}</span>
+  <span>{{ getTitle }}</span>
   <BasicHelp v-if="getHelpMessage" :text="getHelpMessage" :class="`${prefixCls}__help`" />
 </template>
 <script lang="ts">
@@ -11,13 +8,11 @@
 
   import { defineComponent, computed } from 'vue'
   import BasicHelp from '/@/components/Basic/src/BasicHelp.vue'
-  import EditTableHeaderCell from './EditTableHeaderIcon.vue'
 
   import { useDesign } from '/@/hooks/web/useDesign'
   export default defineComponent({
     name: 'TableHeaderCell',
     components: {
-      EditTableHeaderCell,
       BasicHelp,
     },
     props: {
@@ -29,11 +24,10 @@
     setup(props) {
       const { prefixCls } = useDesign('basic-table-header-cell')
 
-      const getIsEdit = computed(() => !!props.column?.edit)
       const getTitle = computed(() => props.column?.customTitle)
       const getHelpMessage = computed(() => props.column?.helpMessage)
 
-      return { prefixCls, getIsEdit, getTitle, getHelpMessage }
+      return { prefixCls, getTitle, getHelpMessage }
     },
   })
 </script>

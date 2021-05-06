@@ -6,6 +6,13 @@ import { isNumber, isObject } from '/@/utils/is'
 
 const { t } = useI18n()
 
+const DATE_TYPE = ['DatePicker', 'MonthPicker', 'WeekPicker', 'TimePicker']
+
+/**
+ * 时间字段
+ */
+export const dateItemType = [...DATE_TYPE, 'RangePicker']
+
 /**
  * @description: 生成placeholder
  */
@@ -27,12 +34,6 @@ export function createPlaceholderMessage(component: ComponentType) {
     return t('common.chooseText')
   }
   return ''
-}
-
-const DATE_TYPE = ['DatePicker', 'MonthPicker', 'WeekPicker', 'TimePicker']
-
-function genType() {
-  return [...DATE_TYPE, 'RangePicker']
 }
 
 export function setComponentRuleType(
@@ -65,8 +66,3 @@ export function handleInputNumberValue(component?: ComponentType, val?: any) {
   }
   return val
 }
-
-/**
- * 时间字段
- */
-export const dateItemType = genType()

@@ -1,0 +1,14 @@
+<assembly>
+    <id>${project.version}-static</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <fileSets>
+        <!-- static 静态文件目录 -->
+        <fileSet>
+            <directory>static</directory>
+            <outputDirectory>static</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

@@ -18,11 +18,8 @@
         </FormItem>
       </template>
 
-      <FormAction v-bind="{ ...getProps, ...advanceState }" @toggle-advanced="handleToggleAdvanced">
-        <template
-          #[item]="data"
-          v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']"
-        >
+      <FormAction v-bind="{ ...getProps }">
+        <template #[item]="data" v-for="item in ['resetBefore', 'submitBefore']">
           <slot :name="item" v-bind="data"></slot>
         </template>
       </FormAction>
@@ -32,7 +29,6 @@
 </template>
 <script lang="ts">
   import type { FormActionType, FormProps, FormSchema } from './types/form'
-  import type { AdvanceState } from './types/hooks'
   import type { CSSProperties, Ref } from 'vue'
 
   import { defineComponent, reactive, ref, computed, unref, onMounted, watch, nextTick } from 'vue'
@@ -47,7 +43,6 @@
   import { deepMerge } from '/@/utils'
 
   import { useFormValues } from './hooks/useFormValues'
-  import useAdvanced from './hooks/useAdvanced'
   import { useFormEvents } from './hooks/useFormEvents'
   import { createFormContext } from './hooks/useFormContext'
   import { useAutoFocus } from './hooks/useAutoFocus'
@@ -60,17 +55,10 @@
     name: 'BasicForm',
     components: { FormItem, Form, Row, FormAction },
     props: basicProps,
-    emits: ['advanced-change', 'reset', 'submit', 'register'],
+    emits: ['reset', 'submit', 'register'],
     setup(props, { emit }) {
       const formModel = reactive<Recordable>({})
       // const modalFn = useModalContext()
-
-      const advanceState = reactive<AdvanceState>({
-        isAdvanced: true,
-        hideAdvanceBtn: false,
-        isLoad: false,
-        actionSpan: 6,
-      })
 
       const defaultValueRef = ref<Recordable>({})
       const isInitedDefaultRef = ref(false)
@@ -122,15 +110,6 @@
           }
         }
         return schemas as FormSchema[]
-      })
-
-      const { handleToggleAdvanced } = useAdvanced({
-        advanceState,
-        emit,
-        getProps,
-        getSchema,
-        formModel,
-        defaultValueRef,
       })
 
       const { handleFormValues, initDefault } = useFormValues({
@@ -235,10 +214,8 @@
       })
 
       return {
-        handleToggleAdvanced,
         formModel,
         defaultValueRef,
-        advanceState,
         getRowWrapStyle,
         getProps,
         formElRef,

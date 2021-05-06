@@ -22,18 +22,6 @@
       >
         {{ getSubmitBtnOptions.text }}
       </Button>
-
-      <slot name="advanceBefore"></slot>
-      <Button
-        type="link"
-        size="small"
-        @click="toggleAdvanced"
-        v-if="showAdvancedButton && !hideAdvanceBtn"
-      >
-        {{ isAdvanced ? t('component.form.putAway') : t('component.form.unfold') }}
-        <BasicArrow class="ml-1" :expand="!isAdvanced" top />
-      </Button>
-      <slot name="advanceAfter"></slot>
     </FormItem>
   </a-col>
 </template>
@@ -44,7 +32,6 @@
   import { defineComponent, computed, PropType } from 'vue'
   import { Form, Col } from 'ant-design-vue'
   import { Button } from '/@/components/Button'
-  import { BasicArrow } from '/@/components/Basic/index'
   import { useFormContext } from '../hooks/useFormContext'
 
   import { useI18n } from '/@/hooks/web/useI18n'
@@ -57,14 +44,12 @@
     components: {
       FormItem: Form.Item,
       Button,
-      BasicArrow,
       [Col.name]: Col,
     },
     props: {
       showActionButtonGroup: propTypes.bool.def(true),
       showResetButton: propTypes.bool.def(true),
       showSubmitButton: propTypes.bool.def(true),
-      showAdvancedButton: propTypes.bool.def(true),
       resetButtonOptions: {
         type: Object as PropType<ButtonOptions>,
         default: () => ({}),
@@ -78,20 +63,14 @@
         default: () => ({}),
       },
       actionSpan: propTypes.number.def(6),
-      isAdvanced: propTypes.bool,
-      hideAdvanceBtn: propTypes.bool,
     },
-    emits: ['toggle-advanced'],
-    setup(props, { emit }) {
+    setup(props) {
       const { t } = useI18n()
 
       const actionColOpt = computed(() => {
-        const { showAdvancedButton, actionSpan: span, actionColOptions } = props
-        const actionSpan = 24 - span
-        const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 6 ? 24 : actionSpan } : {}
+        const { actionColOptions } = props
         const actionColOpt: Partial<ColEx> = {
-          span: showAdvancedButton ? 6 : 4,
-          ...advancedSpanObj,
+          span: 4,
           ...actionColOptions,
         }
         return actionColOpt
@@ -117,16 +96,11 @@
         )
       })
 
-      function toggleAdvanced() {
-        emit('toggle-advanced')
-      }
-
       return {
         t,
         actionColOpt,
         getResetBtnOptions,
         getSubmitBtnOptions,
-        toggleAdvanced,
         ...useFormContext(),
       }
     },

@@ -1,6 +1,6 @@
 <template>
   <BasicTable @register="registerTable">
-    <template #form-custom> custom-slot </template>
+    <!-- <template #form-custom> custom-slot </template> -->
 
     <template #toolbar>
       <Button type="primary" @click="getFormValues">获取表单数据</Button>

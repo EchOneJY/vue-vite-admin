@@ -1,6 +1,7 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
     <BasicForm
+      :isFormTable="getBindValues.useSearchForm"
       submitOnReset
       v-bind="getFormProps"
       v-if="getBindValues.useSearchForm"

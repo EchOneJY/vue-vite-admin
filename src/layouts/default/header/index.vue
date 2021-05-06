@@ -9,7 +9,7 @@
     <div :class="`${prefixCls}-action`">
       <AppLocalePicker :class="`${prefixCls}-action__item`" :showText="false" :reload="true" />
 
-      <span :class="`${prefixCls}-action__item`">欢迎您，admin</span>
+      <span class="mx-2">欢迎您，admin</span>
 
       <span :class="`${prefixCls}-action__item`" @click="handleLoginOut">
         <Icon icon="ion:power-outline" />

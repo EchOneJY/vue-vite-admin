@@ -230,8 +230,7 @@ export const getAdvanceSchema = (itemNumber = 6): FormSchema[] => {
       label: `字段${index}`,
       component: 'Input',
       colProps: {
-        xl: 12,
-        xxl: 8,
+        lg: 6
       },
     });
   }
@@ -239,17 +238,16 @@ export const getAdvanceSchema = (itemNumber = 6): FormSchema[] => {
 };
 export function getFormConfig(): Partial<FormProps> {
   return {
-    labelWidth: 100,
+    labelWidth: 60,
     schemas: [
       ...getAdvanceSchema(5),
       {
         field: `field11`,
         label: `Slot示例`,
         component: 'Select',
-        slot: 'custom',
+        // slot: 'custom',
         colProps: {
-          xl: 12,
-          xxl: 8,
+          lg: 6
         },
       },
     ],

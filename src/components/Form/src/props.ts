@@ -7,6 +7,8 @@ import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes'
 import { propTypes } from '/@/utils/propTypes'
 
 export const basicProps = {
+  // 是否为表格表单
+  isFormTable: propTypes.bool,
   model: {
     type: Object as PropType<Recordable>,
     default: {},
@@ -16,6 +18,7 @@ export const basicProps = {
     type: [Number, String] as PropType<number | string>,
     default: 0,
   },
+  // 间隔时间自定义 [field, [startTimeKey, endTimeKey], format = 'YYYY-MM-DD']
   fieldMapToTime: {
     type: Array as PropType<FieldMapToTime>,
     default: () => [],
@@ -37,6 +40,7 @@ export const basicProps = {
     type: Object as PropType<Partial<ColEx>>,
   },
   autoSetPlaceHolder: propTypes.bool.def(true),
+  // 重置表单时是否重新查询
   submitOnReset: propTypes.bool,
   size: propTypes.oneOf(['default', 'small', 'large']).def('default'),
   // 禁用表单
@@ -45,18 +49,14 @@ export const basicProps = {
     type: [Number, Object] as PropType<number>,
     default: 0,
   },
-  // 是否显示收起展开按钮
-  showAdvancedButton: propTypes.bool,
   // 转化时间
   transformDateFunc: {
     type: Function as PropType<Fn>,
     default: (date: any) => {
-      return date._isAMomentObject ? date?.format('YYYY-MM-DD HH:mm:ss') : date
+      return date?.format('YYYY-MM-DD HH:mm:ss')
     },
   },
   rulesMessageJoinLabel: propTypes.bool.def(true),
-  // 超过3行自动折叠
-  autoAdvancedLine: propTypes.number.def(3),
 
   // 是否显示操作按钮
   showActionButtonGroup: propTypes.bool.def(true),

@@ -30,7 +30,7 @@ export function useFormValues({
         continue
       }
       const transformDateFunc = unref(getProps).transformDateFunc
-      if (isObject(value)) {
+      if (isObject(value) && value._isAMomentObject) {
         value = transformDateFunc?.(value)
       }
       if (isArray(value) && value[0]?._isAMomentObject && value[1]?._isAMomentObject) {
