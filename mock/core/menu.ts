@@ -255,6 +255,49 @@ const iframeRoute = {
   ],
 }
 
+const systemRoute = {
+  path: 'system',
+  component: '',
+  meta: {
+    icon: 'system',
+    title: 'system.title',
+  },
+  children: [
+    {
+      path: 'organization',
+      component: '/system/organization/index',
+      meta: {
+        title: 'system.organization.title',
+      },
+      children: [],
+    },
+    {
+      path: 'role',
+      component: '/system/role/index',
+      meta: {
+        title: 'system.role.title',
+      },
+      children: [],
+    },
+    {
+      path: 'setting',
+      component: '/system/setting/index',
+      meta: {
+        title: 'system.setting.title',
+      },
+      children: [],
+    },
+    {
+      path: 'user',
+      component: '/system/user/index',
+      meta: {
+        title: 'system.user.title',
+      },
+      children: [],
+    },
+  ],
+}
+
 export default [
   {
     url: '/basic-api/getMenuListById',
@@ -267,6 +310,7 @@ export default [
         levelRoute,
         exceptionRoute,
         iframeRoute,
+        systemRoute,
       ])
     },
   },

@@ -6,7 +6,6 @@ import TableHeader from '../components/TableHeader.vue'
 
 import { isString } from '/@/utils/is'
 import { getSlot } from '/@/utils/helper/tsx'
-// import { FormActionType } from '/@/components/Form'
 
 // interface ActionType {
 //   getFormProps: ComputedRef<Partial<FormProps>>
@@ -17,22 +16,12 @@ import { getSlot } from '/@/utils/helper/tsx'
 //   getFormSlotKeys: ComputedRef<(string | null)[]>
 // }
 
-export function useTableHeader(
-  propsRef: ComputedRef<BasicTableProps>,
-  // formElRef: Ref<ComponentRef>,
-  slots: Slots
-) {
+export function useTableHeader(propsRef: ComputedRef<BasicTableProps>, slots: Slots) {
   const getHeaderProps = computed(
     (): Recordable => {
-      // let formHeight = 0
-      // const form = unref(formElRef)
-      // if (form) {
-      //   const formEl: Element = form.$el
-      //   if (formEl) {
-      //     formHeight = formEl.clientHeight
-      //   }
-      // }
-      const { title, showTableSetting, titleHelpMessage, tableSetting } = unref(propsRef)
+      const { title, showTableSetting, titleHelpMessage, tableSetting, useSearchForm } = unref(
+        propsRef
+      )
       const hideTitle = !slots.tableTitle && !title && !slots.toolbar && !showTableSetting
       if (hideTitle && !isString(title)) {
         return {}
@@ -49,7 +38,7 @@ export function useTableHeader(
                   titleHelpMessage,
                   showTableSetting,
                   tableSetting,
-                  // formHeight: formHeight + 'px',
+                  useSearchForm,
                 } as Recordable,
                 {
                   ...(slots.toolbar

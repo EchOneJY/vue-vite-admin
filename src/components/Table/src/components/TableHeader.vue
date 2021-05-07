@@ -1,12 +1,20 @@
 <template>
   <div :class="prefixCls">
-    <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
+    <template v-if="!useSearchForm">
+      <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
 
-    <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
+      <TableTitle
+        :helpMessage="titleHelpMessage"
+        :title="title"
+        v-if="!$slots.tableTitle && title"
+      />
+    </template>
 
-    <div :class="`${prefixCls}__toolbar`">
-      <slot name="toolbar"></slot>
-      <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
+    <div :class="[`${prefixCls}__toolbar`, { form: useSearchForm }]">
+      <div :class="`${prefixCls}__toolbar__slot`">
+        <slot name="toolbar"></slot>
+      </div>
+      <Divider type="vertical" v-if="!useSearchForm && $slots.toolbar && showTableSetting" />
       <TableSetting :setting="tableSetting" v-if="showTableSetting" />
     </div>
   </div>
@@ -43,9 +51,9 @@
         type: [String, Array] as PropType<string | string[]>,
         default: '',
       },
-      // formHeight: {
-      //   type: String,
-      // },
+      useSearchForm: {
+        type: Boolean,
+      },
     },
     setup() {
       const { prefixCls } = useDesign('basic-table-header')
@@ -68,8 +76,18 @@
       align-items: center;
       justify-content: flex-end;
 
+      &.form {
+        justify-content: space-between;
+      }
+
       > * {
         margin-right: 8px;
+      }
+
+      &__slot {
+        > * {
+          margin-right: 12px;
+        }
       }
     }
   }

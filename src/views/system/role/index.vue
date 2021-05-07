@@ -11,21 +11,25 @@
   import { defineComponent } from 'vue'
   import { Button } from 'ant-design-vue'
   import { BasicTable, useTable } from '/@/components/Table'
-  import { getBasicColumns, getFormConfig } from './tableData'
+  import { columns, searchFormSchema } from './role.data'
 
-  import { demoListApi } from '/@/api/component/table'
+  import { getRoleListByPage } from '/@/api/system/role'
 
   export default defineComponent({
     components: { BasicTable, Button },
     setup() {
       const [registerTable, { getForm }] = useTable({
         title: '人员信息',
-        api: demoListApi,
-        columns: getBasicColumns(),
+        api: getRoleListByPage,
+        columns,
         useSearchForm: true,
-        formConfig: getFormConfig(),
+        formConfig: {
+          labelWidth: 120,
+          schemas: searchFormSchema,
+        },
         showTableSetting: true,
-        rowSelection: { type: 'checkbox' },
+        bordered: true,
+        showIndexColumn: false,
       })
 
       function getFormValues() {

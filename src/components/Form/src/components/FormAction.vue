@@ -8,8 +8,8 @@
     <FormItem>
       <slot name="resetBefore"></slot>
       <Button
-        type="default"
-        class="mr-2"
+        type="primary"
+        :class="['mr-2.5', `${prefixCls}__reset`]"
         v-bind="getResetBtnOptions"
         @click="resetAction"
         v-if="showResetButton"
@@ -20,7 +20,7 @@
 
       <Button
         type="primary"
-        class="mr-2"
+        :class="['mr-2.5', `${prefixCls}__submit`]"
         v-bind="getSubmitBtnOptions"
         @click="submitAction"
         v-if="showSubmitButton"
@@ -40,6 +40,7 @@
   import { useFormContext } from '../hooks/useFormContext'
 
   import { useI18n } from '/@/hooks/web/useI18n'
+  import { useDesign } from '/@/hooks/web/useDesign'
   import { propTypes } from '/@/utils/propTypes'
 
   type ButtonOptions = Partial<ButtonProps> & { text: string }
@@ -72,6 +73,7 @@
     },
     setup(props) {
       const { t } = useI18n()
+      const { prefixCls } = useDesign('form-action')
 
       const actionColOpt = computed(() => {
         const { actionColOptions } = props
@@ -104,6 +106,7 @@
 
       return {
         t,
+        prefixCls,
         actionColOpt,
         getResetBtnOptions,
         getSubmitBtnOptions,
@@ -112,3 +115,21 @@
     },
   })
 </script>
+<style lang="less">
+  @prefix-cls: ~'@{namespace}-form-action';
+
+  .@{prefix-cls} {
+    &__reset {
+      background: #3cc1c4;
+      &:hover {
+        background-color: #41cbce;
+      }
+      &:focus {
+        background-color: #41cbce;
+      }
+    }
+    // &__submit {
+    //   background: @primary-color;
+    // }
+  }
+</style>
