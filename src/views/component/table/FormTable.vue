@@ -16,16 +16,17 @@
   import { demoListApi } from '/@/api/component/table'
 
   export default defineComponent({
-    components: { Button, BasicTable },
+    components: { BasicTable, Button },
     setup() {
       const [registerTable, { getForm }] = useTable({
-        title: '开启搜索区域',
+        title: '人员信息',
         api: demoListApi,
         columns: getBasicColumns(),
         useSearchForm: true,
         formConfig: getFormConfig(),
         showTableSetting: true,
         rowSelection: { type: 'checkbox' },
+        canResize: false,
       })
 
       function getFormValues() {

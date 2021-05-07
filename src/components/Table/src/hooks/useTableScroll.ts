@@ -65,6 +65,7 @@ export function useTableScroll(
     if (!table) return
 
     const tableEl: Element = table.$el
+    console.log(tableEl)
     if (!tableEl) return
 
     if (!bodyEl) {

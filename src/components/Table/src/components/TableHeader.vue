@@ -10,8 +10,6 @@
       <TableSetting :setting="tableSetting" v-if="showTableSetting" />
     </div>
   </div>
-
-  <div :class="`${prefixCls}__form`"> </div>
 </template>
 <script lang="ts">
   import type { TableSetting } from '../types/table'
@@ -45,6 +43,9 @@
         type: [String, Array] as PropType<string | string[]>,
         default: '',
       },
+      // formHeight: {
+      //   type: String,
+      // },
     },
     setup() {
       const { prefixCls } = useDesign('basic-table-header')
@@ -57,7 +58,7 @@
 
   .@{prefix-cls} {
     display: flex;
-    padding: 8px 6px;
+    padding: 4px 4px;
     border-bottom: none;
     justify-content: space-between;
     align-items: center;

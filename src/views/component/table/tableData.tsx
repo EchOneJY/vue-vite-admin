@@ -241,7 +241,7 @@ export function getFormConfig(): Partial<FormProps> {
   return {
     labelWidth: 60,
     schemas: [
-      ...getAdvanceSchema(5),
+      ...getAdvanceSchema(3),
       {
         field: `field11`,
         label: `Slot示例`,

@@ -2,6 +2,7 @@
   <div class="table-settings">
     <RedoSetting v-if="getSetting.redo" />
     <SizeSetting v-if="getSetting.size" />
+    <ColumnSetting v-if="getSetting.setting" />
     <FullScreenSetting v-if="getSetting.fullScreen" />
   </div>
 </template>
@@ -14,6 +15,7 @@
   import SizeSetting from './SizeSetting.vue'
   import RedoSetting from './RedoSetting.vue'
   import FullScreenSetting from './FullScreenSetting.vue'
+  import ColumnSetting from './ColumnSetting.vue'
 
   import { useI18n } from '/@/hooks/web/useI18n'
 
@@ -23,6 +25,7 @@
       SizeSetting,
       RedoSetting,
       FullScreenSetting,
+      ColumnSetting,
     },
     props: {
       setting: {

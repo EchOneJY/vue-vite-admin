@@ -1,6 +1,7 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
     <BasicForm
+      ref="formElRef"
       :isFormTable="getBindValues.useSearchForm"
       submitOnReset
       v-bind="getFormProps"
@@ -83,6 +84,7 @@
       // 'expanded-rows-change',
     ],
     setup(props, { attrs, emit, slots }) {
+      const formElRef = ref<ComponentRef>(null)
       const tableElRef = ref<ComponentRef>(null)
       const tableData = ref<Recordable[]>([])
 
@@ -276,6 +278,7 @@
       emit('register', tableAction, formActions)
 
       return {
+        formElRef,
         tableElRef,
         getBindValues,
         getLoading,
@@ -309,11 +312,12 @@
     }
 
     &-form-container {
-      padding: 16px;
+      position: relative;
+      padding: 12px 16px;
 
       .ant-form {
-        padding: 12px 10px 6px 10px;
-        margin-bottom: 16px;
+        padding: 10px 10px 4px 6px;
+        margin-bottom: 12px;
         background-color: @component-background;
         border-radius: 2px;
       }
@@ -347,14 +351,6 @@
     .ant-table {
       width: 100%;
       overflow-x: hidden;
-
-      // &-title {
-      //   display: flex;
-      //   padding: 8px 6px;
-      //   border-bottom: none;
-      //   justify-content: space-between;
-      //   align-items: center;
-      // }
 
       .ant-table-tbody > tr.ant-table-row-selected td {
         background-color: fade(@primary-color, 8%) !important;

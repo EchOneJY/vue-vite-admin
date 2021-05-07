@@ -10,6 +10,8 @@ export function useMenuSetting() {
 
   const getShowMenu = computed(() => appStore.getMenuSetting.show)
 
+  const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth)
+
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
     appStore.commitProjectConfig({ menuSetting })
   }
@@ -25,5 +27,6 @@ export function useMenuSetting() {
     toggleCollapsed,
     getShowMenu,
     getCollapsed,
+    getMenuWidth,
   }
 }

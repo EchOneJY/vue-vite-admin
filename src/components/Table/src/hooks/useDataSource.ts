@@ -25,7 +25,7 @@ interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>
   setPagination: (info: Partial<PaginationProps>) => void
   setLoading: (loading: boolean) => void
-  getFieldsValue: () => Recordable
+  getFieldsValue: (() => Recordable) | undefined
   clearSelectedRowKeys: () => void
   tableData: Ref<Recordable[]>
 }
@@ -178,7 +178,7 @@ export function useDataSource(
 
       let params: Recordable = {
         ...pageParams,
-        ...(useSearchForm ? getFieldsValue() : {}),
+        ...(useSearchForm && getFieldsValue ? getFieldsValue() : {}),
         ...searchInfo,
         ...(opt?.searchInfo ?? {}),
         ...sortInfo,

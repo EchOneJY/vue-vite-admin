@@ -2,15 +2,19 @@
   <Layout :class="prefixCls">
     <LayoutSider v-if="getShowMenu" />
     <Layout>
-      <LayoutHeader v-if="getHeaderShow" />
-      <LayoutTabs />
+      <div style="height: 80px"></div>
+      <div :class="`${prefixCls}-multiple-header`" :style="getWrapStyle">
+        <LayoutHeader v-if="getHeaderShow" />
+        <LayoutTabs />
+      </div>
+
       <LayoutContent :class="`${prefixCls}-content`" />
     </Layout>
   </Layout>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { computed, CSSProperties, defineComponent, unref } from 'vue'
   import { Layout } from 'ant-design-vue'
 
   import LayoutSider from './sider/index.vue'
@@ -33,10 +37,18 @@
     },
     setup() {
       const { prefixCls } = useDesign('default-layout')
-      const { getShowMenu } = useMenuSetting()
+      const { getShowMenu, getMenuWidth } = useMenuSetting()
       const { getHeaderShow } = useHeaderSetting()
 
-      return { prefixCls, getShowMenu, getHeaderShow }
+      const getWrapStyle = computed(
+        (): CSSProperties => {
+          const style: CSSProperties = {}
+          style.width = `calc(100% - ${unref(getMenuWidth)}px)`
+          return style
+        }
+      )
+
+      return { prefixCls, getShowMenu, getHeaderShow, getWrapStyle }
     },
   })
 </script>
@@ -48,6 +60,11 @@
     width: 100%;
     min-height: 100%;
     background: @content-bg;
+    &-multiple-header {
+      position: fixed;
+      top: 0;
+      z-index: 505;
+    }
     &-content {
       position: relative;
       flex: 1 1 auto;

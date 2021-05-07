@@ -1,7 +1,7 @@
 import { getThemeVariables } from 'ant-design-vue/dist/theme'
 import { resolve } from 'path'
 
-export const primaryColor = '#0960bd'
+export const primaryColor = '#4BBE73'
 
 /**
  * less global variable
