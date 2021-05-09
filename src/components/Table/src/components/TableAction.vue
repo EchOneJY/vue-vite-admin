@@ -17,9 +17,9 @@
       v-if="dropDownActions"
     >
       <slot name="more"></slot>
-      <a-button type="link" size="small" v-if="!$slots.more">
+      <mn-button type="link" size="small" v-if="!$slots.more">
         <MoreOutlined class="icon-more" />
-      </a-button>
+      </mn-button>
     </Dropdown>
   </div>
 </template>
@@ -36,6 +36,7 @@
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useTableContext } from '../hooks/useTableContext'
 
+  import { isBoolean, isFunction } from '/@/utils/is'
   import { propTypes } from '/@/utils/propTypes'
   import { ACTION_COLUMN_FLAG } from '../const'
 
@@ -51,7 +52,7 @@
         type: Array as PropType<ActionItem[]>,
         default: null,
       },
-      divider: propTypes.bool.def(true),
+      divider: propTypes.bool,
       outside: propTypes.bool,
     },
     setup(props) {
@@ -61,33 +62,55 @@
         table = useTableContext()
       }
 
+      function isIfShow(action: ActionItem): boolean {
+        const ifShow = action.ifShow
+
+        let isIfShow = true
+
+        if (isBoolean(ifShow)) {
+          isIfShow = ifShow
+        }
+        if (isFunction(ifShow)) {
+          isIfShow = ifShow(action)
+        }
+        return isIfShow
+      }
+
       const getActions = computed(() => {
-        return (toRaw(props.actions) || []).map((action) => {
-          const { popConfirm } = action
-          return {
-            type: 'link',
-            size: 'small',
-            ...action,
-            ...(popConfirm || {}),
-            onConfirm: popConfirm?.confirm,
-            onCancel: popConfirm?.cancel,
-            enable: !!popConfirm,
-          }
-        })
+        return (toRaw(props.actions) || [])
+          .filter((action) => {
+            return isIfShow(action)
+          })
+          .map((action) => {
+            const { popConfirm } = action
+            return {
+              type: 'link',
+              size: 'small',
+              ...action,
+              ...(popConfirm || {}),
+              onConfirm: popConfirm?.confirm,
+              onCancel: popConfirm?.cancel,
+              enable: !!popConfirm,
+            }
+          })
       })
 
       const getDropdownList = computed(() => {
-        return (toRaw(props.dropDownActions) || []).map((action, index) => {
-          const { label, popConfirm } = action
-          return {
-            ...action,
-            ...popConfirm,
-            onConfirm: popConfirm?.confirm,
-            onCancel: popConfirm?.cancel,
-            text: label,
-            divider: index < props.dropDownActions.length - 1 ? props.divider : false,
-          }
-        })
+        return (toRaw(props.dropDownActions) || [])
+          .filter((action) => {
+            return isIfShow(action)
+          })
+          .map((action, index) => {
+            const { label, popConfirm } = action
+            return {
+              ...action,
+              ...popConfirm,
+              onConfirm: popConfirm?.confirm,
+              onCancel: popConfirm?.cancel,
+              text: label,
+              divider: index < props.dropDownActions.length - 1 ? props.divider : false,
+            }
+          })
       })
 
       const getAlign = computed(() => {

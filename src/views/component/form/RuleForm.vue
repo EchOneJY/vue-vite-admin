@@ -1,11 +1,11 @@
 <template>
   <div class="m-4">
     <div class="mb-4">
-      <a-button @click="validateForm" class="mr-2"> 手动校验表单 </a-button>
-      <a-button @click="resetValidate" class="mr-2"> 清空校验信息 </a-button>
-      <a-button @click="getFormValues" class="mr-2"> 获取表单值 </a-button>
-      <a-button @click="setFormValues" class="mr-2"> 设置表单值 </a-button>
-      <a-button @click="resetFields" class="mr-2"> 重置 </a-button>
+      <mn-button @click="validateForm" class="mr-2"> 手动校验表单 </mn-button>
+      <mn-button @click="resetValidate" class="mr-2"> 清空校验信息 </mn-button>
+      <mn-button @click="getFormValues" class="mr-2"> 获取表单值 </mn-button>
+      <mn-button @click="setFormValues" class="mr-2"> 设置表单值 </mn-button>
+      <mn-button @click="resetFields" class="mr-2"> 重置 </mn-button>
     </div>
     <div class="pt-4 bg-white">
       <BasicForm @register="register" @submit="handleSubmit" />
@@ -16,7 +16,6 @@
   import { defineComponent } from 'vue'
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index'
   import { useMessage } from '/@/hooks/web/useMessage'
-  import { Button } from 'ant-design-vue'
 
   const schemas: FormSchema[] = [
     {
@@ -164,7 +163,7 @@
   ]
 
   export default defineComponent({
-    components: { BasicForm, [Button.name]: Button },
+    components: { BasicForm },
     setup() {
       const { createMessage } = useMessage()
       const [

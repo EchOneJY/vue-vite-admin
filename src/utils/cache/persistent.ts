@@ -37,6 +37,7 @@ const localMemory = new Memory(DEFAULT_CACHE_TIME)
 const sessionMemory = new Memory(DEFAULT_CACHE_TIME)
 
 function initPersistentMemory() {
+  console.log('cache-init')
   const localCache = ls.get(APP_LOCAL_CACHE_KEY)
   const sessionCache = ss.get(APP_SESSION_CACHE_KEY)
   localCache && localMemory.resetCache(localCache)
@@ -84,11 +85,13 @@ export class Persistent {
 }
 
 window.addEventListener('beforeunload', function () {
+  console.log('cache-beforeunload')
   ls.set(APP_LOCAL_CACHE_KEY, localMemory.getCache)
   ss.set(APP_SESSION_CACHE_KEY, sessionMemory.getCache)
 })
 
 function storageChange(e: any) {
+  console.log('cache-storageChange')
   const { key, newValue, oldValue } = e
 
   if (!key) {

@@ -16,7 +16,7 @@
   import { propTypes } from '/@/utils/propTypes'
 
   export default defineComponent({
-    name: 'AButton',
+    name: 'MnButton',
     components: { Button, Icon },
     inheritAttrs: false,
     props: {

@@ -120,6 +120,7 @@ export function useColumns(
     if (!columns) {
       return []
     }
+
     const { ellipsis } = unref(propsRef)
 
     const cloneColumns = cloneDeep(columns)
@@ -175,6 +176,7 @@ export function useColumns(
           Reflect.deleteProperty(column, 'title')
         }
         const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!)
+
         if (!customRender && format && !edit && !isDefaultAction) {
           column.customRender = ({ text, record, index }) => {
             return formatCell(text, format, record, index)

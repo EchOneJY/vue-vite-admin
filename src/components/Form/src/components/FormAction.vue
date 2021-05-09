@@ -121,11 +121,11 @@
   .@{prefix-cls} {
     &__reset {
       background: #3cc1c4;
-      &:hover {
-        background-color: #41cbce;
-      }
+      border-color: #3cc1c4;
+      &:hover,
       &:focus {
         background-color: #41cbce;
+        border-color: #41cbce;
       }
     }
     // &__submit {

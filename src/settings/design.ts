@@ -1,2 +1,2 @@
 // class prefix
-export const prefixCls = 'zjxl'
+export const prefixCls = 'mn'
