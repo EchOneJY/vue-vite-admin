@@ -6,7 +6,6 @@ import type {
   TableRowSelection as ITableRowSelection,
 } from 'ant-design-vue/lib/table/interface'
 
-import { ComponentType } from './componentType'
 import { VueNode } from '/@/utils/propTypes'
 
 export declare type SortOrder = 'ascend' | 'descend'
@@ -137,8 +136,6 @@ export interface BasicTableProps<T = any> {
   sortFn?: (sortInfo: SorterResult) => any
   // 排序方法
   filterFn?: (data: Partial<Recordable<string[]>>) => any
-  // 取消表格的默认padding
-  inset?: boolean
   // 显示表格设置
   showTableSetting?: boolean
   tableSetting?: TableSetting
@@ -152,8 +149,8 @@ export interface BasicTableProps<T = any> {
   summaryData?: Recordable[]
   // 是否显示合计行
   showSummary?: boolean
-  // 是否可拖拽列
-  canColDrag?: boolean
+  // // 是否可拖拽列
+  // canColDrag?: boolean
   // 接口请求对象
   api?: (...arg: any) => Promise<any>
   // 请求之前处理参数
@@ -259,13 +256,6 @@ export interface BasicTableProps<T = any> {
   scroll?: { x?: number | true; y?: number }
 
   /**
-   * Whether to show table header
-   * @default true
-   * @type boolean
-   */
-  showHeader?: boolean
-
-  /**
    * Size of table
    * @default 'default'
    * @type string
@@ -355,17 +345,8 @@ export interface BasicColumn extends ColumnProps {
 
   format?: CellFormat
 
-  // Editable
-  edit?: boolean
-  editRow?: boolean
-  editable?: boolean
-  editComponent?: ComponentType
-  editComponentProps?: Recordable
-  editRule?: boolean | ((text: string, record: Recordable) => Promise<string>)
-  editValueMap?: (value: any) => string
-  onEditRow?: () => void
   // 权限编码控制是否显示
-  auth?: string | string[]
+  // auth?: string | string[]
   // 业务控制是否显示
   ifShow?: boolean | ((column: BasicColumn) => boolean)
 }

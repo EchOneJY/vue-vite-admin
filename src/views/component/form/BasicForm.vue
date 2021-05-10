@@ -6,7 +6,11 @@
       :schemas="schemas"
       :actionColOptions="{ span: 24 }"
       @submit="handleSubmit"
-    />
+    >
+      <template #resetBefore> resetBefore </template>
+      <template #submitBefore> submitBefore </template>
+      <template #custom> custom </template>
+    </BasicForm>
   </div>
 </template>
 <script lang="ts">
@@ -209,7 +213,6 @@
         ],
       },
     },
-
     {
       field: 'field30',
       component: 'ApiSelect',
@@ -231,6 +234,12 @@
       colProps: {
         span: 8,
       },
+    },
+    {
+      field: 'field40',
+      component: 'Input',
+      label: '自定义slot',
+      slot: 'custom',
     },
   ]
 

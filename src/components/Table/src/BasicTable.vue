@@ -77,11 +77,6 @@
       'row-contextmenu',
       'row-mouseenter',
       'row-mouseleave',
-      // 'edit-end',
-      // 'edit-cancel',
-      // 'edit-row-end',
-      // 'edit-change',
-      // 'expanded-rows-change',
     ],
     setup(props, { attrs, emit, slots }) {
       const formElRef = ref<ComponentRef>(null)
@@ -215,7 +210,8 @@
       })
 
       // setTimeout(() => {
-      //   console.log(unref(getBindValues))
+      //   console.log(unref(getRowClassName))
+      //   // console.log(unref(getBindValues))
       // }, 2000)
 
       const getWrapperClass = computed(() => {
@@ -225,7 +221,6 @@
           attrs.class,
           {
             [`${prefixCls}-form-container`]: values.useSearchForm,
-            [`${prefixCls}--inset`]: values.inset,
           },
         ]
       })
@@ -307,7 +302,7 @@
   .@{prefix-cls} {
     &-row__striped {
       td {
-        background-color: content-background;
+        background-color: #fafafa;
       }
     }
 
@@ -320,12 +315,6 @@
         margin-bottom: 12px;
         background-color: @component-background;
         border-radius: 2px;
-      }
-    }
-
-    &--inset {
-      .ant-table-wrapper {
-        padding: 0;
       }
     }
 

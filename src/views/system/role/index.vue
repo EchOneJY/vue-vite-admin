@@ -84,6 +84,7 @@
           slots: { customRender: 'action' },
           fixed: undefined,
         },
+        size: 'small',
       })
 
       function handleCreate() {

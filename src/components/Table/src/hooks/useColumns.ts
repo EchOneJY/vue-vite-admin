@@ -4,8 +4,6 @@ import type { ComputedRef } from 'vue'
 
 import { unref, Ref, computed, watch, ref, toRaw } from 'vue'
 
-// import { renderEditCell } from '../components/editable'
-
 // import { usePermission } from '/@/hooks/web/usePermission'
 import { useI18n } from '/@/hooks/web/useI18n'
 
@@ -160,15 +158,7 @@ export function useColumns(
         return isIfShow(column)
       })
       .map((column) => {
-        const {
-          slots,
-          dataIndex,
-          customRender,
-          format,
-          edit,
-          flag,
-          // editRow,
-        } = column
+        const { slots, dataIndex, customRender, format, flag } = column
 
         if (!slots || !slots?.title) {
           column.slots = { title: `header-${dataIndex}`, ...(slots || {}) }
@@ -177,16 +167,12 @@ export function useColumns(
         }
         const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!)
 
-        if (!customRender && format && !edit && !isDefaultAction) {
+        if (!customRender && format && !isDefaultAction) {
           column.customRender = ({ text, record, index }) => {
             return formatCell(text, format, record, index)
           }
         }
 
-        // // edit table
-        // if ((edit || editRow) && !isDefaultAction) {
-        //   column.customRender = renderEditCell(column)
-        // }
         return column
       })
   })

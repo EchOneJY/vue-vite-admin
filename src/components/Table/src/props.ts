@@ -20,7 +20,6 @@ export const basicProps = {
   clickToRowSelect: propTypes.bool.def(true),
   isTreeTable: propTypes.bool.def(false),
   tableSetting: propTypes.shape<TableSetting>({}),
-  inset: propTypes.bool,
   // sortFn: {
   //   type: Function as PropType<(sortInfo: SorterResult) => any>,
   //   default: DEFAULT_SORT_FN,
@@ -42,7 +41,7 @@ export const basicProps = {
     default: null,
   },
   indentSize: propTypes.number.def(24),
-  canColDrag: propTypes.bool.def(true),
+  // canColDrag: propTypes.bool.def(true),
   api: {
     type: Function as PropType<(...arg: any[]) => Promise<any>>,
     default: null,
@@ -75,7 +74,7 @@ export const basicProps = {
   },
   // 使用搜索表单
   useSearchForm: propTypes.bool,
-  // // 表单配置
+  // 表单配置
   formConfig: {
     type: Object as PropType<Partial<FormProps>>,
     default: null,
