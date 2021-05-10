@@ -62,12 +62,12 @@
 
       const getValues = computed(() => {
         const { allDefaultValues, formModel, schema } = props
-        const { mergeDynamicData } = props.formProps
+        // const { mergeDynamicData } = props.formProps
         return {
           field: schema.field,
           model: formModel,
           values: {
-            ...mergeDynamicData,
+            // ...mergeDynamicData,
             ...allDefaultValues,
             ...formModel,
           } as Recordable,
@@ -188,7 +188,7 @@
 
       function renderComponent() {
         const {
-          renderComponentContent,
+          renderCompContent,
           component,
           field,
           changeEvent = 'change',
@@ -244,13 +244,13 @@
           ...bindValue,
         }
 
-        if (!renderComponentContent) {
+        if (!renderCompContent) {
           return <Comp {...compAttr} />
         }
-        const compSlot = isFunction(renderComponentContent)
-          ? { ...renderComponentContent(unref(getValues)) }
+        const compSlot = isFunction(renderCompContent)
+          ? { ...renderCompContent(unref(getValues)) }
           : {
-              default: () => renderComponentContent,
+              default: () => renderCompContent,
             }
 
         return <Comp {...compAttr}>{compSlot}</Comp>

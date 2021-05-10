@@ -36,7 +36,7 @@
           },
         }
       },
-      renderComponentContent: () => {
+      renderCompContent: () => {
         return {
           prefix: () => 'pSlot',
           suffix: () => 'sSlot',
@@ -135,7 +135,7 @@
       colProps: {
         span: 8,
       },
-      renderComponentContent: 'Check',
+      renderCompContent: 'Check',
     },
     {
       field: 'field9',

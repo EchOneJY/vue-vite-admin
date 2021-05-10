@@ -4,7 +4,7 @@ import type { NamePath } from 'ant-design-vue/lib/form/interface'
 
 import { unref, toRaw } from 'vue'
 
-import { isArray, isFunction, isObject, isString } from '/@/utils/is'
+import { isArray, isObject, isString } from '/@/utils/is'
 import { deepMerge } from '/@/utils'
 import { dateItemType, handleInputNumberValue } from '../helper'
 import { dateUtil } from '/@/utils/date'
@@ -32,8 +32,7 @@ export function useFormEvents({
   handleFormValues,
 }: UseFormActionContext) {
   async function resetFields(): Promise<void> {
-    const { resetFunc, submitOnReset } = unref(getProps)
-    resetFunc && isFunction(resetFunc) && (await resetFunc())
+    const { submitOnReset } = unref(getProps)
 
     const formEl = unref(formElRef)
     if (!formEl) return
@@ -229,11 +228,6 @@ export function useFormEvents({
    */
   async function handleSubmit(e?: Event): Promise<void> {
     e && e.preventDefault()
-    const { submitFunc } = unref(getProps)
-    if (submitFunc && isFunction(submitFunc)) {
-      await submitFunc()
-      return
-    }
     const formEl = unref(formElRef)
     if (!formEl) return
     try {

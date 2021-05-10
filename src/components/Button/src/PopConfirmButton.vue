@@ -18,7 +18,7 @@
     inheritAttrs: false,
     props: {
       size: propTypes.oneOf(['large', 'default', 'small']).def(),
-      enable: propTypes.bool.def(true),
+      enabled: propTypes.bool.def(true),
       okText: propTypes.string,
       cancelText: propTypes.string,
     },
@@ -41,7 +41,7 @@
         const values = omit(unref(getBindValues), 'icon')
         const Button = h(BasicButton, values, extendSlots(slots))
 
-        if (!props.enable) {
+        if (!props.enabled) {
           return Button
         }
 

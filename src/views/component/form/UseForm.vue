@@ -60,7 +60,10 @@
       </mn-button>
     </div>
     <div class="pt-4 bg-white">
-      <BasicForm @register="register" @submit="handleSubmit" />
+      <BasicForm @register="register" @submit="handleSubmit">
+        <template #resetBefore> test </template>
+        <template #custom> custom </template>
+      </BasicForm>
     </div>
   </div>
 </template>
@@ -161,6 +164,12 @@
           },
         ],
       },
+    },
+    {
+      field: 'field8',
+      component: 'Input',
+      label: '自定义',
+      slot: 'custom',
     },
   ]
 

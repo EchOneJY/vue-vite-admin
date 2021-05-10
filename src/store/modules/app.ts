@@ -4,7 +4,6 @@ import { resetRouter } from '/@/router'
 import store from '/@/store'
 
 import type { ProjectConfig } from '/#/config'
-// import PrjectSettings from '/@/settings/project'
 
 import { deepMerge } from '/@/utils'
 import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'

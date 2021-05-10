@@ -54,15 +54,6 @@
       required: true,
     },
     {
-      field: 'field44',
-      component: 'InputCountDown',
-      label: '验证码',
-      colProps: {
-        span: 8,
-      },
-      required: true,
-    },
-    {
       field: 'field4',
       component: 'Select',
       label: '字段4',

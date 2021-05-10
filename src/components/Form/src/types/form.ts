@@ -71,11 +71,11 @@ export interface FormProps {
   // Form configuration rules
   schemas?: FormSchema[]
   // Function values used to merge into dynamic control form items
-  mergeDynamicData?: Recordable
+  // mergeDynamicData?: Recordable
   // Compact mode for search forms
   compact?: boolean
   // Blank line span
-  emptySpan?: number | Partial<ColEx>
+  // emptySpan?: number | Partial<ColEx>
   // Internal component size of the form
   size?: 'default' | 'small' | 'large'
   // Whether to disable
@@ -105,8 +105,6 @@ export interface FormProps {
   // Show confirmation button
   showSubmitButton?: boolean
 
-  resetFunc?: () => Promise<void>
-  submitFunc?: () => Promise<void>
   transformDateFunc?: (date: any) => string
   colon?: boolean
 }
@@ -172,7 +170,7 @@ export interface FormSchema {
   // Rendering col content requires outer wrapper form-item
   renderColContent?: (renderCallbackParams: RenderCallbackParams) => VNode | VNode[] | string
 
-  renderComponentContent?:
+  renderCompContent?:
     | ((renderCallbackParams: RenderCallbackParams) => any)
     | VNode
     | VNode[]

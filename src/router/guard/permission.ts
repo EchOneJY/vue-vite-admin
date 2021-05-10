@@ -60,7 +60,6 @@ export function createPermissionGuard(router: Router) {
     routes.forEach((route) => {
       router.addRoute((route as unknown) as RouteRecordRaw)
     })
-    console.log(routes)
 
     const redirectPath = (from.query.redirect || to.path) as string
     const redirect = decodeURIComponent(redirectPath)

@@ -23,16 +23,17 @@ export const basicProps = {
     type: Array as PropType<FieldMapToTime>,
     default: () => [],
   },
+  // 是否紧凑表单
   compact: propTypes.bool,
   // 表单配置规则
   schemas: {
     type: [Array] as PropType<FormSchema[]>,
     default: () => [],
   },
-  mergeDynamicData: {
-    type: Object as PropType<Recordable>,
-    default: null,
-  },
+  // mergeDynamicData: {
+  //   type: Object as PropType<Recordable>,
+  //   default: null,
+  // },
   baseRowStyle: {
     type: Object as PropType<CSSProperties>,
   },
@@ -45,10 +46,6 @@ export const basicProps = {
   size: propTypes.oneOf(['default', 'small', 'large']).def('default'),
   // 禁用表单
   disabled: propTypes.bool,
-  emptySpan: {
-    type: [Number, Object] as PropType<number>,
-    default: 0,
-  },
   // 转化时间
   transformDateFunc: {
     type: Function as PropType<Fn>,
@@ -74,16 +71,13 @@ export const basicProps = {
   // 确认按钮配置
   submitButtonOptions: Object as PropType<Partial<ButtonProps>>,
 
-  // 自定义重置函数
-  resetFunc: Function as PropType<() => Promise<void>>,
-  submitFunc: Function as PropType<() => Promise<void>>,
-
   // 以下为默认props
-  hideRequiredMark: propTypes.bool,
+  // hideRequiredMark: propTypes.bool,
 
   labelCol: Object as PropType<Partial<ColEx>>,
 
   layout: propTypes.oneOf(['horizontal', 'vertical', 'inline']).def('horizontal'),
+
   tableAction: {
     type: Object as PropType<TableActionType>,
   },
@@ -91,6 +85,4 @@ export const basicProps = {
   wrapperCol: Object as PropType<Partial<ColEx>>,
 
   colon: propTypes.bool,
-
-  labelAlign: propTypes.string,
 }

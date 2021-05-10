@@ -4,13 +4,6 @@ import type { VNodeChild } from 'vue'
 
 export interface FormItem {
   /**
-   * Used with label, whether to display : after label text.
-   * @default true
-   * @type boolean
-   */
-  colon?: boolean
-
-  /**
    * The extra prompt message. It is similar to help. Usage example: to display error message and prompt message at the same time.
    * @type any (string | slot)
    */
@@ -63,10 +56,6 @@ export interface FormItem {
    * Set sub label htmlFor.
    */
   htmlFor?: string
-  /**
-   * text align of label
-   */
-  labelAlign?: 'left' | 'right'
   /**
    * a key of model. In the setting of validate and resetFields method, the attribute is required
    */

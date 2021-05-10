@@ -87,7 +87,6 @@ export type ComponentType =
   | 'InputSearch'
   | 'InputTextArea'
   | 'InputNumber'
-  | 'InputCountDown'
   | 'Select'
   | 'ApiSelect'
   | 'SelectOptGroup'

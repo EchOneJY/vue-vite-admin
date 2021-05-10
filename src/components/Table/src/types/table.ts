@@ -219,49 +219,6 @@ export interface BasicTableProps<T = any> {
   components?: object
 
   /**
-   * Expand all rows initially
-   * @default false
-   * @type boolean
-   */
-  defaultExpandAllRows?: boolean
-
-  /**
-   * Initial expanded row keys
-   * @type string[]
-   */
-  defaultExpandedRowKeys?: string[]
-
-  /**
-   * Current expanded row keys
-   * @type string[]
-   */
-  expandedRowKeys?: string[]
-
-  /**
-   * Expanded container render for each row
-   * @type Function
-   */
-  expandedRowRender?: (record?: ExpandedRowRenderRecord<T>) => VNodeChild | JSX.Element
-
-  /**
-   * Customize row expand Icon.
-   * @type Function | VNodeChild
-   */
-  expandIcon?: Function | VNodeChild | JSX.Element
-
-  /**
-   * Whether to expand row by clicking anywhere in the whole row
-   * @default false
-   * @type boolean
-   */
-  expandRowByClick?: boolean
-
-  /**
-   * The index of `expandIcon` which column will be inserted when `expandIconAsCell` is false. default 0
-   */
-  expandIconColumnIndex?: number
-
-  /**
    * Table footer renderer
    * @type Function | VNodeChild
    */
@@ -366,20 +323,6 @@ export interface BasicTableProps<T = any> {
    * @param currentDataSource
    */
   onChange?: (pagination: any, filters: any, sorter: any, extra: any) => void
-
-  /**
-   * Callback executed when the row expand icon is clicked
-   *
-   * @param expanded
-   * @param record
-   */
-  onExpand?: (expande: boolean, record: T) => void
-
-  /**
-   * Callback executed when the expanded rows change
-   * @param expandedRows
-   */
-  onExpandedRowsChange?: (expandedRows: string[] | number[]) => void
 }
 
 export type CellFormat =

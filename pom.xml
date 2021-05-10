@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.sinoiov</groupId>
-        <artifactId>wlhyzyb-parent</artifactId>
-        <version>1.3.8.9</version>
+      <groupId>com.ctfo</groupId>
+      <artifactId>zjxl-parent</artifactId>
+      <version>1.2</version>
     </parent>
 
     <artifactId>mengniu-view</artifactId>
