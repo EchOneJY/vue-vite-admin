@@ -1,4 +1,3 @@
-<a name="aqIdf"></a>
 # 技术选型
 - Vue->3.x
 - Vite->2.x
@@ -10,62 +9,46 @@
 - Prettier->^2.2.1
 
 <br />
-<a name="PBWx7"></a>
 # 基础架构
-<a name="qxsbf"></a>
 ## 目录结构
 | ├── build # 构建相关脚本<br />├── mock # 模拟数据<br />├── public # 静态资源<br />├── src # 项目代码<br />│   ├── api #请求相关<br />│   ├── assets # 静态资源<br />│   ├── components # 组件<br />│   ├── styles # 样式<br />│   ├── enums # 常量，枚举<br />│   ├── hooks # hooks<br />│   ├── layouts # 布局<br />│   ├── main.ts # 入口文件<br />│   ├── router #路由，菜单等<br />│   ├── locale #多语言文件<br />│   ├── settings # 配置文件<br />│   ├── store # vuex<br />│   ├── utils # 工具类<br />│   └── views # 页面<br />└── types # 类型定义 |
 | --- |
 
-<a name="pWcT7"></a>
 ## Vite配置
 
 
-<a name="dAPaB"></a>
 ## Mock
 
 
-<a name="CkiTL"></a>
 ## 路由及菜单
 
 
-<a name="iWlkx"></a>
 ## 权限
-1234567891011121314151617181920212223
-<a name="jnYnH"></a>
+
+
 # 基础开发
-<a name="ids7t"></a>
 ## 样式
 
 
-<a name="CwoNL"></a>
 ## 请求
 
 
-<a name="gAn7R"></a>
 ## 缓存
-<a name="dD31L"></a>
 ### 浏览器缓存
 
 
-<a name="QNcm1"></a>
 ### Vuex
 
 
-<a name="KeN6K"></a>
 # 组件
-<a name="OWdPv"></a>
 ## 图标
-<a name="PbgH3"></a>
 ### Icon
-<a name="PkQTL"></a>
 #### 示例
 ```javascript
 <Icon icon="ion:language" color="white" :size="14/>
 
 <Icon icon="language" color="white" :size="14" prefix="ion"/>
 ```
-<a name="Q8j65"></a>
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -75,14 +58,11 @@
 | spin | 旋转动画 | Boolen | false |
 | prefix | 名称前缀 | String | —— |
 
-<a name="btm6K"></a>
 ### SvgIcon
-<a name="UV2nP"></a>
 #### 示例
 ```javascript
 <SvgIcon :size="size" :name="getSvgIcon" v-if="isSvgIcon" :spin="spin" />
 ```
-<a name="wQn11"></a>
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -93,20 +73,16 @@
 
 
 
-<a name="lYEpC"></a>
 ## 按钮
-<a name="F73UT"></a>
 ### MnButton
 > 该组件已全局注册，无需单独引入
 
-<a name="BTQZG"></a>
 #### 示例
 ```javascript
 <mn-button type="link" size="small">
   <MoreOutlined class="icon-more" />
 </mn-button>
 ```
-<a name="X5rAj"></a>
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -118,17 +94,13 @@
 | postIcon | 后置图标 | String | —— |
 | onClick | 点击事件 | Function | —— |
 
-<a name="t9Bme"></a>
 #### slot
 | 名称 | 说明 |
 | --- | --- |
 | default | 默认插槽 |
 
-<a name="Yl26K"></a>
 ## 表单
-<a name="yVT9X"></a>
 ### BasicForm
-<a name="sT6gd"></a>
 #### 示例
 **基础使用**
 > 详见 src/views/component/form/BasicForm.vue
@@ -140,12 +112,11 @@
 
 
 
-<a name="roRcQ"></a>
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | model | 表单数据对象 | Object | {} |
-| labelWidth | label 标签宽度 | String or Number | 0 |
+| labelWidth | label 标签宽度 | String | Number | 0 |
 | schemas | 表单配置规则 | Array | [] |
 | disabled | 禁用表单 | Boolean | false |
 | size | 尺寸 `default` `small` `large` | String | default |
@@ -179,28 +150,28 @@
 | field | （必填）字段名称 | String | default |
 | label | （必填）标签名称 | Boolen | false |
 | component | （必填）组件类型 | String | —— |
-| componentProps | 组件属性 | Object or Function | —— |
+| componentProps | 组件属性 | Object | Function | —— |
 | valueField | 字段值 | String | —— |
 | changeEvent | 触发事件名称 | String | change |
-| labelWidth | 标签宽度 | String or Number | —— |
+| labelWidth | 标签宽度 | String | Number | —— |
 | subLabel | 二级标签名称 | String | —— |
 | helpMessage | 辅助提示信息 | String | —— |
 | helpComponentProps | 辅助组件属性 | Object | —— |
 | required | 是否必填 | Boolen | false |
-| suffix | 后缀 | Boolean or  Number or  Function | —— |
+| suffix | 后缀 | Boolean |  Number |  Function | —— |
 | rules | 校验规则 | Array | [] |
 | rulesMessageJoinLabel | 是否将label添加到校验提示信息 | Boolen | —— |
 | itemProps | 表单子项属性，与antd-vue中Form.Item属性一致 | Object | —— |
 | colProps | Column属性 | Object | —— |
 | defaultValue | 默认值 | —— | —— |
-| ifShow | 通过v-if控制是否显示 | Boolean or Function | —— |
-| show | 通过v-show控制是否显示 | Boolean or Function | —— |
-| render | 自定义render form-item标签里的View | Function or String | —— |
-| renderColContent | 自定义render表单子项View | Function or String | —— |
-| renderCompContent | 自定义render表单组件View | Function or String | —— |
+| ifShow | 通过v-if控制是否显示 | Boolean | Function | —— |
+| show | 通过v-show控制是否显示 | Boolean | Function | —— |
+| render | 自定义render form-item标签里的View | Function | String | —— |
+| renderColContent | 自定义render表单子项View | Function | String | —— |
+| renderCompContent | 自定义render表单组件View | Function | String | —— |
 | slot | form-item内插槽名称 | String | —— |
 | colSlot | 表单子项插槽名称 | String | —— |
-| dynamicDisabled | 动态定义禁用状态 | Boolean or Function | —— |
+| dynamicDisabled | 动态定义禁用状态 | Boolean | Function | —— |
 | dynamicRules | 动态生成表单规则 | Function | —— |
 
 
@@ -236,7 +207,6 @@
 
 
 
-<a name="BVMWy"></a>
 #### 事件
 | 名称 | 说明 | 回调参数 |
 | --- | --- | --- |
@@ -246,7 +216,6 @@
 
 
 
-<a name="NwwEw"></a>
 #### slot
 | 名称 | 说明 |
 | --- | --- |
@@ -255,22 +224,18 @@
 | resetBefore | 重置按钮前 |
 | submitBefore | 提交按钮前 |
 
-<a name="eYkpv"></a>
 ## 表格
-<a name="vvLtX"></a>
 ### BasicTable
-<a name="rv2b0"></a>
 #### 示例
 
 
-<a name="nJv4x"></a>
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | tableLayout | 表格布局，`auto` `fixed`，与Antd-Vue中Table->tableLayout一致 | String | —— |
 | size | 表格大小，`default` `middle`  `small` | String | default  |
 | title | 表格标题，与Antd-Vue中Table->title一致 | —— | —— |
-| titleHelpMessage | 标题右侧提示 | String or Array | —— |
+| titleHelpMessage | 标题右侧提示 | String | Array | —— |
 | striped | 斑马纹 | Boolean | true |
 | bordered | 是否显示边框 | Boolean | false |
 | showHeader | 是否展示表头 |  |  |
@@ -289,12 +254,12 @@
 | scroll | 滚动距离 | Object | {x:Number,y:Number} |
 | showTableSetting | 是否显示表格设置 | Boolean | false |
 | tableSetting | 表格设置配置 | Object | {redo: true,size: true,setting: true,fullScreen:false} |
-| rowKey | 行键值 | String or Function or<br />undefined | undefined |
+| rowKey | 行键值 | String | Function |<br />undefined | undefined |
 | autoCreateKey | 是否自动生成行键值 | Boolean | true |
 | clickToRowSelect | 是否点击行选中 | Boolean | true |
 | rowSelection | 行选择配置，与antd-vue中Table->rowSelection配置一致 | Object | null |
 | loading | 加载状态 | Boolean | false |
-| pagination | 分页配置，详见`Pagination` | Boolen or Object | —— |
+| pagination | 分页配置，详见`Pagination` | Boolen | Object | —— |
 | clearSelectOnPageChange | 分页改变的时候清空选项 | Boolean | false |
 | useSearchForm | 是否为表单表格 | Boolean | false |
 | formConfig | 表单配置 | Object | —— |
@@ -314,7 +279,6 @@
 
 
 
-<a name="jc1TI"></a>
 #### 事件
 | 名称 | 说明 | 回调参数 |
 | --- | --- | --- |
@@ -328,15 +292,12 @@
 | row-mouseenter | 鼠标进入行 | function(record,index,e) |
 | row-mouseleave | 鼠标离开行 | function(record,index,e) |
 
-<a name="lfJNx"></a>
 #### slot
 | 名称 | 说明 |
 | --- | --- |
 | tableTitle | 表格标题 |
 
-<a name="fGpBi"></a>
 ### <br />
 
 
-<a name="pA8Uq"></a>
 ## 
