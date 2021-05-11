@@ -103,12 +103,12 @@
 ### BasicForm
 #### 示例
 **基础使用**
-> 详见 src/views/component/form/BasicForm.vue
+> 详见 /src/views/component/form/BasicForm.vue
 
 
 
 **表单校验**
-> 详见 src/view/component/form/RuleForm.vue
+> 详见 /src/view/component/form/RuleForm.vue
 
 
 
@@ -292,16 +292,16 @@ const [register, methods] = useForm(formProps)
 ### BasicTable
 #### 示例
 **基础使用**
-> 详见 src/views/component/table/BasicTable.vue
+> 详见 /src/views/component/table/BasicTable.vue
 
 
 
 **请求表格**
-> 详见 src/views/component/table/FetchTable.vue
+> 详见 /src/views/component/table/FetchTable.vue
 
 
 **表单表格**
-> 详见 src/views/component/table/FormTable.vue
+> 详见 /src/views/component/table/FormTable.vue
 
 
 #### 属性

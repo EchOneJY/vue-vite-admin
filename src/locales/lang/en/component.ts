@@ -28,4 +28,13 @@ export default {
     settingSelectColumnShow: 'Selection Column',
     settingFullScreen: 'Full Screen',
   },
+  tree: {
+    selectAll: 'Select All',
+    unSelectAll: 'Cancel Select',
+    expandAll: 'Expand All',
+    unExpandAll: 'Collapse all',
+
+    checkStrictly: 'Hierarchical association',
+    checkUnStrictly: 'Hierarchical independence',
+  },
 }

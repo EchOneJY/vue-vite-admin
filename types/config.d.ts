@@ -71,6 +71,8 @@ export interface ProjectConfig {
 export interface GlobConfig {
   // 网站标题
   title: string
+  // 侧栏标题
+  siderTitle: string
   // 项目路径
   apiUrl: string
   uploadUrl?: string
@@ -81,6 +83,8 @@ export interface GlobConfig {
 export interface GlobEnvConfig {
   // 网站标题
   VITE_GLOB_APP_TITLE: string
+  // 侧边栏标题
+  VITE_GLOB_SIDER_TITLE: string
   // 项目路径
   VITE_GLOB_API_URL: string
   VITE_GLOB_API_URL_PREFIX?: string

@@ -1,8 +1,6 @@
 <template>
   <div>
     <BasicTable @register="registerTable">
-      <!-- <template #form-custom> custom-slot </template> -->
-
       <template #toolbar>
         <mn-button type="primary" @click="handleCreate">新增</mn-button>
         <mn-button @click="handleOutput">导出</mn-button>
@@ -84,7 +82,6 @@
           slots: { customRender: 'action' },
           fixed: undefined,
         },
-        size: 'small',
       })
 
       function handleCreate() {

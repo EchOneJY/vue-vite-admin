@@ -90,7 +90,7 @@
               ...(popConfirm || {}),
               onConfirm: popConfirm?.confirm,
               onCancel: popConfirm?.cancel,
-              enable: !!popConfirm,
+              enabled: !!popConfirm,
             }
           })
       })

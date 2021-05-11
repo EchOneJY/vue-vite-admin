@@ -10,7 +10,6 @@ export function useTableStyle(propsRef: ComputedRef<BasicTableProps>, prefixCls:
     if (rowClassName && isFunction(rowClassName)) {
       return rowClassName(record)
     }
-    console.log(111)
     return (index || 0) % 2 === 1 ? `${prefixCls}-row__striped` : null
   }
 

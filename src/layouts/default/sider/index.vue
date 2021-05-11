@@ -7,7 +7,9 @@
     :trigger="null"
     collapsible
   >
-    <AppLogo />
+    <div :class="`${prefixCls}__logo`">
+      <AppLogo />
+    </div>
     <LayoutMenu />
   </Sider>
 </template>
@@ -66,5 +68,9 @@
     left: 0;
     height: 100%;
     z-index: 510;
+    &__logo {
+      height: 48px;
+      padding: 10px 4px;
+    }
   }
 </style>
