@@ -11,9 +11,8 @@
 
 # 基础架构
 ## 目录结构
-<br />
-| ├── build # 构建相关脚本<br />├── mock # 模拟数据<br />├── public # 静态资源<br />├── src # 项目代码<br />│   ├── api #请求相关<br />│   ├── assets # 静态资源<br />│   ├── components # 组件<br />│   ├── styles # 样式<br />│   ├── enums # 常量，枚举<br />│   ├── hooks # hooks<br />│   ├── layouts # 布局<br />│   ├── main.ts # 入口文件<br />│   ├── router #路由，菜单等<br />│   ├── locale #多语言文件<br />│   ├── settings # 配置文件<br />│   ├── store # vuex<br />│   ├── utils # 工具类<br />│   └── views # 页面<br />└── types # 类型定义 |
-| --- |
+├── build # 构建相关脚本<br />├── mock # 模拟数据<br />├── public # 静态资源<br />├── src # 项目代码<br />│   ├── api #请求相关<br />│   ├── assets # 静态资源<br />│   ├── components # 组件<br />│   ├── styles # 样式<br />│   ├── enums # 常量，枚举<br />│   ├── hooks # hooks<br />│   ├── layouts # 布局<br />│   ├── main.ts # 入口文件<br />│   ├── router #路由，菜单等<br />│   ├── locale #多语言文件<br />│   ├── settings # 配置文件<br />│   ├── store # vuex<br />│   ├── utils # 工具类<br />│   └── views # 页面<br />└── types # 类型定义
+
 
 ## Vite配置
 
@@ -301,10 +300,10 @@ const [register, methods] = useForm(formProps)
 > 详见 src/views/component/table/FetchTable.vue
 
 
-<br />**表单表格**
+**表单表格**
 > 详见 src/views/component/table/FormTable.vue
 
-<br />
+
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -365,7 +364,7 @@ const [register, methods] = useForm(formProps)
 | fullScreen | 全屏 | Boolean | false |
 
 
-<br />**FetchSetting**
+**FetchSetting**
 
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -374,7 +373,7 @@ const [register, methods] = useForm(formProps)
 | listField | 请求结果列表字段  | String | items |
 | totalField | 请求结果总数字段 | String | total |
 
-<br />
+
 #### 事件
 | 名称 | 说明 | 回调参数 |
 | --- | --- | --- |
@@ -395,6 +394,48 @@ const [register, methods] = useForm(formProps)
 
 #### hooks
 **示例**
+```typescript
+<template>
+  <BasicTable @register="registerTable">
+    <template #toolbar>
+      <Button type="primary" @click="getFormValues">获取表单数据</Button>
+    </template>
+  </BasicTable>
+</template>
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { Button } from 'ant-design-vue'
+  import { BasicTable, useTable } from '/@/components/Table'
+  import { getBasicColumns, getFormConfig } from './tableData'
+
+  import { demoListApi } from '/@/api/component/table'
+
+  export default defineComponent({
+    components: { BasicTable, Button },
+    setup() {
+      const [registerTable, { getForm }] = useTable({
+        title: '人员信息',
+        api: demoListApi,
+        columns: getBasicColumns(),
+        useSearchForm: true,
+        formConfig: getFormConfig(),
+        showTableSetting: true,
+        rowSelection: { type: 'checkbox' },
+      })
+
+      function getFormValues() {
+        console.log(getForm().getFieldsValue())
+      }
+
+      return {
+        registerTable,
+        getFormValues,
+      }
+    },
+  })
+</script>
+```
+
 
 **参数**<br />**useTable**
 ```typescript
