@@ -8,7 +8,7 @@
 - Eslint->7.x
 - Prettier->^2.2.1
 
-<br />
+
 # 基础架构
 ## 目录结构
 | ├── build # 构建相关脚本<br />├── mock # 模拟数据<br />├── public # 静态资源<br />├── src # 项目代码<br />│   ├── api #请求相关<br />│   ├── assets # 静态资源<br />│   ├── components # 组件<br />│   ├── styles # 样式<br />│   ├── enums # 常量，枚举<br />│   ├── hooks # hooks<br />│   ├── layouts # 布局<br />│   ├── main.ts # 入口文件<br />│   ├── router #路由，菜单等<br />│   ├── locale #多语言文件<br />│   ├── settings # 配置文件<br />│   ├── store # vuex<br />│   ├── utils # 工具类<br />│   └── views # 页面<br />└── types # 类型定义 |
