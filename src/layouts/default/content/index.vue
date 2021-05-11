@@ -10,6 +10,7 @@
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useRootSetting } from '/@/hooks/setting/useRootSetting'
   import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting'
+  import { useContentViewHeight } from './useContentViewHeight'
 
   import LayoutPage from '/@/layouts/page/index.vue'
 
@@ -20,6 +21,8 @@
       const { prefixCls } = useDesign('layout-content')
       const { getOpenPageLoading } = useTransitionSetting()
       const { getLayoutContentMode, getPageLoading } = useRootSetting()
+
+      useContentViewHeight()
 
       return {
         prefixCls,

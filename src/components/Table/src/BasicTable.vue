@@ -308,11 +308,11 @@
 
     &-form-container {
       position: relative;
-      padding: 12px 16px;
+      padding: 0.75rem 1rem;
 
       .ant-form {
-        padding: 10px 10px 4px 6px;
-        margin-bottom: 12px;
+        padding: 0.75rem 0.75rem 0.25rem 0.25rem;
+        margin-bottom: 0.75rem;
         background-color: @component-background;
         border-radius: 2px;
       }

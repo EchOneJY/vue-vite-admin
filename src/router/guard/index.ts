@@ -2,14 +2,16 @@ import router from '/@/router'
 
 import { createProgressGuard } from './progress'
 import { createPermissionGuard } from './permission'
-import { createResetGuard } from './reset'
-import { createPageGuard } from './page'
 import { createPageLoadingGuard } from './pageLoading'
+import { createResetGuard } from './reset'
+import { createScrollGuard } from './scroll'
+import { createPageGuard } from './page'
 
 export function setupRouterGuard() {
-  createProgressGuard(router)
-  createPermissionGuard(router)
-  createResetGuard(router)
   createPageGuard(router)
   createPageLoadingGuard(router)
+  createProgressGuard(router)
+  createScrollGuard(router)
+  createPermissionGuard(router)
+  createResetGuard(router)
 }

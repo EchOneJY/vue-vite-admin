@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white m-4 mr-0 overflow-hidden">
+  <div class="bg-white m-3 mr-0 overflow-hidden">
     <BasicTree
       title="组织管理"
       toolbar

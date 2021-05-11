@@ -3,7 +3,7 @@ import { resultPageSuccess, resultSuccess } from '../_util'
 
 const organizationList = (() => {
   const result: any[] = []
-  for (let index = 0; index < 10; index++) {
+  for (let index = 0; index < 15; index++) {
     result.push({
       id: `${index}`,
       orgCode: `${index + 1}`,

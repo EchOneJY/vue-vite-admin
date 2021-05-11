@@ -7,7 +7,7 @@ import { getViewportOffset } from '/@/utils/dom'
 import { isBoolean } from '/@/utils/is'
 
 import { useWindowSize } from '/@/hooks/event/useWindowSize'
-// import { useModalContext } from '/@/components/Modal'
+import { useModalContext } from '/@/components/Modal'
 import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated'
 import { useDebounceFn } from '@vueuse/core'
 
@@ -20,7 +20,7 @@ export function useTableScroll(
 ) {
   const tableHeightRef: Ref<Nullable<number>> = ref(null)
 
-  // const modalFn = useModalContext()
+  const modalFn = useModalContext()
 
   // Greater than animation time 280
   const debounceRedoHeight = useDebounceFn(redoHeight, 100)
@@ -49,7 +49,7 @@ export function useTableScroll(
   function setHeight(heigh: number) {
     tableHeightRef.value = heigh
     //  Solve the problem of modal adaptive height calculation when the form is placed in the modal
-    // modalFn?.redoModalHeight?.()
+    modalFn?.redoModalHeight?.()
   }
 
   // No need to repeat queries

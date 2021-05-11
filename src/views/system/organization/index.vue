@@ -4,6 +4,7 @@
     <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5">
       <template #toolbar>
         <mn-button type="primary" @click="handleCreate">新增</mn-button>
+        <mn-button @click="handleCreate">导出</mn-button>
       </template>
       <template #action="{ record }">
         <TableAction
@@ -24,27 +25,29 @@
         />
       </template>
     </BasicTable>
-    <!-- <AccountModal @register="registerModal" @success="handleSuccess" /> -->
+    <OrganizationModal @register="registerModal" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue'
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table'
+  import OrganizationModal from './OrganizationModal.vue'
   import { getOrganizationPageList } from '/@/api/system/organization'
   import DeptTree from './DeptTree.vue'
 
-  // import { useModal } from '/@/components/Modal'
+  import { useModal } from '/@/components/Modal'
 
   import { columns, searchFormSchema } from './organization.data'
 
   export default defineComponent({
-    name: 'AccountManagement',
-    components: { BasicTable, DeptTree, TableAction },
+    name: 'OrganizationManagement',
+    components: { OrganizationModal, BasicTable, DeptTree, TableAction },
     setup() {
-      // const [registerModal, { openModal }] = useModal()
+      const [registerModal, { openModal }] = useModal()
       const [registerTable, { reload }] = useTable({
         title: '账号列表',
+        showIndexColumn: false,
         api: getOrganizationPageList,
         columns,
         formConfig: {
@@ -64,17 +67,17 @@
       })
 
       function handleCreate() {
-        // openModal(true, {
-        //   isUpdate: false,
-        // })
+        openModal(true, {
+          isUpdate: false,
+        })
       }
 
       function handleEdit(record: Recordable) {
         console.log(record)
-        // openModal(true, {
-        //   record,
-        //   isUpdate: true,
-        // })
+        openModal(true, {
+          record,
+          isUpdate: true,
+        })
       }
 
       function handleDelete(record: Recordable) {
@@ -91,7 +94,7 @@
 
       return {
         registerTable,
-        // registerModal,
+        registerModal,
         handleCreate,
         handleEdit,
         handleDelete,

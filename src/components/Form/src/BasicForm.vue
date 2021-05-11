@@ -47,7 +47,7 @@
   import { useFormEvents } from './hooks/useFormEvents'
   import { createFormContext } from './hooks/useFormContext'
   import { useAutoFocus } from './hooks/useAutoFocus'
-  // import { useModalContext } from '/@/components/Modal'
+  import { useModalContext } from '/@/components/Modal'
 
   import { basicProps } from './props'
   import { useDesign } from '/@/hooks/web/useDesign'
@@ -59,7 +59,7 @@
     emits: ['reset', 'submit', 'register'],
     setup(props, { emit }) {
       const formModel = reactive<Recordable>({})
-      // const modalFn = useModalContext()
+      const modalFn = useModalContext()
 
       const defaultValueRef = ref<Recordable>({})
       const isInitedDefaultRef = ref(false)
@@ -173,7 +173,7 @@
         (schema) => {
           nextTick(() => {
             //  Solve the problem of modal adaptive height calculation when the form is placed in the modal
-            // modalFn?.redoModalHeight?.()
+            modalFn?.redoModalHeight?.()
           })
           if (unref(isInitedDefaultRef)) {
             return
