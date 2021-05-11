@@ -11,6 +11,7 @@
 
 # 基础架构
 ## 目录结构
+<br />
 | ├── build # 构建相关脚本<br />├── mock # 模拟数据<br />├── public # 静态资源<br />├── src # 项目代码<br />│   ├── api #请求相关<br />│   ├── assets # 静态资源<br />│   ├── components # 组件<br />│   ├── styles # 样式<br />│   ├── enums # 常量，枚举<br />│   ├── hooks # hooks<br />│   ├── layouts # 布局<br />│   ├── main.ts # 入口文件<br />│   ├── router #路由，菜单等<br />│   ├── locale #多语言文件<br />│   ├── settings # 配置文件<br />│   ├── store # vuex<br />│   ├── utils # 工具类<br />│   └── views # 页面<br />└── types # 类型定义 |
 | --- |
 
@@ -113,6 +114,8 @@
 
 
 #### 属性
+> 以下Column属性与Antd-Vue中Grid->Col属性一致
+
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | model | 表单数据对象 | Object | {} |
@@ -224,11 +227,84 @@
 | resetBefore | 重置按钮前 |
 | submitBefore | 提交按钮前 |
 
+
+
+#### hooks
+**示例**
+```typescript
+<template>
+   <BasicForm @register="register" @submit="handleSubmit">
+        <template #resetBefore> test </template>
+        <template #custom> custom </template>
+    </BasicForm>
+</template>
+
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index'
+
+	export default defineComponent({
+    components: { BasicForm },
+    setup() {
+      const [register, { setProps }] = useForm({
+        labelWidth: 120,
+        schemas,
+        actionColOptions: {
+          span: 24,
+        },
+      })
+      return {
+        register,
+        schemas,
+        handleSubmit: (values: Recordable) => {
+          console.log(values)
+        },
+        setProps,
+      }
+    },
+  })
+</script>
+```
+
+
+**参数**<br />**useForm**
+```typescript
+const [register, methods] = useForm(formProps)
+```
+**methods**
+
+| 名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| setProps | 设置表单属性 | function(formProps) |
+| updateSchema | 更新schemas配置 | function(formSchemas) |
+| resetSchema | 重置schemas是配置 | function(formSchemas) |
+| getFieldsValue | 获得表单值 | function() |
+| setFieldsValue | 设置表单值 | function(values) |
+| resetFields | 重置表单值 | function() |
+| scrollToField | 滚动到表单指定项 | function(name,options) |
+| removeSchemaByFiled | 根据field删除指定schema | function(fields) |
+| appendSchemaByField | 根据field添加指定schema | function(schema,prefixField,first=false) |
+| validate | 验证表单 | function(nameList) |
+| validateFields | 验证表单值 | function(nameList) |
+| clearValidate | 清除表单验证 | function(nameList) |
+| submit | 提交 | function(values) |
+
 ## 表格
 ### BasicTable
 #### 示例
+**基础使用**
+> 详见 src/views/component/table/BasicTable.vue
 
 
+
+**请求表格**
+> 详见 src/views/component/table/FetchTable.vue
+
+
+<br />**表单表格**
+> 详见 src/views/component/table/FormTable.vue
+
+<br />
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
@@ -253,13 +329,13 @@
 | maxHeight | 表格滚动最大高度 | Number | —— |
 | scroll | 滚动距离 | Object | {x:Number,y:Number} |
 | showTableSetting | 是否显示表格设置 | Boolean | false |
-| tableSetting | 表格设置配置 | Object | {redo: true,size: true,setting: true,fullScreen:false} |
+| tableSetting | 表格设置配置，详见`TablSetting` | Object | —— |
 | rowKey | 行键值 | String | Function |<br />undefined | undefined |
 | autoCreateKey | 是否自动生成行键值 | Boolean | true |
 | clickToRowSelect | 是否点击行选中 | Boolean | true |
 | rowSelection | 行选择配置，与antd-vue中Table->rowSelection配置一致 | Object | null |
 | loading | 加载状态 | Boolean | false |
-| pagination | 分页配置，详见`Pagination` | Boolen | Object | —— |
+| pagination | 分页配置，详见Antd-Vue中Pagination属性 | Boolen | Object | —— |
 | clearSelectOnPageChange | 分页改变的时候清空选项 | Boolean | false |
 | useSearchForm | 是否为表单表格 | Boolean | false |
 | formConfig | 表单配置 | Object | —— |
@@ -279,6 +355,26 @@
 
 
 
+**TableSetting**
+
+| 名称 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| redo | 刷新 | Boolean | true |
+| size | 密度 | Boolean | true |
+| setting | 列设置 | Boolean | true |
+| fullScreen | 全屏 | Boolean | false |
+
+
+<br />**FetchSetting**
+
+| 名称 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| pageField | 请求接口当前页数字段  | String | page |
+| sizeField | 每页显示多少条字段  | String | pageSize |
+| listField | 请求结果列表字段  | String | items |
+| totalField | 请求结果总数字段 | String | total |
+
+<br />
 #### 事件
 | 名称 | 说明 | 回调参数 |
 | --- | --- | --- |
@@ -297,7 +393,37 @@
 | --- | --- |
 | tableTitle | 表格标题 |
 
-### <br />
+#### hooks
+**示例**
 
+**参数**<br />**useTable**
+```typescript
+const [register, methods] = useTable(tableProps)
+```
+**methods**
 
-## 
+| 名称 | 说明 | 回调参数 |
+| --- | --- | --- |
+| setProps | 设置表格属性 | function(formProps) |
+| reload | 请求表格 | function(params) |
+| redoHeight | 重置表格高度 | function() |
+| setLoading | 设置加载状态 | function(loading) |
+| getDataSource | 获取dataSource | function() |
+| setTableData | 设置dataSource | function(fields) |
+| getColumns | 获取columns | function(options) |
+| setColumns | 设置columns | function(columns) |
+| setPagination | 设置分页信息 | function(info) |
+| deleteSelectRowByKey | 删除选择行的键值 | function(nameList) |
+| getSelectRowKeys | 获取选择行的键值 | function(nameList) |
+| getSelectRows | 获取选择行 | function(nameList) |
+| clearSelectedRowKeys | 清除选择行的键值 | function() |
+| setSelectedRowKeys | 设置选择行的键值 | function(keys) |
+| getPaginationRef | 获取分页信息 | function() |
+| getSize | 获取尺寸 | function() |
+| updateTableData | 更新表格数据 | function(index,key,value) |
+| getRowSelection | 获取表格选项数据 | function() |
+| getCacheColumns | 获取持久化columns | function() |
+| getForm | 获取表单methods | function() |
+| setShowPagination | 设置分页显示 | function(show) |
+| getShowPagination | 获取是否显示分页 | function() |
+

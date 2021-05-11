@@ -261,6 +261,7 @@ export function useColumns(
 
     return columns
   }
+
   function getCacheColumns() {
     return cacheColumns
   }
