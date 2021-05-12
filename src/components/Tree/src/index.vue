@@ -373,7 +373,6 @@
 
     .ant-tree-node-content-wrapper {
       position: relative;
-
       .ant-tree-title {
         position: absolute;
         left: 0;

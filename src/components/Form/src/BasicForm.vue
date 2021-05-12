@@ -1,5 +1,10 @@
 <template>
-  <Form v-bind="{ ...$attrs, ...$props }" :class="getFormClass" ref="formElRef" :model="formModel">
+  <Form
+    v-bind="{ ...$attrs, ...getProps }"
+    :class="getFormClass"
+    ref="formElRef"
+    :model="formModel"
+  >
     <Row :style="getRowWrapStyle">
       <slot name="formHeader"></slot>
       <template v-for="schema in getSchema" :key="schema.field">

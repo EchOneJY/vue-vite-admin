@@ -4,7 +4,7 @@ export type OrganizationParams = {
   createTimeBegin?: number
   createTimeEnd?: number
   orgName?: string
-  status?: number
+  status?: string
 }
 
 export type OrganizationPageParams = BasicPageParams & OrganizationParams
@@ -15,7 +15,7 @@ export interface OrganizationListItem {
   orgCode: string
   orgName: string
   parentOrgName: string
-  type: number
+  type: string
   createAccountName: string
 }
 

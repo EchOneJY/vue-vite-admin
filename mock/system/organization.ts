@@ -9,7 +9,7 @@ const organizationList = (() => {
       orgCode: `${index + 1}`,
       orgName: '@cword(2,8)',
       parentOrgName: '@cword(2,8)',
-      'type|1': [1, 2, 3, 4],
+      'type|1': ['1', ' 2', ' 3', '4'],
       'status|1': ['0', '1'],
       createAccountName: '@cword(2,3)',
     })

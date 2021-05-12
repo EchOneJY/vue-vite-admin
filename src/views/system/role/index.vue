@@ -29,7 +29,7 @@
                 confirm: handleOpen.bind(null, record),
               },
               ifShow: (_action) => {
-                return record.status !== '0' // 根据业务控制是否显示: 非enable状态的不显示启用按钮
+                return record.status !== 0 // 根据业务控制是否显示: 非enable状态的不显示启用按钮
               },
             },
             {
@@ -39,7 +39,7 @@
                 confirm: handleOpen.bind(null, record),
               },
               ifShow: () => {
-                return record.status === '0' // 根据业务控制是否显示: enable状态的显示禁用按钮
+                return record.status === 0 // 根据业务控制是否显示: enable状态的显示禁用按钮
               },
             },
           ]"

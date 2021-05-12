@@ -1,10 +1,10 @@
 <template>
-  <div class="flex">
+  <div class="flex" v-if="!detailVisible">
     <DeptTree class="w-1/4 xl:w-1/5" @select="handleSelect" />
     <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5">
       <template #toolbar>
-        <mn-button type="primary" @click="handleCreate">新增</mn-button>
-        <mn-button @click="handleCreate">导出</mn-button>
+        <mn-button type="primary" @click="handleAdd">新增</mn-button>
+        <mn-button @click="handleAdd">导出</mn-button>
       </template>
       <template #action="{ record }">
         <TableAction
@@ -25,26 +25,25 @@
         />
       </template>
     </BasicTable>
-    <OrganizationModal @register="registerModal" @success="handleSuccess" />
   </div>
+
+  <!-- Detail -->
+  <OrganizationDetail :action="detailAction" :data="detailData" @back="handleBack" v-else />
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, reactive, toRefs } from 'vue'
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table'
-  import OrganizationModal from './OrganizationModal.vue'
+  import OrganizationDetail from './Detail.vue'
   import { getOrganizationPageList } from '/@/api/system/organization'
   import DeptTree from './DeptTree.vue'
-
-  import { useModal } from '/@/components/Modal'
 
   import { columns, searchFormSchema } from './organization.data'
 
   export default defineComponent({
     name: 'OrganizationManagement',
-    components: { OrganizationModal, BasicTable, DeptTree, TableAction },
+    components: { BasicTable, DeptTree, TableAction, OrganizationDetail },
     setup() {
-      const [registerModal, { openModal }] = useModal()
       const [registerTable, { reload }] = useTable({
         title: '账号列表',
         showIndexColumn: false,
@@ -65,19 +64,22 @@
           slots: { customRender: 'action' },
         },
       })
+      const detailState = reactive({
+        detailVisible: false,
+        detailData: {},
+        detailAction: 'add',
+      })
 
-      function handleCreate() {
-        openModal(true, {
-          isUpdate: false,
-        })
+      function handleAdd() {
+        detailState.detailAction = 'add'
+        detailState.detailVisible = true
+        detailState.detailData = {}
       }
 
       function handleEdit(record: Recordable) {
-        console.log(record)
-        openModal(true, {
-          record,
-          isUpdate: true,
-        })
+        detailState.detailAction = 'edit'
+        detailState.detailData = record
+        detailState.detailVisible = true
       }
 
       function handleDelete(record: Recordable) {
@@ -92,14 +94,19 @@
         reload({ searchInfo: { deptId } })
       }
 
+      function handleBack() {
+        detailState.detailVisible = false
+      }
+
       return {
+        ...toRefs(detailState),
         registerTable,
-        registerModal,
-        handleCreate,
+        handleAdd,
         handleEdit,
         handleDelete,
         handleSuccess,
         handleSelect,
+        handleBack,
       }
     },
   })

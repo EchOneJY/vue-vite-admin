@@ -28,6 +28,8 @@ export interface FormItem {
    */
   label?: string | VNodeChild | JSX.Element
 
+  labelAlign?: string
+
   /**
    * The layout of label. You can set span offset to something like {span: 3, offset: 12} or sm: {span: 3, offset: 12} same as with <Col>
    * @type Col

@@ -107,6 +107,7 @@ export interface FormProps {
 
   transformDateFunc?: (date: any) => string
   colon?: boolean
+  labelAlign?: string
 }
 export interface FormSchema {
   // Field name

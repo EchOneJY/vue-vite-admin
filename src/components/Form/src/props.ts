@@ -18,6 +18,7 @@ export const basicProps = {
     type: [Number, String] as PropType<number | string>,
     default: 0,
   },
+  labelAlign: propTypes.string,
   // 间隔时间自定义 [field, [startTimeKey, endTimeKey], format = 'YYYY-MM-DD']
   fieldMapToTime: {
     type: Array as PropType<FieldMapToTime>,
