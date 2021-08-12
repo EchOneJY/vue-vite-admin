@@ -61,7 +61,7 @@
           ],
         },
         {
-          field: 'type',
+          field: 'test',
           component: 'Select',
           label: '组织类型',
           colProps: {
@@ -71,19 +71,19 @@
             options: [
               {
                 label: '管理组织',
-                value: '1',
+                value: 1,
               },
               {
                 label: '工厂',
-                value: '2',
+                value: 2,
               },
               {
                 label: '外设仓',
-                value: '3',
+                value: 3,
               },
               {
                 label: '其他',
-                value: '4',
+                value: 4,
               },
             ],
           },

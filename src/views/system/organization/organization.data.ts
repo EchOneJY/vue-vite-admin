@@ -20,7 +20,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '组织类型',
-    dataIndex: 'type',
+    dataIndex: 'test',
     width: 120,
   },
   {

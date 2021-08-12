@@ -1,38 +1,55 @@
 import type { LocaleSetting, LocaleType } from '/#/config'
 
-import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
-import store from '/@/store'
+import { defineStore } from 'pinia'
+import { store } from '/@/store'
 
+import { LOCALE_KEY } from '/@/enums/cacheEnum'
+import { createLocalStorage } from '/@/utils/cache'
 import { localeSetting } from '/@/settings/locale'
 
-import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
+const ls = createLocalStorage()
 
-const NAME = 'locale'
-hotModuleUnregisterModule(NAME)
+const lsLocaleSetting = (ls.get(LOCALE_KEY) || localeSetting) as LocaleSetting
 
-@Module({ dynamic: true, namespaced: true, store, name: NAME })
-class Locale extends VuexModule {
-  private locale: LocaleSetting = localeSetting
-
-  get getShowPicker() {
-    return !!this.locale?.showPicker
-  }
-
-  get getLocale(): LocaleType {
-    return this.locale?.locale ?? 'zh_CN'
-  }
-
-  @Mutation
-  setLocale(locale: Partial<LocaleSetting>): void {
-    this.locale = { ...this.locale, ...locale }
-  }
-
-  @Action
-  initLocale() {
-    this.setLocale({
-      ...localeSetting,
-    })
-  }
+interface LocaleState {
+  localInfo: LocaleSetting
 }
 
-export const localeStore = getModule<Locale>(Locale)
+export const useLocaleStore = defineStore({
+  id: 'app-locale',
+  state: (): LocaleState => ({
+    localInfo: lsLocaleSetting,
+  }),
+  getters: {
+    getShowPicker(): boolean {
+      return !!this.localInfo?.showPicker
+    },
+    getLocale(): LocaleType {
+      return this.localInfo?.locale ?? 'zh_CN'
+    },
+  },
+  actions: {
+    /**
+     * Set up multilingual information and cache
+     * @param info multilingual info
+     */
+    setLocaleInfo(info: Partial<LocaleSetting>) {
+      this.localInfo = { ...this.localInfo, ...info }
+      ls.set(LOCALE_KEY, this.localInfo)
+    },
+    /**
+     * Initialize multilingual information and load the existing configuration from the local cache
+     */
+    initLocale() {
+      this.setLocaleInfo({
+        ...localeSetting,
+        ...this.localInfo,
+      })
+    },
+  },
+})
+
+// Need to be used outside the setup
+export function useLocaleStoreWithOut() {
+  return useLocaleStore(store)
+}

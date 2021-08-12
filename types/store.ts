@@ -1,6 +1,0 @@
-export interface UserInfo {
-  userId: string | number
-  username: string
-  realName: string
-  desc?: string
-}
