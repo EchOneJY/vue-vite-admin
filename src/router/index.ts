@@ -2,8 +2,17 @@ import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
-import { basicRoutes, LoginRoute, REDIRECT_ROUTE } from './routes'
-const WHITE_NAME_LIST = [LoginRoute.path, REDIRECT_ROUTE.path]
+
+import { basicRoutes } from './routes'
+
+// 白名单应该包含基本静态路由
+const WHITE_NAME_LIST: string[] = []
+const getRouteNames = (array: any[]) =>
+  array.forEach((item) => {
+    WHITE_NAME_LIST.push(item.name)
+    getRouteNames(item.children || [])
+  })
+getRouteNames(basicRoutes)
 
 const router = createRouter({
   history: createWebHistory(),

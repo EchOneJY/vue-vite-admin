@@ -22,11 +22,11 @@
 
   import { useRouter, useRoute } from 'vue-router'
 
-  import { permissionStore } from '/@/store/modules/permission'
+  import { usePermissionStore } from '/@/store/modules/permission'
   import SubMenuItem from './components/SubMenuItem.vue'
   import { getAllParentPath } from '/@/router/helper/menuHelper'
   import { REDIRECT_NAME } from '/@/router/constant'
-  import { userStore } from '/@/store/modules/user'
+  import { useUserStore } from '/@/store/modules/user'
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
 
   interface State {
@@ -41,6 +41,9 @@
       SubMenuItem,
     },
     setup() {
+      const userStore = useUserStore()
+      const permissionStore = usePermissionStore()
+
       const router: Router = useRouter()
       const route = useRoute()
       const { getCollapsed } = useMenuSetting()

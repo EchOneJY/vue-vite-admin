@@ -1,9 +1,12 @@
 import type { ProjectConfig } from '/#/config'
 import { CacheTypeEnum } from '/@/enums/cacheEnum'
-import { ContentEnum, RouterTransitionEnum } from '/@/enums/appEnum'
+import { ContentEnum, PermissionModeEnum, RouterTransitionEnum } from '/@/enums/appEnum'
 
 const setting: ProjectConfig = {
   showSettingButton: false,
+
+  // Permission mode
+  permissionMode: PermissionModeEnum.ROUTE_MAPPING,
 
   // Permission-related cache is stored in sessionStorage or localStorage
   permissionCacheType: CacheTypeEnum.SESSION,

@@ -1,10 +1,11 @@
 import { unref, computed } from 'vue'
 
-import { appStore } from '/@/store/modules/app'
+import { useAppStore } from '/@/store/modules/app'
 import { MenuSetting } from '/#/config'
 import projectSetting from '/@/settings/project'
 
 export function useMenuSetting() {
+  const appStore = useAppStore()
   const getMenuSetting = computed(() => appStore.getProjectConfig.menuSetting)
 
   const getCollapsed = computed(() => unref(getMenuSetting).collapsed)
@@ -14,7 +15,7 @@ export function useMenuSetting() {
   const getMenuWidth = computed(() => appStore.getMenuSetting.menuWidth)
 
   function setMenuSetting(menuSetting: Partial<MenuSetting>): void {
-    appStore.commitProjectConfig({ menuSetting })
+    appStore.setProjectConfig({ menuSetting })
   }
 
   function toggleCollapsed() {

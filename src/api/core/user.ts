@@ -1,16 +1,12 @@
 import { defHttp } from '/@/utils/axios'
-import {
-  LoginParams,
-  LoginResultModel,
-  GetUserInfoByUserIdParams,
-  GetUserInfoByUserIdModel,
-} from './model/userModel'
+import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel'
 import { ErrorMessageMode } from '/@/utils/axios/types'
 
 enum Api {
   Login = '/login',
-  GetUserInfoById = '/getUserInfoById',
-  GetPermCodeByUserId = '/getPermCodeByUserId',
+  Logout = '/logout',
+  GetUserInfo = '/getUserInfo',
+  GetPermCode = '/getPermCode',
 }
 
 /**
@@ -29,19 +25,14 @@ export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') 
 }
 
 /**
- * @description: getUserInfoById
+ * @description: getUserInfo
  */
-export function getUserInfoById(params: GetUserInfoByUserIdParams) {
-  return defHttp.get<GetUserInfoByUserIdModel>({
-    url: Api.GetUserInfoById,
-    params,
+export function getUserInfo() {
+  return defHttp.get<GetUserInfoModel>({
+    url: Api.GetUserInfo,
   })
 }
 
-export function getPermCodeByUserId(params: GetUserInfoByUserIdParams) {
-  return defHttp.get<string[]>({
-    url: Api.GetPermCodeByUserId,
-    method: 'GET',
-    params,
-  })
+export function doLogout() {
+  return defHttp.get({ url: Api.Logout })
 }

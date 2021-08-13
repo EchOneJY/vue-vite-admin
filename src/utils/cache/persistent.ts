@@ -7,6 +7,7 @@ import { Memory } from './memory'
 import {
   TOKEN_KEY,
   USER_INFO_KEY,
+  ROLES_KEY,
   PROJ_CFG_KEY,
   APP_LOCAL_CACHE_KEY,
   APP_SESSION_CACHE_KEY,
@@ -18,6 +19,7 @@ import { toRaw } from 'vue'
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined
   [USER_INFO_KEY]: UserInfo
+  [ROLES_KEY]: string[]
   [PROJ_CFG_KEY]: ProjectConfig
   [TABS_KEY]: RouteLocationNormalized[]
 }

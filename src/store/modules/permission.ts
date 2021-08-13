@@ -21,7 +21,7 @@ import { filter } from '/@/utils/helper/tree'
 import { asyncRoutes } from '/@/router/routes'
 import { transformObjToRoute, flatMultiLevelRoutes } from '/@/router/helper/routeHelper'
 import { transformRouteToMenu } from '/@/router/helper/menuHelper'
-import { PAGE_NOT_FOUND_ROUTE, ERROR_LOG_ROUTE } from '/@/router/routes'
+import { PAGE_NOT_FOUND_ROUTE, ERROR_LOG_ROUTE } from '/@/router/routes/basic'
 
 import { getMenuList } from '/@/api/system/menu'
 

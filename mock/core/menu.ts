@@ -19,28 +19,28 @@ const levelRoute = {
   component: '',
   meta: {
     icon: 'level',
-    title: 'routes.level.level',
+    title: 'routes.demo.level.level',
   },
   children: [
     {
       path: 'menu1',
       component: '',
       meta: {
-        title: 'routes.level.menu1',
+        title: 'routes.demo.level.menu1',
       },
       children: [
         {
           path: 'menu1-1',
           component: '',
           meta: {
-            title: 'routes.level.menu1-1',
+            title: 'routes.demo.level.menu1-1',
           },
           children: [
             {
               path: 'menu1-1-1',
-              component: '/level/Menu111',
+              component: '/demo/level/Menu111',
               meta: {
-                title: 'routes.level.menu1-1-1',
+                title: 'routes.demo.level.menu1-1-1',
               },
               children: [],
             },
@@ -48,9 +48,9 @@ const levelRoute = {
         },
         {
           path: 'menu1-2',
-          component: '/level/Menu12',
+          component: '/demo/level/Menu12',
           meta: {
-            title: 'routes.level.menu1-2',
+            title: 'routes.demo.level.menu1-2',
           },
           children: [],
         },
@@ -58,9 +58,9 @@ const levelRoute = {
     },
     {
       path: 'menu2',
-      component: '/level/Menu2',
+      component: '/demo/level/Menu2',
       meta: {
-        title: 'routes.level.menu2',
+        title: 'routes.demo.level.menu2',
       },
       children: [],
     },
@@ -134,11 +134,11 @@ const exceptionRoute = {
 }
 
 const componentsRoute = {
-  path: 'component',
+  path: 'comp',
   component: '',
   meta: {
-    icon: 'component',
-    title: 'routes.component.title',
+    icon: 'comp',
+    title: 'routes.demo.comp.title',
   },
   children: [
     // {
@@ -153,38 +153,38 @@ const componentsRoute = {
       path: 'form',
       component: '',
       meta: {
-        title: 'routes.component.form.title',
+        title: 'routes.demo.comp.form.title',
       },
       children: [
         {
           path: 'basic',
-          component: '/component/form/BasicForm',
+          component: '/demo/comp/form/BasicForm',
           meta: {
-            title: 'routes.component.form.basic',
+            title: 'routes.demo.comp.form.basic',
           },
           children: [],
         },
         {
           path: 'useForm',
-          component: '/component/form/UseForm',
+          component: '/demo/comp/form/UseForm',
           meta: {
-            title: 'routes.component.form.useForm',
+            title: 'routes.demo.comp.form.useForm',
           },
           children: [],
         },
         {
           path: 'refForm',
-          component: '/component/form/RefForm',
+          component: '/demo/comp/form/RefForm',
           meta: {
-            title: 'routes.component.form.refForm',
+            title: 'routes.demo.comp.form.refForm',
           },
           children: [],
         },
         {
           path: 'ruleForm',
-          component: '/component/form/RuleForm',
+          component: '/demo/comp/form/RuleForm',
           meta: {
-            title: 'routes.component.form.ruleForm',
+            title: 'routes.demo.comp.form.ruleForm',
           },
           children: [],
         },
@@ -194,30 +194,30 @@ const componentsRoute = {
       path: 'table',
       component: '',
       meta: {
-        title: 'routes.component.table.title',
+        title: 'routes.demo.comp.table.title',
       },
       children: [
         {
           path: 'basic',
-          component: '/component/table/BasicTable',
+          component: '/demo/comp/table/BasicTable',
           meta: {
-            title: 'routes.component.table.basic',
+            title: 'routes.demo.comp.table.basic',
           },
           children: [],
         },
         {
           path: 'fetch',
-          component: '/component/table/FetchTable',
+          component: '/demo/comp/table/FetchTable',
           meta: {
-            title: 'routes.component.table.fetch',
+            title: 'routes.demo.comp.table.fetch',
           },
           children: [],
         },
         {
           path: 'form',
-          component: '/component/table/FormTable',
+          component: '/demo/comp/table/FormTable',
           meta: {
-            title: 'routes.component.table.form',
+            title: 'routes.demo.comp.table.form',
           },
           children: [],
         },

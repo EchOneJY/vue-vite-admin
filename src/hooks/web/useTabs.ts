@@ -1,11 +1,10 @@
-import type { RouteLocationNormalized } from 'vue-router'
+import type { RouteLocationNormalized, Router } from 'vue-router'
 
+import { useRouter } from 'vue-router'
 import { unref } from 'vue'
 
-import { tabsStore } from '/@/store/modules/tabs'
-import { appStore } from '/@/store/modules/app'
-
-import router from '/@/router'
+import { useTabsStore } from '/@/store/modules/tabs'
+import { useAppStore } from '/@/store/modules/app'
 
 enum TableActionEnum {
   REFRESH,
@@ -17,7 +16,9 @@ enum TableActionEnum {
   CLOSE,
 }
 
-export function useTabs() {
+export function useTabs(_router?: Router) {
+  const appStore = useAppStore()
+
   function canIUseTabs(): boolean {
     const { show } = appStore.getTabsSetting
     if (!show) {
@@ -25,6 +26,9 @@ export function useTabs() {
     }
     return !!show
   }
+
+  const tabsStore = useTabsStore()
+  const router = _router || useRouter()
 
   const { currentRoute } = router
 
@@ -41,28 +45,28 @@ export function useTabs() {
     const currentTab = getCurrentTab()
     switch (action) {
       case TableActionEnum.REFRESH:
-        await tabsStore.refreshPage()
+        await tabsStore.refreshPage(router)
         break
 
       case TableActionEnum.CLOSE_ALL:
-        await tabsStore.closeAllTab()
+        await tabsStore.closeAllTab(router)
         break
 
       case TableActionEnum.CLOSE_LEFT:
-        await tabsStore.closeLeftTabs(currentTab)
+        await tabsStore.closeLeftTabs(currentTab, router)
         break
 
       case TableActionEnum.CLOSE_RIGHT:
-        await tabsStore.closeRightTabs(currentTab)
+        await tabsStore.closeRightTabs(currentTab, router)
         break
 
       case TableActionEnum.CLOSE_OTHER:
-        await tabsStore.closeOtherTabs(currentTab)
+        await tabsStore.closeOtherTabs(currentTab, router)
         break
 
       case TableActionEnum.CLOSE_CURRENT:
       case TableActionEnum.CLOSE:
-        await tabsStore.closeTab(tab || currentTab)
+        await tabsStore.closeTab(tab || currentTab, router)
         break
     }
   }

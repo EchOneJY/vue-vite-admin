@@ -13,13 +13,9 @@ import type {
 import type { BeforeMiniState } from '/#/store'
 
 import { deepMerge } from '/@/utils'
-import { hotModuleUnregisterModule } from '/@/utils/helper/vuex'
 import { Persistent } from '/@/utils/cache/persistent'
 
 import { PROJ_CFG_KEY } from '/@/enums/cacheEnum'
-
-const NAME = 'app'
-hotModuleUnregisterModule(NAME)
 
 let timeId: TimeoutHandle
 
@@ -61,7 +57,7 @@ export const useAppStore = defineStore({
     getTransitionSetting(): TransitionSetting {
       return this.getProjectConfig.transitionSetting
     },
-    getMultiTabsSetting(): TabsSetting {
+    getTabsSetting(): TabsSetting {
       return this.getProjectConfig.tabsSetting
     },
   },

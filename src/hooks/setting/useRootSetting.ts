@@ -1,10 +1,11 @@
 import { computed } from 'vue'
 
-import { appStore } from '/@/store/modules/app'
+import { useAppStore } from '/@/store/modules/app'
 
 import { ContentEnum } from '/@/enums/appEnum'
 
 export function useRootSetting() {
+  const appStore = useAppStore()
   const getLogoShow = computed(() => appStore.getProjectConfig.showLogo)
 
   const getPageLoading = computed(() => appStore.getPageLoading)

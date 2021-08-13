@@ -1,8 +1,10 @@
 import { computed } from 'vue'
 import { TabsSetting } from '/#/config'
-import { appStore } from '/@/store/modules/app'
+import { useAppStore } from '/@/store/modules/app'
 
 export function useTabsSetting() {
+  const appStore = useAppStore()
+
   const getShowTab = computed(() => appStore.getTabsSetting.show)
 
   const getShowQuick = computed(() => appStore.getTabsSetting.showQuick)
@@ -12,7 +14,7 @@ export function useTabsSetting() {
   const getShowFold = computed(() => appStore.getTabsSetting.showFold)
 
   function setTabSetting(tabsSetting: Partial<TabsSetting>) {
-    appStore.commitProjectConfig({ tabsSetting })
+    appStore.setProjectConfig({ tabsSetting })
   }
 
   return {

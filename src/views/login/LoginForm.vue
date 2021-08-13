@@ -48,7 +48,7 @@
 
   import { useMessage } from '/@/hooks/web/useMessage'
 
-  import { userStore } from '/@/store/modules/user'
+  import { useUserStore } from '/@/store/modules/user'
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin'
   import { useDesign } from '/@/hooks/web/useDesign'
   import { onKeyStroke } from '@vueuse/core'
@@ -67,6 +67,7 @@
       InputPassword: Input.Password,
     },
     setup() {
+      const userStore = useUserStore()
       const { notification } = useMessage()
       const { prefixCls } = useDesign('login')
 

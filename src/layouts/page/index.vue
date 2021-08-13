@@ -35,12 +35,13 @@
   import { useTabsSetting } from '/@/hooks/setting/useTabsSetting'
   import { getTransitionName } from './transition'
 
-  import { tabsStore } from '/@/store/modules/tabs'
+  import { useTabsStore } from '/@/store/modules/tabs'
 
   export default defineComponent({
     name: 'PageLayout',
     components: { LayoutFrame },
     setup() {
+      const tabsStore = useTabsStore()
       const { getShowTab } = useTabsSetting()
 
       const { getOpenKeepAlive } = useRootSetting()

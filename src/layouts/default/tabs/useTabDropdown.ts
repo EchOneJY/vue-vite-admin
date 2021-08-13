@@ -3,7 +3,7 @@ import type { DropMenu } from '/@/components/Dropdown'
 
 import { computed, unref, reactive } from 'vue'
 import { MenuEventEnum } from './types'
-import { tabsStore } from '/@/store/modules/tabs'
+import { useTabsStore } from '/@/store/modules/tabs'
 import { RouteLocationNormalized, useRouter } from 'vue-router'
 import { useTabs } from '/@/hooks/web/useTabs'
 import { useI18n } from '/@/hooks/web/useI18n'
@@ -15,6 +15,7 @@ export function useTabDropdown(tabContentProps: TabContentProps, getIsTabs: bool
   })
 
   const { t } = useI18n()
+  const tabsStore = useTabsStore()
   const { currentRoute } = useRouter()
   const { refreshPage, closeAll, close, closeLeft, closeOther, closeRight } = useTabs()
 

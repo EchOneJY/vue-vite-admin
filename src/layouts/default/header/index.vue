@@ -28,7 +28,7 @@
 
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
-  import { userStore } from '/@/store/modules/user'
+  import { useUserStore } from '/@/store/modules/user'
 
   export default defineComponent({
     name: 'LayoutHeader',
@@ -40,6 +40,7 @@
       AppLocalePicker,
     },
     setup() {
+      const userStore = useUserStore()
       const { prefixCls } = useDesign('layout-header')
       const { getCollapsed, toggleCollapsed } = useMenuSetting()
 

@@ -1,25 +1,7 @@
 import type { AppRouteRecordRaw } from '/@/router/types'
+
 import { t } from '/@/hooks/web/useI18n'
 import { REDIRECT_NAME, LAYOUT, EXCEPTION_COMPONENT } from '/@/router/constant'
-import { PageEnum } from '/@/enums/pageEnum'
-
-export const RootRoute: AppRouteRecordRaw = {
-  path: '/',
-  name: 'Root',
-  redirect: PageEnum.BASE_HOME,
-  meta: {
-    title: 'Root',
-  },
-}
-
-export const LoginRoute: AppRouteRecordRaw = {
-  path: '/login',
-  name: 'Login',
-  component: () => import('/@/views/login/index.vue'),
-  meta: {
-    title: t('routes.basic.login'),
-  },
-}
 
 // 404 on a page
 export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
@@ -76,7 +58,7 @@ export const ERROR_LOG_ROUTE: AppRouteRecordRaw = {
     {
       path: 'list',
       name: 'errorLogList',
-      component: () => import('/@/views/sys/error-log/index.vue'),
+      component: () => import('/@/views/core/exception/index.vue'),
       meta: {
         title: t('routes.basic.errorLogList'),
         hideBreadcrumb: true,
@@ -84,6 +66,3 @@ export const ERROR_LOG_ROUTE: AppRouteRecordRaw = {
     },
   ],
 }
-
-// Basic routing without permission
-export const basicRoutes = [LoginRoute, RootRoute, REDIRECT_ROUTE]

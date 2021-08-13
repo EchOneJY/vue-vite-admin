@@ -1,4 +1,5 @@
 import { CacheTypeEnum } from '/@/enums/cacheEnum'
+import { ContentEnum, PermissionModeEnum, RouterTransitionEnum } from '/@/enums/appEnum'
 
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko'
 
@@ -42,6 +43,8 @@ export interface TabsSetting {
 export interface ProjectConfig {
   // 是否显示配置按钮
   showSettingButton: boolean
+
+  permissionMode: PermissionModeEnum
 
   permissionCacheType: CacheTypeEnum
 

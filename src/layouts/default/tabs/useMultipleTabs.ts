@@ -2,7 +2,7 @@ import { toRaw, ref } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 // import { useDesign } from '/@/hooks/web/useDesign'
 // import { useSortable } from '/@/hooks/web/useSortable'
-import { tabsStore } from '/@/store/modules/tabs'
+import { useTabsStore } from '/@/store/modules/tabs'
 // import { isNullAndUnDef } from '/@/utils/is'
 // import projectSetting from '/@/settings/project'
 import { useRouter } from 'vue-router'
@@ -10,6 +10,7 @@ import { useRouter } from 'vue-router'
 export function initAffixTabs(): string[] {
   const affixList = ref<RouteLocationNormalized[]>([])
 
+  const tabsStore = useTabsStore()
   const router = useRouter()
   /**
    * @description: Filter all fixed routes

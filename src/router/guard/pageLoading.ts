@@ -1,10 +1,12 @@
 import type { Router } from 'vue-router'
-import { appStore } from '/@/store/modules/app'
-import { userStore } from '/@/store/modules/user'
+import { useAppStoreWithOut } from '/@/store/modules/app'
+import { useUserStoreWithOut } from '/@/store/modules/user'
 import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting'
 import { unref } from 'vue'
 
 export function createPageLoadingGuard(router: Router) {
+  const userStore = useUserStoreWithOut()
+  const appStore = useAppStoreWithOut()
   const { getOpenPageLoading } = useTransitionSetting()
   router.beforeEach(async (to) => {
     if (!userStore.getToken) {

@@ -2,7 +2,7 @@ import type { AppRouteRecordRaw } from '/@/router/types'
 
 import { computed, toRaw, unref } from 'vue'
 
-import { tabsStore } from '/@/store/modules/tabs'
+import { useTabsStore } from '/@/store/modules/tabs'
 
 import { uniqBy } from 'lodash-es'
 
@@ -14,6 +14,7 @@ export function useFrameKeepAlive() {
   const router = useRouter()
   const { currentRoute } = router
   const { getShowTab } = useTabsSetting()
+  const tabsStore = useTabsStore()
   const getFramePages = computed(() => {
     const ret =
       getAllFramePages((toRaw(router.getRoutes()) as unknown) as AppRouteRecordRaw[]) || []

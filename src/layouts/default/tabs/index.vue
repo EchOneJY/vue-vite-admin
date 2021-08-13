@@ -39,8 +39,8 @@
 
   import { useGo } from '/@/hooks/web/usePage'
 
-  import { tabsStore } from '/@/store/modules/tabs'
-  import { userStore } from '/@/store/modules/user'
+  import { useTabsStore } from '/@/store/modules/tabs'
+  import { useUserStore } from '/@/store/modules/user'
 
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useTabsSetting } from '/@/hooks/setting/useTabsSetting'
@@ -59,6 +59,9 @@
       TabContent,
     },
     setup() {
+      const tabsStore = useTabsStore()
+      const userStore = useUserStore()
+
       const activeKeyRef = ref('')
 
       const router = useRouter()
@@ -86,7 +89,7 @@
       watch(
         () => route.path,
         () => {
-          const { path, fullPath, meta = {} } = route
+          const { path, fullPath, meta } = route
           if (route.name === REDIRECT_NAME || !userStore.getToken) {
             return
           }
@@ -124,7 +127,7 @@
           return
         }
 
-        tabsStore.closeTabByKey(targetKey)
+        tabsStore.closeTabByKey(targetKey, router)
       }
       return {
         prefixCls,
