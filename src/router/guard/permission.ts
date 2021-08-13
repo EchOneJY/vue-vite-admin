@@ -59,6 +59,8 @@ export function createPermissionGuard(router: Router) {
     }
     const routes = await permissionStore.buildRoutesAction()
 
+    console.log(routes)
+
     routes.forEach((route) => {
       router.addRoute((route as unknown) as RouteRecordRaw)
     })

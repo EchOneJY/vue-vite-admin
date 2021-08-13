@@ -8,7 +8,7 @@ const iframe: AppRouteModule = {
   component: LAYOUT,
   meta: {
     icon: 'iframe',
-    title: 'routes.iframe.title',
+    title: 'routes.demo.iframe.title',
   },
   children: [
     {

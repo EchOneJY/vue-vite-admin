@@ -53,7 +53,7 @@
         selectedKeys: [],
       })
 
-      const menus = permissionStore.getBackMenuList
+      const menus = permissionStore.getFrontMenuList
 
       watch(
         () => route.path,

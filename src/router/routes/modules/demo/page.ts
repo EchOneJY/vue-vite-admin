@@ -14,7 +14,7 @@ const page: AppRouteModule = {
   meta: {
     orderNo: 20,
     icon: 'ion:aperture-outline',
-    title: t('routes.demo.page.page'),
+    title: t('routes.demo.page.title'),
   },
   children: [
     // =============================exception start=============================
@@ -24,7 +24,7 @@ const page: AppRouteModule = {
       component: getParentLayout('ExceptionPage'),
       redirect: '/page-demo/exception/404',
       meta: {
-        title: t('routes.demo.page.exception'),
+        title: t('routes.demo.page.exception.title'),
       },
       children: [
         {
@@ -68,7 +68,7 @@ const page: AppRouteModule = {
             status: ExceptionEnum.NET_WORK_ERROR,
           },
           meta: {
-            title: t('routes.demo.page.netWorkError'),
+            title: t('routes.demo.page.exception.netWorkError'),
           },
         },
         {
@@ -79,7 +79,7 @@ const page: AppRouteModule = {
             status: ExceptionEnum.PAGE_NOT_DATA,
           },
           meta: {
-            title: t('routes.demo.page.notData'),
+            title: t('routes.demo.page.exception.notData'),
           },
         },
       ],
