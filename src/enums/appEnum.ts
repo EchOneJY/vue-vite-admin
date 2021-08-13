@@ -14,3 +14,13 @@ export enum RouterTransitionEnum {
   FADE_BOTTOM = 'fade-bottom',
   FADE_SCALE = 'fade-scale',
 }
+
+/**
+ * 权限模式
+ */
+export enum PermissionModeEnum {
+  // black
+  BACK = 'BACK',
+  // route mapping
+  ROUTE_MAPPING = 'ROUTE_MAPPING',
+}
