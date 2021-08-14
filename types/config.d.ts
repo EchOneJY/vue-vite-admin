@@ -10,6 +10,7 @@ export interface MenuSetting {
   hidden: boolean
   collapsed: boolean
   menuWidth: number
+  menuWidthCollapsed: number
   trigger: 'top'
 }
 

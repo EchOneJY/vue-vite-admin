@@ -1,22 +1,14 @@
 <template>
   <div :class="[prefixCls, { collapsed: getCollapsed }]">
-    <img src="../../../../assets/images/logo.png" />
-    <div
-      class="ml-2 truncate md:opacity-100"
-      :class="[
-        `${prefixCls}__title`,
-        {
-          'xs:opacity-0': !alwaysShowTitle,
-        },
-      ]"
-    >
+    <img style="width: 32px; height: 32px" src="../../../../assets/images/logo.png" />
+    <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
       {{ siderTitle }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, computed } from 'vue'
   import { propTypes } from '/@/utils/propTypes'
 
   import { useDesign } from '/@/hooks/web/useDesign'
@@ -27,15 +19,24 @@
     name: 'AppLogo',
     props: {
       alwaysShowTitle: propTypes.bool.def(false),
+      showTitle: propTypes.bool.def(true),
     },
-    setup() {
+    setup(props) {
       const { prefixCls } = useDesign('app-logo')
       const { siderTitle } = useGlobSetting()
       const { getCollapsed } = useMenuSetting()
 
+      const getTitleClass = computed(() => [
+        `${prefixCls}__title`,
+        {
+          'xs:opacity-0': !props.alwaysShowTitle,
+        },
+      ])
+
       return {
         siderTitle,
         prefixCls,
+        getTitleClass,
         getCollapsed,
       }
     },

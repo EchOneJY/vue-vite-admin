@@ -2,7 +2,7 @@
   <Layout :class="prefixCls">
     <LayoutSider v-if="getShowMenu" />
     <Layout>
-      <div style="height: 80px"></div>
+      <div :style="{ height: getHeaderShow ? '80px' : '32px' }"></div>
       <div :class="`${prefixCls}-multiple-header`" :style="getWrapStyle">
         <LayoutHeader v-if="getHeaderShow" />
         <LayoutTabs />
@@ -60,11 +60,13 @@
     width: 100%;
     min-height: 100%;
     background: @content-bg;
+
     &-multiple-header {
       position: fixed;
       top: 0;
       z-index: 505;
     }
+
     &-content {
       position: relative;
       flex: 1 1 auto;

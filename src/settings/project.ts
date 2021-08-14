@@ -45,6 +45,8 @@ const setting: ProjectConfig = {
     collapsed: false,
     // Menu width
     menuWidth: 210,
+    // Menu collapse width
+    menuWidthCollapsed: 80,
     // Fold trigger position
     trigger: 'top',
   },

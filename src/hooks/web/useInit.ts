@@ -19,5 +19,6 @@ export function useInit() {
   // init project configure
   let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig
   projCfg = deepMerge(projectSetting, projCfg || {})
+  console.log(projCfg)
   appStore.setProjectConfig(projCfg)
 }

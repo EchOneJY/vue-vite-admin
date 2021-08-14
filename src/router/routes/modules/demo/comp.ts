@@ -17,6 +17,7 @@ const comp: AppRouteModule = {
     // =============================form start=============================
     {
       path: 'form',
+      name: 'CompForm',
       component: getParentLayout('CompFormPage'),
       meta: {
         title: 'routes.demo.comp.form.title',
@@ -24,6 +25,7 @@ const comp: AppRouteModule = {
       children: [
         {
           path: 'basic',
+          name: 'CompBasicForm',
           component: () => import('/@/views/demo/comp/form/BasicForm.vue'),
           meta: {
             title: 'routes.demo.comp.form.basic',
@@ -32,6 +34,7 @@ const comp: AppRouteModule = {
         },
         {
           path: 'useForm',
+          name: 'CompUseForm',
           component: () => import('/@/views/demo/comp/form/UseForm.vue'),
           meta: {
             title: 'routes.demo.comp.form.useForm',
@@ -40,6 +43,7 @@ const comp: AppRouteModule = {
         },
         {
           path: 'refForm',
+          name: 'CompRefForm',
           component: () => import('/@/views/demo/comp/form/RefForm.vue'),
           meta: {
             title: 'routes.demo.comp.form.refForm',
@@ -48,6 +52,7 @@ const comp: AppRouteModule = {
         },
         {
           path: 'ruleForm',
+          name: 'CompRuleForm',
           component: () => import('/@/views/demo/comp/form/RuleForm.vue'),
           meta: {
             title: 'routes.demo.comp.form.ruleForm',
@@ -67,6 +72,7 @@ const comp: AppRouteModule = {
       children: [
         {
           path: 'basic',
+          name: 'CompBasicTable',
           component: () => import('/@/views/demo/comp/table/BasicTable.vue'),
           meta: {
             title: 'routes.demo.comp.table.basic',
@@ -75,6 +81,7 @@ const comp: AppRouteModule = {
         },
         {
           path: 'fetch',
+          name: 'CompFetchTable',
           component: () => import('/@/views/demo/comp/table/FetchTable.vue'),
           meta: {
             title: 'routes.demo.comp.table.fetch',
@@ -83,6 +90,7 @@ const comp: AppRouteModule = {
         },
         {
           path: 'form',
+          name: 'CompFormTable',
           component: () => import('/@/views/demo/comp/table/FormTable.vue'),
           meta: {
             title: 'routes.demo.comp.table.form',

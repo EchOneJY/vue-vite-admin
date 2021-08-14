@@ -1,17 +1,19 @@
 <template>
   <div :style="getHiddenDomStyle"></div>
-  <Sider
-    :class="prefixCls"
-    :width="getMenuWidth"
-    v-model:collapsed="getCollapsed"
-    :trigger="null"
-    collapsible
-  >
-    <div :class="`${prefixCls}__logo`">
-      <AppLogo />
+  <div :class="prefixCls">
+    <div :class="`${prefixCls}__logo`" :style="getLogoStyle">
+      <AppLogo :showTitle="!getCollapsed" />
     </div>
-    <LayoutMenu />
-  </Sider>
+    <Sider
+      :class="`${prefixCls}__content`"
+      :width="getMenuWidth"
+      v-model:collapsed="getCollapsed"
+      :trigger="null"
+      collapsible
+    >
+      <LayoutMenu />
+    </Sider>
+  </div>
 </template>
 
 <script lang="ts">
@@ -37,6 +39,7 @@
 
       const getHiddenDomStyle = computed(
         (): CSSProperties => {
+          console.log(unref(getMenuWidth))
           const width = `${unref(getMenuWidth)}px`
           return {
             width: unref(width),
@@ -49,10 +52,20 @@
         }
       )
 
+      const getLogoStyle = computed(
+        (): CSSProperties => {
+          const width = `${unref(getMenuWidth)}px`
+          return {
+            width: unref(width),
+          }
+        }
+      )
+
       return {
         prefixCls,
         getCollapsed,
         getMenuWidth,
+        getLogoStyle,
         getHiddenDomStyle,
       }
     },
@@ -66,11 +79,22 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
     z-index: 510;
+    height: 100%;
+
     &__logo {
       height: 48px;
-      padding: 10px 4px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      background-color: @sider-bg-color;
+      transition: all 0.2s;
+    }
+
+    &__content {
+      height: calc(100% - 48px);
+      overflow-y: auto;
+      background: @sider-bg-color;
     }
   }
 </style>

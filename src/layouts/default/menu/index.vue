@@ -5,7 +5,6 @@
     v-model:selectedKeys="selectedKeys"
     @click="handleMenuClick"
     mode="inline"
-    :inline-collapsed="getCollapsed"
   >
     <template v-for="item in menus" :key="item.path">
       <SubMenuItem :item="item" />
@@ -27,7 +26,6 @@
   import { getAllParentPath } from '/@/router/helper/menuHelper'
   import { REDIRECT_NAME } from '/@/router/constant'
   import { useUserStore } from '/@/store/modules/user'
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
 
   interface State {
     openKeys: string[]
@@ -46,7 +44,6 @@
 
       const router: Router = useRouter()
       const route = useRoute()
-      const { getCollapsed } = useMenuSetting()
 
       const state = reactive<State>({
         openKeys: [],
@@ -75,7 +72,6 @@
       }
 
       return {
-        getCollapsed,
         ...toRefs(state),
         handleMenuClick,
         menus,
