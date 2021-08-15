@@ -7,8 +7,9 @@ const iframe: AppRouteModule = {
   path: '/iframe',
   component: LAYOUT,
   meta: {
-    icon: 'iframe',
+    icon: 'ion:tv-outline',
     title: 'routes.demo.iframe.title',
+    orderNo: 50,
   },
   children: [
     {

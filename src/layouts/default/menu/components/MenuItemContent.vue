@@ -1,8 +1,13 @@
-<script lang="tsx">
-  import { computed, defineComponent, unref } from 'vue'
-  import Icon from '@ant-design/icons-vue'
+<template>
+  <span :class="`${prefixCls}- flex items-center `">
+    <Icon v-if="getIcon" :icon="getIcon" :size="18" :class="`${prefixCls}-wrapper__icon mr-2`" />
+    {{ getI18nName }}
+  </span>
+</template>
+<script lang="ts">
+  import { computed, defineComponent } from 'vue'
 
-  import { SvgIcon } from '/@/components/Icon/index'
+  import Icon from '/@/components/Icon/index'
   import { useI18n } from '/@/hooks/web/useI18n'
   import { useDesign } from '/@/hooks/web/useDesign'
   import { contentProps } from '../props'
@@ -19,23 +24,10 @@
       const getI18nName = computed(() => t(props.item?.name))
       const getIcon = computed(() => props.item?.icon)
 
-      function renderIcon() {
-        return (
-          <SvgIcon
-            name={unref(getIcon) || ''}
-            size={15}
-            class={`${prefixCls}-wrapper__icon mr-2.5`}
-          />
-        )
-      }
-
-      return () => {
-        return (
-          <>
-            {unref(getIcon) ? <Icon component={renderIcon()} /> : null}
-            <span>{unref(getI18nName)}</span>
-          </>
-        )
+      return {
+        prefixCls,
+        getI18nName,
+        getIcon,
       }
     },
   })

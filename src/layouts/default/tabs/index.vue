@@ -89,8 +89,8 @@
       watch(
         () => route.path,
         () => {
-          const { path, fullPath, meta } = route
-          if (route.name === REDIRECT_NAME || !userStore.getToken) {
+          const { name, path, fullPath, meta } = route
+          if (name === REDIRECT_NAME || !userStore.getToken) {
             return
           }
           const { currentActiveMenu, hideTab } = meta
