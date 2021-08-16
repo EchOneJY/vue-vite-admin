@@ -17,9 +17,9 @@
       v-if="dropDownActions"
     >
       <slot name="more"></slot>
-      <mn-button type="link" size="small" v-if="!$slots.more">
+      <a-button type="link" size="small" v-if="!$slots.more">
         <MoreOutlined class="icon-more" />
-      </mn-button>
+      </a-button>
     </Dropdown>
   </div>
 </template>

@@ -30,6 +30,7 @@ const setting: ProjectConfig = {
     // Whether to show the full screen button
     showFullScreen: true,
     // Whether to show the document button
+    showDoc: true,
   },
 
   // Menu configuration
@@ -81,6 +82,12 @@ const setting: ProjectConfig = {
   },
 
   openKeepAlive: true,
+
+  // Whether to show breadcrumbs
+  showBreadCrumb: true,
+
+  // Whether to show the breadcrumb icon
+  showBreadCrumbIcon: false,
 }
 
 export default setting

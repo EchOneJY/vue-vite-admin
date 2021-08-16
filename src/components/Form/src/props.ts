@@ -55,6 +55,10 @@ export const basicProps = {
     },
   },
   rulesMessageJoinLabel: propTypes.bool.def(true),
+  emptySpan: {
+    type: [Number, Object] as PropType<number>,
+    default: 0,
+  },
 
   // 是否显示操作按钮
   showActionButtonGroup: propTypes.bool.def(true),
@@ -71,6 +75,11 @@ export const basicProps = {
   showSubmitButton: propTypes.bool.def(true),
   // 确认按钮配置
   submitButtonOptions: Object as PropType<Partial<ButtonProps>>,
+
+  // 是否显示收起展开按钮
+  showAdvancedButton: propTypes.bool,
+  // 超过3行自动折叠
+  autoAdvancedLine: propTypes.number.def(3),
 
   // 以下为默认props
   // hideRequiredMark: propTypes.bool,

@@ -39,7 +39,6 @@
 
       const getHiddenDomStyle = computed(
         (): CSSProperties => {
-          console.log(unref(getMenuWidth))
           const width = `${unref(getMenuWidth)}px`
           return {
             width: unref(width),

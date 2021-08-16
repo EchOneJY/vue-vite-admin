@@ -18,7 +18,8 @@ export interface HeaderSetting {
   bgColor: string
   fixed: boolean
   show: boolean
-
+  //显示文档跳转
+  showDoc: boolean
   // 显示全屏按钮
   showFullScreen: boolean
 }
@@ -70,6 +71,11 @@ export interface ProjectConfig {
 
   // 是否可以使用keep-alive
   openKeepAlive: boolean
+
+  // Show breadcrumbs
+  showBreadCrumb: boolean
+  // Show breadcrumb icon
+  showBreadCrumbIcon: boolean
 }
 
 export interface GlobConfig {

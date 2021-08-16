@@ -4,6 +4,7 @@ import { useUserStore } from '/@/store/modules/user'
 import { useTabsStore } from '/@/store/modules/tabs'
 import { usePermissionStore } from '/@/store/modules/permission'
 import { PageEnum } from '/@/enums/pageEnum'
+import { removeTabChangeListener } from '/@/logics/mitt/routeChange'
 
 export function createResetGuard(router: Router) {
   router.afterEach((to) => {
@@ -17,6 +18,7 @@ export function createResetGuard(router: Router) {
       permissionStore.resetState()
       userStore.resetState()
       tabStore.resetState()
+      removeTabChangeListener()
     }
   })
 }

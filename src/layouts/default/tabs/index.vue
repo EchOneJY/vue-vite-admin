@@ -29,7 +29,7 @@
 <script lang="ts">
   import type { RouteLocationNormalized } from 'vue-router'
 
-  import { defineComponent, computed, unref, ref, watch } from 'vue'
+  import { defineComponent, computed, unref, ref } from 'vue'
 
   import { Tabs } from 'ant-design-vue'
   import TabContent from './components/TabContent.vue'
@@ -45,8 +45,10 @@
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useTabsSetting } from '/@/hooks/setting/useTabsSetting'
 
-  import { useRouter, useRoute } from 'vue-router'
+  import { useRouter } from 'vue-router'
   import { REDIRECT_NAME } from '/@/router/constant'
+
+  import { listenerRouteChange } from '/@/logics/mitt/routeChange'
 
   export default defineComponent({
     name: 'MultipleTabs',
@@ -65,7 +67,6 @@
       const activeKeyRef = ref('')
 
       const router = useRouter()
-      const route = useRoute()
 
       const { prefixCls } = useDesign('tabs')
       const go = useGo()
@@ -86,34 +87,29 @@
         ]
       })
 
-      watch(
-        () => route.path,
-        () => {
-          const { name, path, fullPath, meta } = route
-          if (name === REDIRECT_NAME || !userStore.getToken) {
-            return
-          }
-          const { currentActiveMenu, hideTab } = meta
-          const isHide = !hideTab ? null : currentActiveMenu
-          const p = isHide || fullPath || path
-          if (activeKeyRef.value !== p) {
-            activeKeyRef.value = p as string
-          }
-          if (isHide) {
-            const findParentRoute = router
-              .getRoutes()
-              .find((item) => item.path === currentActiveMenu)
-
-            findParentRoute &&
-              tabsStore.addTab((findParentRoute as unknown) as RouteLocationNormalized)
-          }
-
-          tabsStore.addTab(unref(route))
-        },
-        {
-          immediate: true,
+      listenerRouteChange((route) => {
+        const { name } = route
+        if (name === REDIRECT_NAME || !route || !userStore.getToken) {
+          return
         }
-      )
+
+        const { path, fullPath, meta } = route
+        const { currentActiveMenu, hideTab } = meta
+        const isHide = !hideTab ? null : currentActiveMenu
+        const p = isHide || fullPath || path
+        if (activeKeyRef.value !== p) {
+          activeKeyRef.value = p as string
+        }
+
+        if (isHide) {
+          const findParentRoute = router.getRoutes().find((item) => item.path === currentActiveMenu)
+
+          findParentRoute &&
+            tabsStore.addTab((findParentRoute as unknown) as RouteLocationNormalized)
+        } else {
+          tabsStore.addTab(unref(route))
+        }
+      })
 
       function handleChange(activeKey: any) {
         activeKeyRef.value = activeKey

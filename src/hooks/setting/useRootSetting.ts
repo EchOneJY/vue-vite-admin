@@ -18,10 +18,13 @@ export function useRootSetting() {
       : ContentEnum.FIXED
   )
 
+  const getShowBreadCrumbIcon = computed(() => appStore.getProjectConfig.showBreadCrumbIcon)
+
   return {
     getLogoShow,
     getPageLoading,
     getOpenKeepAlive,
     getLayoutContentMode,
+    getShowBreadCrumbIcon,
   }
 }

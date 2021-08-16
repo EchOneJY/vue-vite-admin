@@ -1,46 +1,53 @@
 <template>
-  <a-col
-    v-bind="actionColOpt"
-    class="ml-4"
-    :style="{ textAlign: isFormTable ? 'left' : 'right' }"
-    v-if="showActionButtonGroup"
-  >
-    <FormItem>
-      <slot name="resetBefore"></slot>
-      <Button
-        type="primary"
-        :class="['mr-2.5', `${prefixCls}__reset`]"
-        v-bind="getResetBtnOptions"
-        @click="resetAction"
-        v-if="showResetButton"
-      >
-        {{ getResetBtnOptions.text }}
-      </Button>
-      <slot name="submitBefore"></slot>
+  <a-col v-bind="actionColOpt" v-if="showActionButtonGroup">
+    <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
+      <FormItem>
+        <slot name="resetBefore"></slot>
+        <Button
+          type="default"
+          class="mr-2"
+          v-bind="getResetBtnOptions"
+          @click="resetAction"
+          v-if="showResetButton"
+        >
+          {{ getResetBtnOptions.text }}
+        </Button>
+        <slot name="submitBefore"></slot>
 
-      <Button
-        type="primary"
-        :class="['mr-2.5', `${prefixCls}__submit`]"
-        v-bind="getSubmitBtnOptions"
-        @click="submitAction"
-        v-if="showSubmitButton"
-      >
-        {{ getSubmitBtnOptions.text }}
-      </Button>
-    </FormItem>
+        <Button
+          type="primary"
+          class="mr-2"
+          v-bind="getSubmitBtnOptions"
+          @click="submitAction"
+          v-if="showSubmitButton"
+        >
+          {{ getSubmitBtnOptions.text }}
+        </Button>
+
+        <slot name="advanceBefore"></slot>
+        <Button
+          type="link"
+          size="small"
+          @click="toggleAdvanced"
+          v-if="showAdvancedButton && !hideAdvanceBtn"
+        >
+          {{ isAdvanced ? t('component.form.putAway') : t('component.form.unfold') }}
+          <BasicArrow class="ml-1" :expand="!isAdvanced" up />
+        </Button>
+        <slot name="advanceAfter"></slot>
+      </FormItem>
+    </div>
   </a-col>
 </template>
 <script lang="ts">
   import type { ColEx } from '../types/index'
-  import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes'
-
+  //import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
   import { defineComponent, computed, PropType } from 'vue'
   import { Form, Col } from 'ant-design-vue'
-  import { Button } from '/@/components/Button'
+  import { Button, ButtonProps } from '/@/components/Button'
+  import { BasicArrow } from '/@/components/Basic'
   import { useFormContext } from '../hooks/useFormContext'
-
   import { useI18n } from '/@/hooks/web/useI18n'
-  import { useDesign } from '/@/hooks/web/useDesign'
   import { propTypes } from '/@/utils/propTypes'
 
   type ButtonOptions = Partial<ButtonProps> & { text: string }
@@ -50,13 +57,14 @@
     components: {
       FormItem: Form.Item,
       Button,
+      BasicArrow,
       [Col.name]: Col,
     },
     props: {
-      isFormTable: propTypes.bool.def(false),
       showActionButtonGroup: propTypes.bool.def(true),
       showResetButton: propTypes.bool.def(true),
       showSubmitButton: propTypes.bool.def(true),
+      showAdvancedButton: propTypes.bool.def(true),
       resetButtonOptions: {
         type: Object as PropType<ButtonOptions>,
         default: () => ({}),
@@ -70,15 +78,21 @@
         default: () => ({}),
       },
       actionSpan: propTypes.number.def(6),
+      isAdvanced: propTypes.bool,
+      hideAdvanceBtn: propTypes.bool,
     },
-    setup(props) {
+    emits: ['toggle-advanced'],
+    setup(props, { emit }) {
       const { t } = useI18n()
-      const { prefixCls } = useDesign('form-action')
 
       const actionColOpt = computed(() => {
-        const { actionColOptions } = props
+        const { showAdvancedButton, actionSpan: span, actionColOptions } = props
+        const actionSpan = 24 - span
+        const advancedSpanObj = showAdvancedButton ? { span: actionSpan < 6 ? 24 : actionSpan } : {}
         const actionColOpt: Partial<ColEx> = {
-          span: 4,
+          style: { textAlign: 'right' },
+          span: showAdvancedButton ? 6 : 4,
+          ...advancedSpanObj,
           ...actionColOptions,
         }
         return actionColOpt
@@ -104,32 +118,18 @@
         )
       })
 
+      function toggleAdvanced() {
+        emit('toggle-advanced')
+      }
+
       return {
         t,
-        prefixCls,
         actionColOpt,
         getResetBtnOptions,
         getSubmitBtnOptions,
+        toggleAdvanced,
         ...useFormContext(),
       }
     },
   })
 </script>
-<style lang="less">
-  @prefix-cls: ~'@{namespace}-form-action';
-
-  .@{prefix-cls} {
-    &__reset {
-      background: #3cc1c4;
-      border-color: #3cc1c4;
-      &:hover,
-      &:focus {
-        background-color: #41cbce;
-        border-color: #41cbce;
-      }
-    }
-    // &__submit {
-    //   background: @primary-color;
-    // }
-  }
-</style>

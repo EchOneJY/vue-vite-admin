@@ -1,6 +1,11 @@
-import { unref } from 'vue'
 import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router'
+import type { App, Plugin } from 'vue'
+
+import { unref } from 'vue'
+
 import { isObject } from '/@/utils/is'
+
+export const noop = () => {}
 
 export const timestamp = () => +Date.now()
 export const now = () => Date.now()
@@ -38,6 +43,19 @@ export function setObjToUrlParams(baseUrl: string, obj: any): string {
   return url
 }
 
+export function openWindow(
+  url: string,
+  opt?: { target?: TargetContext | string; noopener?: boolean; noreferrer?: boolean }
+) {
+  const { target = '__blank', noopener = true, noreferrer = true } = opt || {}
+  const feature: string[] = []
+
+  noopener && feature.push('noopener=yes')
+  noreferrer && feature.push('noreferrer=yes')
+
+  window.open(url, target, feature.join(','))
+}
+
 export function getRawRoute(route: RouteLocationNormalized): RouteLocationNormalized {
   if (!route) return route
   const { matched, ...opt } = route
@@ -69,4 +87,15 @@ export function getDynamicProps<T, U>(props: T): Partial<U> {
   })
 
   return ret as Partial<U>
+}
+
+export const withInstall = <T>(component: T, alias?: string) => {
+  const comp = component as any
+  comp.install = (app: App) => {
+    app.component(comp.name || comp.displayName, component)
+    if (alias) {
+      app.config.globalProperties[alias] = component
+    }
+  }
+  return component as T & Plugin
 }

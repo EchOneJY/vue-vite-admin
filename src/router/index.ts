@@ -14,7 +14,7 @@ const getRouteNames = (array: any[]) =>
   })
 getRouteNames(basicRoutes)
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(),
   routes: (basicRoutes as unknown) as RouteRecordRaw[],
   scrollBehavior: () => ({ left: 0, top: 0 }),

@@ -13,19 +13,21 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, watch } from 'vue'
+  import { defineComponent, reactive, toRefs } from 'vue'
 
   import { Router } from 'vue-router'
 
   import { Menu } from 'ant-design-vue'
 
-  import { useRouter, useRoute } from 'vue-router'
+  import { useRouter } from 'vue-router'
 
   import { usePermissionStore } from '/@/store/modules/permission'
   import SubMenuItem from './components/SubMenuItem.vue'
   import { getAllParentPath } from '/@/router/helper/menuHelper'
   import { REDIRECT_NAME } from '/@/router/constant'
   import { useUserStore } from '/@/store/modules/user'
+
+  import { listenerRouteChange } from '/@/logics/mitt/routeChange'
 
   interface State {
     openKeys: string[]
@@ -43,7 +45,6 @@
       const permissionStore = usePermissionStore()
 
       const router: Router = useRouter()
-      const route = useRoute()
 
       const state = reactive<State>({
         openKeys: [],
@@ -52,19 +53,13 @@
 
       const menus = permissionStore.getFrontMenuList
 
-      watch(
-        () => route.path,
-        () => {
-          if (route.name === REDIRECT_NAME || !userStore.getToken) {
-            return
-          }
-          state.openKeys = getAllParentPath(menus, route.path)
-          state.selectedKeys = [route.path]
-        },
-        {
-          immediate: true,
+      listenerRouteChange((route) => {
+        if (route.name === REDIRECT_NAME || !userStore.getToken) {
+          return
         }
-      )
+        state.openKeys = getAllParentPath(menus, route.path)
+        state.selectedKeys = [route.path]
+      })
 
       const handleMenuClick = (e) => {
         state.selectedKeys = e.keyPath

@@ -79,9 +79,9 @@
 
 #### 示例
 ```javascript
-<mn-button type="link" size="small">
+<a-button type="link" size="small">
   <MoreOutlined class="icon-more" />
-</mn-button>
+</a-button>
 ```
 #### 属性
 | 名称 | 说明 | 类型 | 默认值 |

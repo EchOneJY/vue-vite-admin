@@ -23,7 +23,7 @@
     props: {
       frameSrc: propTypes.string.def(''),
     },
-    setup() {
+    setup(props) {
       const loading = ref(false)
       const topRef = ref(50)
       const heightRef = ref(window.innerHeight)
@@ -62,6 +62,9 @@
         nextTick(() => {
           const iframe = unref(frameRef)
           if (!iframe) return
+
+          console.log(iframe)
+          console.log(props.frameSrc)
 
           const _frame = iframe as any
           if (_frame.attachEvent) {

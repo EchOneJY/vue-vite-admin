@@ -43,7 +43,7 @@
       const getWrapStyle = computed(
         (): CSSProperties => {
           const style: CSSProperties = {}
-          style.width = `calc(100% - ${unref(getMenuWidth)}px)`
+          style.width = unref(getShowMenu) ? `calc(100% - ${unref(getMenuWidth)}px)` : '100%'
           return style
         }
       )

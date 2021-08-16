@@ -4,7 +4,10 @@ import { HeaderSetting } from '/#/config'
 
 export function useHeaderSetting() {
   const appStore = useAppStore()
+
   const getHeaderShow = computed(() => appStore.getHeaderSetting.show)
+
+  const getShowDoc = computed(() => appStore.getHeaderSetting.showDoc)
 
   function setHeaderSetting(headerSetting: Partial<HeaderSetting>): void {
     appStore.setProjectConfig({ headerSetting })
@@ -12,6 +15,7 @@ export function useHeaderSetting() {
 
   return {
     getHeaderShow,
+    getShowDoc,
     setHeaderSetting,
   }
 }

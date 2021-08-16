@@ -7,11 +7,11 @@ function createFakeUserList() {
       userId: '1',
       username: 'admin',
       realName: 'Admin',
-      avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
+      avatar: '/avatar.png',
       desc: 'manager',
       password: '123456',
       token: 'fakeToken1',
-      homePath: '/dashboard/analysis',
+      homePath: '/dashboard/index',
       roles: [
         {
           roleName: 'Super Admin',
@@ -24,10 +24,10 @@ function createFakeUserList() {
       username: 'test',
       password: '123456',
       realName: 'test user',
-      avatar: 'https://q1.qlogo.cn/g?b=qq&nk=339449197&s=640',
+      avatar: '/avatar.png',
       desc: 'tester',
       token: 'fakeToken2',
-      homePath: '/dashboard/workbench',
+      homePath: '/dashboard/index',
       roles: [
         {
           roleName: 'Tester',
@@ -93,6 +93,20 @@ export default [
       const codeList = fakeCodeList[userId]
 
       return resultSuccess(codeList)
+    },
+  },
+  {
+    url: '/basic-api/logout',
+    timeout: 200,
+    method: 'get',
+    response: (request: requestParams) => {
+      const token = getRequestToken(request)
+      if (!token) return resultError('Invalid token')
+      const checkUser = createFakeUserList().find((item) => item.token === token)
+      if (!checkUser) {
+        return resultError('Invalid token!')
+      }
+      return resultSuccess(undefined, { message: 'Token has been destroyed' })
     },
   },
 ] as MockMethod[]

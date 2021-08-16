@@ -1,47 +1,41 @@
 <template>
-  <Button v-bind="getBindValue" :class="[getColor, $attrs.class]" @click="onClick">
+  <Button v-bind="getBindValue" :class="getButtonClass" @click="onClick">
     <template #default="data">
-      <Icon :icon="preIcon" v-if="preIcon" :size="14" />
+      <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" />
       <slot v-bind="data"></slot>
-      <Icon :icon="postIcon" v-if="postIcon" :size="14" />
+      <Icon :icon="postIcon" v-if="postIcon" :size="iconSize" />
     </template>
   </Button>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue'
-
+  import { defineComponent, computed, unref } from 'vue'
   import { Button } from 'ant-design-vue'
-  import Icon from '/@/components/Icon'
-
-  import { propTypes } from '/@/utils/propTypes'
+  import { Icon } from '/@/components/Icon'
+  import { buttonProps } from './props'
+  import { useAttrs } from '/@/hooks/core/useAttrs'
 
   export default defineComponent({
-    name: 'MnButton',
+    name: 'AButton',
     components: { Button, Icon },
     inheritAttrs: false,
-    props: {
-      type: propTypes.oneOf(['primary', 'default', 'danger', 'dashed', 'link']).def('default'),
-      color: propTypes.oneOf(['error', 'warning', 'success', '']),
-      loading: propTypes.bool,
-      disabled: propTypes.bool,
-      preIcon: propTypes.string,
-      postIcon: propTypes.string,
-      onClick: propTypes.func,
-    },
-    setup(props, { attrs }) {
-      const getColor = computed(() => {
+    props: buttonProps,
+    setup(props) {
+      // get component class
+      const attrs = useAttrs({ excludeDefaultKeys: false })
+      const getButtonClass = computed(() => {
         const { color, disabled } = props
-        return {
-          [`ant-btn-${color}`]: !!color,
-          [`is-disabled`]: disabled,
-        }
+        return [
+          {
+            [`ant-btn-${color}`]: !!color,
+            [`is-disabled`]: disabled,
+          },
+        ]
       })
 
-      const getBindValue = computed((): any => {
-        return { ...attrs, ...props }
-      })
+      // get inherit binding value
+      const getBindValue = computed(() => ({ ...unref(attrs), ...props }))
 
-      return { getBindValue, getColor }
+      return { getBindValue, getButtonClass }
     },
   })
 </script>

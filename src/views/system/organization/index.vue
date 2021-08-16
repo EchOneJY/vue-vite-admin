@@ -3,8 +3,8 @@
     <DeptTree class="w-1/4 xl:w-1/5" @select="handleSelect" />
     <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5">
       <template #toolbar>
-        <mn-button type="primary" @click="handleAdd">新增</mn-button>
-        <mn-button @click="handleAdd">导出</mn-button>
+        <a-button type="primary" @click="handleAdd">新增</a-button>
+        <a-button @click="handleAdd">导出</a-button>
       </template>
       <template #action="{ record }">
         <TableAction

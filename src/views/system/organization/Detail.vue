@@ -17,8 +17,8 @@
     </Row>
     <PageFooter>
       <template #right>
-        <mn-button class="mr-3" type="primary" @click="handleSubmit">保存</mn-button>
-        <mn-button @click="handleBack">返回</mn-button>
+        <a-button class="mr-3" type="primary" @click="handleSubmit">保存</a-button>
+        <a-button @click="handleBack">返回</a-button>
       </template>
     </PageFooter>
   </div>

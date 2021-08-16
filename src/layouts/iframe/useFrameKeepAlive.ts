@@ -41,19 +41,19 @@ export function useFrameKeepAlive() {
         res.push(...getAllFramePages(children))
       }
     }
-    res = uniqBy(res, 'path')
+    res = uniqBy(res, 'name')
     return res
   }
 
   function showIframe(item: AppRouteRecordRaw) {
-    return item.path === unref(currentRoute).path
+    return item.name === unref(currentRoute).name
   }
 
-  function hasRenderFrame(path: string) {
+  function hasRenderFrame(name: string) {
     if (!unref(getShowTab)) {
-      return router.currentRoute.value.path === path
+      return router.currentRoute.value.name === name
     }
-    return unref(getOpenTabList).includes(path)
+    return unref(getOpenTabList).includes(name)
   }
 
   return { hasRenderFrame, getFramePages, showIframe, getAllFramePages }

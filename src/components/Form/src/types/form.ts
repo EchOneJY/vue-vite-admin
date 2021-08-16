@@ -75,7 +75,7 @@ export interface FormProps {
   // Compact mode for search forms
   compact?: boolean
   // Blank line span
-  // emptySpan?: number | Partial<ColEx>
+  emptySpan?: number | Partial<ColEx>
   // Internal component size of the form
   size?: 'default' | 'small' | 'large'
   // Whether to disable
@@ -96,6 +96,11 @@ export interface FormProps {
 
   // Confirm button configuration
   submitButtonOptions?: Partial<ButtonProps>
+
+  // Whether to show collapse and expand buttons
+  showAdvancedButton?: boolean
+  // Automatically collapse over the specified number of rows
+  autoAdvancedLine?: number
 
   // Operation column configuration
   actionColOptions?: Partial<ColEx>
@@ -157,6 +162,8 @@ export interface FormSchema {
 
   // 默认值
   defaultValue?: any
+
+  isAdvanced?: boolean
 
   // Matching details components
   span?: number

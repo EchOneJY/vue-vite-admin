@@ -4,7 +4,7 @@ import { createContext, useContext } from '/@/hooks/core/useContext'
 export interface AppProviderContextProps {
   prefixCls: Ref<string>
 
-  // isMobile: Ref<boolean>;
+  isMobile: Ref<boolean>
 }
 
 const key: InjectionKey<AppProviderContextProps> = Symbol()

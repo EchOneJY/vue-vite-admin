@@ -2,8 +2,8 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <mn-button type="primary" @click="handleCreate">新增</mn-button>
-        <mn-button @click="handleOutput">导出</mn-button>
+        <a-button type="primary" @click="handleCreate">新增</a-button>
+        <a-button @click="handleOutput">导出</a-button>
       </template>
       <template #action="{ record }">
         <TableAction
