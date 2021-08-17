@@ -64,9 +64,6 @@
 
     &__title {
       color: @white;
-    }
-
-    &__title {
       font-size: 18px;
       font-weight: 600;
       transition: all 0.5s;

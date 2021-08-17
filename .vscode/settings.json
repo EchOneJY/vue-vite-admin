@@ -6,6 +6,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "volar.tsPlugin": true,
+  "volar.tsPluginStatus": false,
   "i18n-ally.localesPaths": [
     "src/locales"
   ],

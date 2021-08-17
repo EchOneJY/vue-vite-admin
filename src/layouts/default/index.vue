@@ -25,6 +25,7 @@
   import { useDesign } from '/@/hooks/web/useDesign'
   import { useMenuSetting } from '/@/hooks/setting/useMenuSetting'
   import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting'
+  import { useAppInject } from '/@/hooks/web/useAppInject'
 
   export default defineComponent({
     name: 'DefaultLayout',
@@ -39,11 +40,15 @@
       const { prefixCls } = useDesign('default-layout')
       const { getShowMenu, getMenuWidth } = useMenuSetting()
       const { getHeaderShow } = useHeaderSetting()
+      const { getIsMobile } = useAppInject()
 
       const getWrapStyle = computed(
         (): CSSProperties => {
           const style: CSSProperties = {}
-          style.width = unref(getShowMenu) ? `calc(100% - ${unref(getMenuWidth)}px)` : '100%'
+          style.width =
+            unref(getShowMenu) && !unref(getIsMobile)
+              ? `calc(100% - ${unref(getMenuWidth)}px)`
+              : '100%'
           return style
         }
       )
