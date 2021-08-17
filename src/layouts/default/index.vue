@@ -7,7 +7,6 @@
         <LayoutHeader v-if="getHeaderShow" />
         <LayoutTabs />
       </div>
-
       <LayoutContent :class="`${prefixCls}-content`" />
     </Layout>
   </Layout>
